@@ -9,5 +9,5 @@ package practica2;
  * @author DELL
  */
 public class class1 {
-    
+    int a;
 }
