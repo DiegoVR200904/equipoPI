@@ -4,6 +4,8 @@
 
 package com.mycompany.spookbook;
 
+import views.Login_View;
+
 /**
  *
  * @author ghostpatron
@@ -11,7 +13,7 @@ package com.mycompany.spookbook;
 public class SpookBook {
 
     public static void main(String[] args) {
-        System.out.println("holi!");
-        System.out.println("lala!");
+        Login_View login = new Login_View();
+        login.setVisible(true);
     }
 }
