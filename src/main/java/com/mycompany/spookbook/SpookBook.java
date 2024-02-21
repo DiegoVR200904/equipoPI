@@ -9,6 +9,7 @@ import views.Login_View;
 /**
  *
  * @author Diego Valenzuela 200904
+ *         Luis Nunez       207393
  */
 public class SpookBook {
 
