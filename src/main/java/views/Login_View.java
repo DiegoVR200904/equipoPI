@@ -36,6 +36,7 @@ public class Login_View extends javax.swing.JFrame {
         lbl_3 = new javax.swing.JLabel();
         tf_email = new javax.swing.JTextField();
         pf_pass = new javax.swing.JPasswordField();
+        btn_login = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1000, 600));
@@ -45,7 +46,7 @@ public class Login_View extends javax.swing.JFrame {
 
         pnl_1.setBackground(new java.awt.Color(0, 0, 0));
 
-        lbl_logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/logo_2.png"))); // NOI18N
+        lbl_logo.setIcon(new javax.swing.ImageIcon("/home/ghostpatron/NetBeansProjects/equipoPI/src/main/java/img/logo_2.png")); // NOI18N
         lbl_logo.setToolTipText("");
 
         javax.swing.GroupLayout pnl_1Layout = new javax.swing.GroupLayout(pnl_1);
@@ -86,6 +87,16 @@ public class Login_View extends javax.swing.JFrame {
             }
         });
 
+        btn_login.setBackground(new java.awt.Color(0, 0, 0));
+        btn_login.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
+        btn_login.setForeground(new java.awt.Color(255, 153, 204));
+        btn_login.setText("Ingresa");
+        btn_login.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_loginActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnl_fondoLayout = new javax.swing.GroupLayout(pnl_fondo);
         pnl_fondo.setLayout(pnl_fondoLayout);
         pnl_fondoLayout.setHorizontalGroup(
@@ -108,7 +119,11 @@ public class Login_View extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_fondoLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(lbl_1)
-                        .addGap(195, 195, 195))))
+                        .addGap(195, 195, 195))
+                    .addGroup(pnl_fondoLayout.createSequentialGroup()
+                        .addGap(193, 193, 193)
+                        .addComponent(btn_login)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         pnl_fondoLayout.setVerticalGroup(
             pnl_fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -126,6 +141,8 @@ public class Login_View extends javax.swing.JFrame {
                 .addGroup(pnl_fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbl_3)
                     .addComponent(pf_pass, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(93, 93, 93)
+                .addComponent(btn_login)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -153,6 +170,10 @@ public class Login_View extends javax.swing.JFrame {
     private void pf_passActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pf_passActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_pf_passActionPerformed
+
+    private void btn_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_loginActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_loginActionPerformed
 
     /**
      * @param args the command line arguments
@@ -191,6 +212,7 @@ public class Login_View extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_login;
     private javax.swing.JLabel lbl_1;
     private javax.swing.JLabel lbl_2;
     private javax.swing.JLabel lbl_3;
