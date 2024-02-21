@@ -8,7 +8,7 @@ import views.Login_View;
 
 /**
  *
- * @author ghostpatron
+ * @author Diego Valenzuela 200904
  */
 public class SpookBook {
 
