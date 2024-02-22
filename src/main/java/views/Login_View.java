@@ -46,7 +46,6 @@ public class Login_View extends javax.swing.JFrame {
 
         pnl_1.setBackground(new java.awt.Color(0, 0, 0));
 
-        lbl_logo.setIcon(new javax.swing.ImageIcon("/home/ghostpatron/NetBeansProjects/equipoPI/src/main/java/img/logo_2.png")); // NOI18N
         lbl_logo.setToolTipText("");
 
         javax.swing.GroupLayout pnl_1Layout = new javax.swing.GroupLayout(pnl_1);

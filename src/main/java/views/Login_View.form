@@ -142,9 +142,6 @@
           <SubComponents>
             <Component class="javax.swing.JLabel" name="lbl_logo">
               <Properties>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="/home/ghostpatron/NetBeansProjects/equipoPI/src/main/java/img/logo_2.png"/>
-                </Property>
                 <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
             </Component>
