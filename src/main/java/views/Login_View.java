@@ -3,6 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package views;
+import javax.swing.JOptionPane;
+import models.ConexionLogin;
 
 /**
  *
@@ -29,70 +31,69 @@ public class Login_View extends javax.swing.JFrame {
     private void initComponents() {
 
         pnl_fondo = new javax.swing.JPanel();
-        pnl_1 = new javax.swing.JPanel();
-        lbl_logo = new javax.swing.JLabel();
         lbl_1 = new javax.swing.JLabel();
         lbl_2 = new javax.swing.JLabel();
         lbl_3 = new javax.swing.JLabel();
         tf_email = new javax.swing.JTextField();
         pf_pass = new javax.swing.JPasswordField();
         btn_login = new javax.swing.JButton();
+        lbl_icon = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        btn_new = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1000, 600));
+        setPreferredSize(new java.awt.Dimension(600, 600));
         setSize(700,800);
 
-        pnl_fondo.setBackground(new java.awt.Color(255, 153, 204));
+        pnl_fondo.setBackground(new java.awt.Color(51, 51, 51));
 
-        pnl_1.setBackground(new java.awt.Color(0, 0, 0));
+        lbl_1.setFont(new java.awt.Font("Garuda", 1, 36)); // NOI18N
+        lbl_1.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_1.setText("Bienvenido!");
 
-        lbl_logo.setToolTipText("");
-
-        javax.swing.GroupLayout pnl_1Layout = new javax.swing.GroupLayout(pnl_1);
-        pnl_1.setLayout(pnl_1Layout);
-        pnl_1Layout.setHorizontalGroup(
-            pnl_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_1Layout.createSequentialGroup()
-                .addContainerGap(61, Short.MAX_VALUE)
-                .addComponent(lbl_logo)
-                .addGap(57, 57, 57))
-        );
-        pnl_1Layout.setVerticalGroup(
-            pnl_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnl_1Layout.createSequentialGroup()
-                .addGap(145, 145, 145)
-                .addComponent(lbl_logo)
-                .addContainerGap(381, Short.MAX_VALUE))
-        );
-
-        lbl_1.setFont(new java.awt.Font("Garuda", 1, 48)); // NOI18N
-        lbl_1.setText("Inicia Sesion");
-
-        lbl_2.setFont(new java.awt.Font("Garuda", 0, 24)); // NOI18N
+        lbl_2.setFont(new java.awt.Font("Garuda", 0, 14)); // NOI18N
+        lbl_2.setForeground(new java.awt.Color(249, 128, 170));
         lbl_2.setText("Correo:");
 
-        lbl_3.setFont(new java.awt.Font("Garuda", 0, 24)); // NOI18N
+        lbl_3.setFont(new java.awt.Font("Garuda", 0, 14)); // NOI18N
+        lbl_3.setForeground(new java.awt.Color(249, 128, 170));
         lbl_3.setText("Password:");
 
+        tf_email.setToolTipText("");
+        tf_email.setPreferredSize(new java.awt.Dimension(50, 20));
         tf_email.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tf_emailActionPerformed(evt);
             }
         });
 
+        pf_pass.setPreferredSize(new java.awt.Dimension(50, 20));
         pf_pass.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 pf_passActionPerformed(evt);
             }
         });
 
-        btn_login.setBackground(new java.awt.Color(0, 0, 0));
-        btn_login.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
-        btn_login.setForeground(new java.awt.Color(255, 153, 204));
+        btn_login.setBackground(new java.awt.Color(249, 128, 170));
+        btn_login.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
+        btn_login.setForeground(new java.awt.Color(51, 51, 51));
         btn_login.setText("Ingresa");
         btn_login.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_loginActionPerformed(evt);
+            }
+        });
+
+        jSeparator1.setBackground(new java.awt.Color(255, 255, 255));
+        jSeparator1.setForeground(new java.awt.Color(255, 255, 255));
+
+        btn_new.setBackground(new java.awt.Color(249, 128, 170));
+        btn_new.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
+        btn_new.setForeground(new java.awt.Color(51, 51, 51));
+        btn_new.setText("Crea nueva cuenta");
+        btn_new.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_newActionPerformed(evt);
             }
         });
 
@@ -101,61 +102,66 @@ public class Login_View extends javax.swing.JFrame {
         pnl_fondoLayout.setHorizontalGroup(
             pnl_fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_fondoLayout.createSequentialGroup()
-                .addComponent(pnl_1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(pnl_fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnl_fondoLayout.createSequentialGroup()
-                        .addGap(77, 77, 77)
-                        .addGroup(pnl_fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(pnl_fondoLayout.createSequentialGroup()
-                                .addComponent(lbl_3)
-                                .addGap(18, 18, 18)
-                                .addComponent(pf_pass))
-                            .addGroup(pnl_fondoLayout.createSequentialGroup()
-                                .addComponent(lbl_2)
-                                .addGap(18, 18, 18)
-                                .addComponent(tf_email, javax.swing.GroupLayout.PREFERRED_SIZE, 416, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 124, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_fondoLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lbl_1)
-                        .addGap(195, 195, 195))
+                        .addGap(223, 223, 223)
+                        .addComponent(lbl_1))
                     .addGroup(pnl_fondoLayout.createSequentialGroup()
-                        .addGap(193, 193, 193)
-                        .addComponent(btn_login)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(214, 214, 214)
+                        .addComponent(lbl_icon))
+                    .addGroup(pnl_fondoLayout.createSequentialGroup()
+                        .addGap(275, 275, 275)
+                        .addComponent(btn_login))
+                    .addGroup(pnl_fondoLayout.createSequentialGroup()
+                        .addGap(63, 63, 63)
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 474, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnl_fondoLayout.createSequentialGroup()
+                        .addGap(74, 74, 74)
+                        .addGroup(pnl_fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbl_3)
+                            .addComponent(lbl_2))
+                        .addGap(18, 18, 18)
+                        .addGroup(pnl_fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tf_email, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(pf_pass, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(pnl_fondoLayout.createSequentialGroup()
+                        .addGap(237, 237, 237)
+                        .addComponent(btn_new)))
+                .addContainerGap(171, Short.MAX_VALUE))
         );
         pnl_fondoLayout.setVerticalGroup(
             pnl_fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_fondoLayout.createSequentialGroup()
-                .addComponent(pnl_1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(pnl_fondoLayout.createSequentialGroup()
-                .addGap(48, 48, 48)
+                .addGap(16, 16, 16)
                 .addComponent(lbl_1)
-                .addGap(52, 52, 52)
-                .addGroup(pnl_fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lbl_2)
-                    .addComponent(tf_email, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(50, 50, 50)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lbl_icon)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnl_fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbl_3)
-                    .addComponent(pf_pass, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(93, 93, 93)
+                    .addComponent(tf_email, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbl_2))
+                .addGap(32, 32, 32)
+                .addGroup(pnl_fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(pf_pass, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbl_3, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(33, 33, 33)
                 .addComponent(btn_login)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(28, 28, 28)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btn_new)
+                .addContainerGap(62, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnl_fondo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnl_fondo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(pnl_fondo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(pnl_fondo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -172,7 +178,27 @@ public class Login_View extends javax.swing.JFrame {
 
     private void btn_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_loginActionPerformed
         // TODO add your handling code here:
+        String user = tf_email.getText();
+        String pass = new String(pf_pass.getPassword());
+
+        if (ConexionLogin.verificarCredenciales(user, pass)) {
+            // Credenciales válidas, realizar acciones después del inicio de sesión
+            JOptionPane.showMessageDialog(this, "Inicio de sesión exitoso", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+            Home inicio = new Home();
+            inicio.setVisible(true);
+            this.setVisible(false);
+        } else {
+            // Credenciales incorrectas
+            JOptionPane.showMessageDialog(this, "Nombre de usuario o contraseña incorrectos", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btn_loginActionPerformed
+
+    private void btn_newActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_newActionPerformed
+        // TODO add your handling code here:
+        NewUser_View newuser = new NewUser_View();
+        newuser.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btn_newActionPerformed
 
     /**
      * @param args the command line arguments
@@ -212,12 +238,13 @@ public class Login_View extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_login;
+    private javax.swing.JButton btn_new;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lbl_1;
     private javax.swing.JLabel lbl_2;
     private javax.swing.JLabel lbl_3;
-    private javax.swing.JLabel lbl_logo;
+    private javax.swing.JLabel lbl_icon;
     private javax.swing.JPasswordField pf_pass;
-    private javax.swing.JPanel pnl_1;
     private javax.swing.JPanel pnl_fondo;
     private javax.swing.JTextField tf_email;
     // End of variables declaration//GEN-END:variables
