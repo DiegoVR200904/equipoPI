@@ -5,7 +5,8 @@
 package views;
 import javax.swing.JOptionPane;
 import models.ConexionLogin;
-
+import java.time.*;
+import java.time.format.DateTimeFormatter;
 /**
  *
  * @author ghostpatron
@@ -98,7 +99,7 @@ public class NewUser_View extends javax.swing.JFrame {
             }
         });
 
-        lbl_icon.setIcon(new javax.swing.ImageIcon("/home/ghostpatron/NetBeansProjects/SpookBookClone/img/logo3-150.png")); // NOI18N
+        lbl_icon.setIcon(new javax.swing.ImageIcon("/home/ghostpatron/NetBeansProjects/SpookBookClone/src/main/java/img/logo3-150.png")); // NOI18N
 
         btn_register.setBackground(new java.awt.Color(249, 128, 170));
         btn_register.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
@@ -136,8 +137,9 @@ public class NewUser_View extends javax.swing.JFrame {
 
         lbl_birthdate.setFont(new java.awt.Font("Garuda", 0, 14)); // NOI18N
         lbl_birthdate.setForeground(new java.awt.Color(249, 128, 170));
-        lbl_birthdate.setText("Fecha:");
+        lbl_birthdate.setText("Fecha Nacimiento:");
 
+        tf_birthdate.setText("yyyy-mm-dd");
         tf_birthdate.setToolTipText("");
         tf_birthdate.setPreferredSize(new java.awt.Dimension(50, 20));
         tf_birthdate.addActionListener(new java.awt.event.ActionListener() {
@@ -166,7 +168,6 @@ public class NewUser_View extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_fondoLayout.createSequentialGroup()
                         .addGroup(pnl_fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(lbl_3)
                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_fondoLayout.createSequentialGroup()
                                     .addGroup(pnl_fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(lbl_4)
@@ -175,18 +176,22 @@ public class NewUser_View extends javax.swing.JFrame {
                                     .addGroup(pnl_fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(tf_lastname, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(lbl_5)))
+                                .addComponent(pf_pass, javax.swing.GroupLayout.PREFERRED_SIZE, 415, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_fondoLayout.createSequentialGroup()
                                     .addGroup(pnl_fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(pnl_fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(pnl_fondoLayout.createSequentialGroup()
+                                                .addComponent(tf_email, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_fondoLayout.createSequentialGroup()
+                                                .addComponent(lbl_2)
+                                                .addGap(212, 212, 212)))
                                         .addGroup(pnl_fondoLayout.createSequentialGroup()
-                                            .addComponent(tf_email, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_fondoLayout.createSequentialGroup()
-                                            .addComponent(lbl_2)
-                                            .addGap(212, 212, 212)))
+                                            .addComponent(lbl_3)
+                                            .addGap(194, 194, 194)))
                                     .addGroup(pnl_fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(lbl_birthdate)
-                                        .addComponent(tf_birthdate, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addComponent(pf_pass, javax.swing.GroupLayout.PREFERRED_SIZE, 415, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(tf_birthdate, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_fondoLayout.createSequentialGroup()
                                 .addComponent(btn_register)
                                 .addGap(94, 94, 94)
@@ -203,7 +208,7 @@ public class NewUser_View extends javax.swing.JFrame {
         pnl_fondoLayout.setVerticalGroup(
             pnl_fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_fondoLayout.createSequentialGroup()
-                .addContainerGap(22, Short.MAX_VALUE)
+                .addContainerGap(16, Short.MAX_VALUE)
                 .addComponent(lbl_icon, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lbl_1)
@@ -211,7 +216,7 @@ public class NewUser_View extends javax.swing.JFrame {
                 .addGroup(pnl_fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbl_4)
                     .addComponent(lbl_5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnl_fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tf_lastname, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tf_firstname, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -265,6 +270,23 @@ public class NewUser_View extends javax.swing.JFrame {
         tf_lastname.setEnabled(false);
         pf_pass.setEnabled(false);
         btn_register.setEnabled(false);
+        
+        String name = tf_firstname.getText();
+        String last = tf_lastname.getText();
+        String bday = tf_birthdate.getText();
+        String email = tf_email.getText();
+        String pass = new String(pf_pass.getPassword());
+        
+        //DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        LocalDate aux = LocalDate.parse(bday);
+        LocalDate now = LocalDate.now();
+        //System.out.print(aux);
+        Period period = Period.between(aux, now);
+        int age = period.getYears();
+        
+        int pic = 0;
+        
+        ConexionLogin.insertarUsuario(name, last, email, bday, pass, age, 1);
     }//GEN-LAST:event_btn_registerActionPerformed
 
     private void tf_firstnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_firstnameActionPerformed
@@ -277,6 +299,7 @@ public class NewUser_View extends javax.swing.JFrame {
 
     private void tf_birthdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_birthdateActionPerformed
         // TODO add your handling code here:
+        this.tf_birthdate.setText("");
     }//GEN-LAST:event_tf_birthdateActionPerformed
 
     private void btn_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_loginActionPerformed

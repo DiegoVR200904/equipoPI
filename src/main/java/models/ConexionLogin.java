@@ -31,12 +31,17 @@ public class ConexionLogin {
     }
     
     
-    public static boolean insertarUsuario(String username, String password) {
+    public static boolean insertarUsuario(String username, String lastname, String email, String birthday, String password, int age, int picture) {
         try (Connection connection = DB_Connection.getConnection()) {
-            String query = "INSERT INTO usuarios (nombre_usuario, contrasena) VALUES (?, ?)";
+            String query = "INSERT INTO users (first_name, last_name, email, birth_date, password, age, picture) VALUES (?, ?, ?, ?, ?, ?, ?)";
             try (PreparedStatement statement = connection.prepareStatement(query)) {
                 statement.setString(1, username);
-                statement.setString(2, password);
+                statement.setString(2, lastname);
+                statement.setString(3, email);
+                statement.setString(4, birthday);
+                statement.setString(5, password);
+                statement.setInt(6, age);
+                statement.setInt(7, picture);
 
                 int filasAfectadas = statement.executeUpdate();
                 return filasAfectadas > 0; // Retorna true si se insertó al menos una fila
