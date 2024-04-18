@@ -36,8 +36,12 @@ public class Home extends javax.swing.JFrame {
         btn_friends = new javax.swing.JButton();
         btn_videos = new javax.swing.JButton();
         btn_home = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jSpinner1 = new javax.swing.JSpinner();
+        lbl_title = new javax.swing.JLabel();
+        tf_post = new javax.swing.JFormattedTextField();
+        lbl_image1 = new javax.swing.JLabel();
+        if_video = new javax.swing.JInternalFrame();
+        btn_previous = new javax.swing.JButton();
+        btn_next = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -46,7 +50,7 @@ public class Home extends javax.swing.JFrame {
         pnl_bar.setBackground(new java.awt.Color(27, 27, 27));
         pnl_bar.setForeground(new java.awt.Color(27, 27, 27));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("/home/ghostpatron/NetBeansProjects/SpookBookClone/src/main/java/img/logo4-64.png")); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon("/home/ghostpatron/NetBeansProjects/CloneV2/src/main/java/img/logo4-64.png")); // NOI18N
 
         tf_search.setBackground(new java.awt.Color(102, 102, 102));
         tf_search.setFont(new java.awt.Font("Garuda", 0, 14)); // NOI18N
@@ -54,19 +58,19 @@ public class Home extends javax.swing.JFrame {
         tf_search.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249, 128, 170)));
 
         btn_search.setBackground(new java.awt.Color(27, 27, 27));
-        btn_search.setIcon(new javax.swing.ImageIcon("/home/ghostpatron/NetBeansProjects/SpookBookClone/src/main/java/img/2-40.png")); // NOI18N
+        btn_search.setIcon(new javax.swing.ImageIcon("/home/ghostpatron/NetBeansProjects/CloneV2/src/main/java/img/2-40.png")); // NOI18N
         btn_search.setBorder(null);
 
         btn_friends.setBackground(new java.awt.Color(27, 27, 27));
-        btn_friends.setIcon(new javax.swing.ImageIcon("/home/ghostpatron/NetBeansProjects/SpookBookClone/src/main/java/img/1-40.png")); // NOI18N
+        btn_friends.setIcon(new javax.swing.ImageIcon("/home/ghostpatron/NetBeansProjects/CloneV2/src/main/java/img/3-40.png")); // NOI18N
         btn_friends.setBorder(null);
 
         btn_videos.setBackground(new java.awt.Color(27, 27, 27));
-        btn_videos.setIcon(new javax.swing.ImageIcon("/home/ghostpatron/NetBeansProjects/SpookBookClone/src/main/java/img/5-40.png")); // NOI18N
+        btn_videos.setIcon(new javax.swing.ImageIcon("/home/ghostpatron/NetBeansProjects/CloneV2/src/main/java/img/5-40.png")); // NOI18N
         btn_videos.setBorder(null);
 
         btn_home.setBackground(new java.awt.Color(27, 27, 27));
-        btn_home.setIcon(new javax.swing.ImageIcon("/home/ghostpatron/NetBeansProjects/SpookBookClone/src/main/java/img/4-40.png")); // NOI18N
+        btn_home.setIcon(new javax.swing.ImageIcon("/home/ghostpatron/NetBeansProjects/CloneV2/src/main/java/img/4-40.png")); // NOI18N
         btn_home.setBorder(null);
 
         javax.swing.GroupLayout pnl_barLayout = new javax.swing.GroupLayout(pnl_bar);
@@ -91,7 +95,7 @@ public class Home extends javax.swing.JFrame {
         pnl_barLayout.setVerticalGroup(
             pnl_barLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_barLayout.createSequentialGroup()
-                .addGap(0, 5, Short.MAX_VALUE)
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jLabel1))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_barLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -107,25 +111,88 @@ public class Home extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jScrollPane1.setViewportView(jSpinner1);
+        lbl_title.setFont(new java.awt.Font("Manjari", 1, 24)); // NOI18N
+        lbl_title.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_title.setText("Publicaciones");
+
+        tf_post.setBackground(new java.awt.Color(102, 102, 102));
+        tf_post.setBorder(null);
+        tf_post.setForeground(new java.awt.Color(255, 102, 153));
+        tf_post.setText("Texto Post");
+
+        lbl_image1.setForeground(new java.awt.Color(255, 102, 153));
+        lbl_image1.setText("imagen");
+
+        if_video.setVisible(true);
+
+        javax.swing.GroupLayout if_videoLayout = new javax.swing.GroupLayout(if_video.getContentPane());
+        if_video.getContentPane().setLayout(if_videoLayout);
+        if_videoLayout.setHorizontalGroup(
+            if_videoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 397, Short.MAX_VALUE)
+        );
+        if_videoLayout.setVerticalGroup(
+            if_videoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 230, Short.MAX_VALUE)
+        );
+
+        btn_previous.setBackground(new java.awt.Color(51, 51, 51));
+        btn_previous.setIcon(new javax.swing.ImageIcon("/home/ghostpatron/NetBeansProjects/CloneV2/src/main/java/img/previous-50.png")); // NOI18N
+        btn_previous.setBorder(null);
+
+        btn_next.setBackground(new java.awt.Color(51, 51, 51));
+        btn_next.setIcon(new javax.swing.ImageIcon("/home/ghostpatron/NetBeansProjects/CloneV2/src/main/java/img/next-50.png")); // NOI18N
+        btn_next.setBorder(null);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(pnl_bar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(463, Short.MAX_VALUE)
+                .addComponent(lbl_title)
+                .addGap(462, 462, 462))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(95, 95, 95)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(60, Short.MAX_VALUE))
+                .addGap(35, 35, 35)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(if_video, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(44, 44, 44))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(btn_previous)
+                        .addGap(128, 128, 128)
+                        .addComponent(btn_next)
+                        .addGap(130, 130, 130)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(tf_post, javax.swing.GroupLayout.DEFAULT_SIZE, 528, Short.MAX_VALUE)
+                    .addComponent(lbl_image1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(pnl_bar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addComponent(lbl_title, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addComponent(tf_post, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(lbl_image1, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(if_video, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                                .addComponent(btn_previous))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(btn_next)))
+                        .addGap(87, 87, 87))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -136,7 +203,9 @@ public class Home extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -181,13 +250,17 @@ public class Home extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_friends;
     private javax.swing.JButton btn_home;
+    private javax.swing.JButton btn_next;
+    private javax.swing.JButton btn_previous;
     private javax.swing.JButton btn_search;
     private javax.swing.JButton btn_videos;
+    private javax.swing.JInternalFrame if_video;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSpinner jSpinner1;
+    private javax.swing.JLabel lbl_image1;
+    private javax.swing.JLabel lbl_title;
     private javax.swing.JPanel pnl_bar;
+    private javax.swing.JFormattedTextField tf_post;
     private javax.swing.JTextField tf_search;
     // End of variables declaration//GEN-END:variables
 }

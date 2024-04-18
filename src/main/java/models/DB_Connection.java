@@ -19,6 +19,7 @@ public class DB_Connection {
     
     private static final String JDBC_URL = "jdbc:ucanaccess://SB_DB.accdb";
     
+    
     public static Connection getConnection() throws SQLException {
         return DriverManager.getConnection(JDBC_URL);
     }

@@ -99,7 +99,7 @@ public class NewUser_View extends javax.swing.JFrame {
             }
         });
 
-        lbl_icon.setIcon(new javax.swing.ImageIcon("/home/ghostpatron/NetBeansProjects/SpookBookClone/src/main/java/img/logo3-150.png")); // NOI18N
+        lbl_icon.setIcon(new javax.swing.ImageIcon("/home/ghostpatron/NetBeansProjects/CloneV2/src/main/java/img/logo3-150.png")); // NOI18N
 
         btn_register.setBackground(new java.awt.Color(249, 128, 170));
         btn_register.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
@@ -142,6 +142,11 @@ public class NewUser_View extends javax.swing.JFrame {
         tf_birthdate.setText("yyyy-mm-dd");
         tf_birthdate.setToolTipText("");
         tf_birthdate.setPreferredSize(new java.awt.Dimension(50, 20));
+        tf_birthdate.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tf_birthdateMouseClicked(evt);
+            }
+        });
         tf_birthdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tf_birthdateActionPerformed(evt);
@@ -299,7 +304,6 @@ public class NewUser_View extends javax.swing.JFrame {
 
     private void tf_birthdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_birthdateActionPerformed
         // TODO add your handling code here:
-        this.tf_birthdate.setText("");
     }//GEN-LAST:event_tf_birthdateActionPerformed
 
     private void btn_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_loginActionPerformed
@@ -308,6 +312,11 @@ public class NewUser_View extends javax.swing.JFrame {
         login.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btn_loginActionPerformed
+
+    private void tf_birthdateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tf_birthdateMouseClicked
+        // TODO add your handling code here:
+        this.tf_birthdate.setText("");
+    }//GEN-LAST:event_tf_birthdateMouseClicked
 
     /**
      * @param args the command line arguments
