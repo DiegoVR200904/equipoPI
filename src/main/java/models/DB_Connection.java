@@ -9,18 +9,31 @@ import java.sql.SQLException;
  */
 
 public class DB_Connection {
-    /*private static final String JDBC_URL = "jdbc:mysql://sql5.freesqldatabase.com:3306/sql5687497?zeroDateTimeBehavior=CONVERT_TO_NULL";
-    private static final String USER = "sql5687497";
-    private static final String PASSWORD = "sS5SNl9tCA";
+ 
+        private static String usuario ="ghost";
+        private static String contrasena ="1234";
+        private static String bd ="SocialSpookBook";
+        private static String ip ="localhost";
+        private static String puerto ="1433";
+        
+        /*private static String cadena="jdbc:sqlserver://"+ip+":"+puerto+"/"+bd;*/
+        private static String cadena="jdbc:sqlserver://localhost:"+puerto+";"+"databaseName="+bd+";trustServerCertificate=true;";
+        public Connection establecerconexion(){
+           Connection conectar =null;
+           try{
+            conectar = DriverManager.getConnection(cadena, usuario, contrasena);
+            // Connection successful
+            System.out.println("Connected to the database.");
+            // Perform database operations here
+        } catch (SQLException e) {
+            // Connection failed
+            System.err.println("Failed to connect to the database.");
+            e.printStackTrace();
+        }
+        return conectar;
+    }
     
-    public static Connection getConnection() throws SQLException {
-        return DriverManager.getConnection(JDBC_URL, USER, PASSWORD);
-    }*/
-    
-    private static final String JDBC_URL = "jdbc:ucanaccess://SB_DB.accdb";
-    
-    
-    public static Connection getConnection() throws SQLException {
-        return DriverManager.getConnection(JDBC_URL);
+   public static Connection getConnection() throws SQLException {
+        return DriverManager.getConnection(cadena,usuario,contrasena);
     }
 }
