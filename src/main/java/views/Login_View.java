@@ -3,8 +3,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package views;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import models.ConexionLogin;
+import models.DB_Connection;
 
 /**
  *
@@ -20,6 +25,25 @@ public class Login_View extends javax.swing.JFrame {
         setResizable(false);
         setTitle("Ingresa al sistema");          
     }
+    
+    int RegresaID() {
+    int userID = -1; // Valor por defecto en caso de que no se encuentre ningún ID
+    String query = "SELECT u.user_id FROM Users u WHERE u.email = ?";
+    try (Connection connection = DB_Connection.getConnection();
+        PreparedStatement statement = connection.prepareStatement(query)) {
+        statement.setString(1, this.tf_email.getText());
+        try (ResultSet resultSet = statement.executeQuery()) {
+            if (resultSet.next()) {
+                userID = resultSet.getInt("user_id");
+            }
+        }
+    } catch (SQLException ex) {
+        ex.printStackTrace();
+        // Aquí podrías lanzar una excepción personalizada o manejar el error de alguna otra manera según tus necesidades.
+    }
+    return userID;
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -194,7 +218,7 @@ public class Login_View extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Nombre de usuario o contraseña incorrectos", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btn_loginActionPerformed
-
+    
     private void btn_newActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_newActionPerformed
         // TODO add your handling code here:
         NewUser_View newuser = new NewUser_View();

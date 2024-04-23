@@ -3,21 +3,96 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package views;
-
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.*;
+import models.DB_Connection;
 /**
  *
  * @author ghostpatron
  */
 public class Home extends javax.swing.JFrame {
+    private Connection connection;
+    private ResultSet resultSet;
 
-    /**
-     * Creates new form Home
-     */
     public Home() {
         initComponents();
         setResizable(false);
         setTitle("Inicio");     
+        
+        
+        try {
+            connection = DB_Connection.getConnection();
+        } catch (SQLException ex) {
+            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        mostrarPrimerRegistro();
     }
+    
+    private void mostrarPrimerRegistro() {
+    Login_View loginView = new Login_View();
+    int userID = loginView.RegresaID(); // Obtener el ID del usuario
+
+    try (Connection connection = DB_Connection.getConnection()) {
+        String query = "SELECT DISTINCT p.post_text, p.post_type, i.image_data, v.video_data " +
+                       "FROM Posts p " +
+                       "LEFT JOIN Images i ON p.post_id = i.post_id " +
+                       "LEFT JOIN Videos v ON p.post_id = v.post_id " +
+                       "LEFT JOIN Contacts c ON p.user_id = c.contact_user_id " +
+                       "WHERE p.user_id = ? OR c.user_id = ?";
+        
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setInt(1, userID); // Asignar el ID de usuario al primer parámetro
+            statement.setInt(2, userID); // Asignar el ID de usuario al segundo parámetro
+
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    mostrarDatos(resultSet);
+                }
+            }
+        }
+            } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    
+    private void mostrarRegistroAnterior() {
+        try {
+            if (resultSet.previous()) {
+                mostrarDatos(resultSet);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    private void mostrarRegistroSiguiente() {
+        try {
+            if (resultSet.next()) {
+                mostrarDatos(resultSet);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    private void mostrarDatos(ResultSet resultSet) {
+        try {
+            String texto = resultSet.getString("post_text");
+            //String video = resultSet.getInt("edad");
+            this.ta_text.setText(texto);
+        } catch (SQLException ex) {
+            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+ 
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -37,11 +112,12 @@ public class Home extends javax.swing.JFrame {
         btn_videos = new javax.swing.JButton();
         btn_home = new javax.swing.JButton();
         lbl_title = new javax.swing.JLabel();
-        tf_post = new javax.swing.JFormattedTextField();
         lbl_image1 = new javax.swing.JLabel();
         if_video = new javax.swing.JInternalFrame();
         btn_previous = new javax.swing.JButton();
         btn_next = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        ta_text = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -50,27 +126,21 @@ public class Home extends javax.swing.JFrame {
         pnl_bar.setBackground(new java.awt.Color(27, 27, 27));
         pnl_bar.setForeground(new java.awt.Color(27, 27, 27));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("/home/ghostpatron/NetBeansProjects/CloneV2/src/main/java/img/logo4-64.png")); // NOI18N
-
         tf_search.setBackground(new java.awt.Color(102, 102, 102));
         tf_search.setFont(new java.awt.Font("Garuda", 0, 14)); // NOI18N
         tf_search.setForeground(new java.awt.Color(249, 128, 170));
         tf_search.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249, 128, 170)));
 
         btn_search.setBackground(new java.awt.Color(27, 27, 27));
-        btn_search.setIcon(new javax.swing.ImageIcon("/home/ghostpatron/NetBeansProjects/CloneV2/src/main/java/img/2-40.png")); // NOI18N
         btn_search.setBorder(null);
 
         btn_friends.setBackground(new java.awt.Color(27, 27, 27));
-        btn_friends.setIcon(new javax.swing.ImageIcon("/home/ghostpatron/NetBeansProjects/CloneV2/src/main/java/img/3-40.png")); // NOI18N
         btn_friends.setBorder(null);
 
         btn_videos.setBackground(new java.awt.Color(27, 27, 27));
-        btn_videos.setIcon(new javax.swing.ImageIcon("/home/ghostpatron/NetBeansProjects/CloneV2/src/main/java/img/5-40.png")); // NOI18N
         btn_videos.setBorder(null);
 
         btn_home.setBackground(new java.awt.Color(27, 27, 27));
-        btn_home.setIcon(new javax.swing.ImageIcon("/home/ghostpatron/NetBeansProjects/CloneV2/src/main/java/img/4-40.png")); // NOI18N
         btn_home.setBorder(null);
 
         javax.swing.GroupLayout pnl_barLayout = new javax.swing.GroupLayout(pnl_bar);
@@ -115,11 +185,6 @@ public class Home extends javax.swing.JFrame {
         lbl_title.setForeground(new java.awt.Color(255, 255, 255));
         lbl_title.setText("Publicaciones");
 
-        tf_post.setBackground(new java.awt.Color(102, 102, 102));
-        tf_post.setBorder(null);
-        tf_post.setForeground(new java.awt.Color(255, 102, 153));
-        tf_post.setText("Texto Post");
-
         lbl_image1.setForeground(new java.awt.Color(255, 102, 153));
         lbl_image1.setText("imagen");
 
@@ -137,12 +202,26 @@ public class Home extends javax.swing.JFrame {
         );
 
         btn_previous.setBackground(new java.awt.Color(51, 51, 51));
-        btn_previous.setIcon(new javax.swing.ImageIcon("/home/ghostpatron/NetBeansProjects/CloneV2/src/main/java/img/previous-50.png")); // NOI18N
+        btn_previous.setIcon(new javax.swing.ImageIcon("C:\\Users\\Aesther\\Documents\\NetBeansProjects\\equipoPI\\src\\main\\java\\img\\previous-50.png")); // NOI18N
         btn_previous.setBorder(null);
+        btn_previous.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_previousActionPerformed(evt);
+            }
+        });
 
         btn_next.setBackground(new java.awt.Color(51, 51, 51));
-        btn_next.setIcon(new javax.swing.ImageIcon("/home/ghostpatron/NetBeansProjects/CloneV2/src/main/java/img/next-50.png")); // NOI18N
+        btn_next.setIcon(new javax.swing.ImageIcon("C:\\Users\\Aesther\\Documents\\NetBeansProjects\\equipoPI\\src\\main\\java\\img\\next-50.png")); // NOI18N
         btn_next.setBorder(null);
+        btn_next.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_nextActionPerformed(evt);
+            }
+        });
+
+        ta_text.setColumns(20);
+        ta_text.setRows(5);
+        jScrollPane1.setViewportView(ta_text);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -157,16 +236,15 @@ public class Home extends javax.swing.JFrame {
                 .addGap(35, 35, 35)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(if_video, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(44, 44, 44))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(btn_previous)
                         .addGap(128, 128, 128)
-                        .addComponent(btn_next)
-                        .addGap(130, 130, 130)))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(tf_post, javax.swing.GroupLayout.DEFAULT_SIZE, 528, Short.MAX_VALUE)
-                    .addComponent(lbl_image1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(btn_next))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(if_video, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 495, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbl_image1, javax.swing.GroupLayout.PREFERRED_SIZE, 528, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -178,8 +256,8 @@ public class Home extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(8, 8, 8)
-                        .addComponent(tf_post, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(15, 15, 15)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(lbl_image1, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -187,7 +265,7 @@ public class Home extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(if_video, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btn_previous))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
@@ -211,6 +289,16 @@ public class Home extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btn_previousActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_previousActionPerformed
+        // TODO add your handling code here:
+        this.mostrarRegistroAnterior();
+    }//GEN-LAST:event_btn_previousActionPerformed
+
+    private void btn_nextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_nextActionPerformed
+        // TODO add your handling code here:
+        this.mostrarRegistroSiguiente();
+    }//GEN-LAST:event_btn_nextActionPerformed
 
     /**
      * @param args the command line arguments
@@ -238,7 +326,7 @@ public class Home extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(Home.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
+        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -257,10 +345,11 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JInternalFrame if_video;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbl_image1;
     private javax.swing.JLabel lbl_title;
     private javax.swing.JPanel pnl_bar;
-    private javax.swing.JFormattedTextField tf_post;
+    private javax.swing.JTextArea ta_text;
     private javax.swing.JTextField tf_search;
     // End of variables declaration//GEN-END:variables
 }
