@@ -25,21 +25,20 @@ public class Home extends javax.swing.JFrame {
         setResizable(false);
         setTitle("Inicio");     
         
-        
         try {
             connection = DB_Connection.getConnection();
         } catch (SQLException ex) {
             Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        mostrarPrimerRegistro();
+        mostrarPrimerRegistro(); // Assuming this method exists
     }
     
     private void mostrarPrimerRegistro() {
     Login_View loginView = new Login_View();
     int userID = loginView.RegresaID(); // Obtener el ID del usuario
 
-    try (Connection connection = DB_Connection.getConnection()) {
+    try (Connection conn = DB_Connection.getConnection()) {
         String query = "SELECT DISTINCT p.post_text, p.post_type, i.image_data, v.video_data " +
                        "FROM Posts p " +
                        "LEFT JOIN Images i ON p.post_id = i.post_id " +
@@ -47,7 +46,7 @@ public class Home extends javax.swing.JFrame {
                        "LEFT JOIN Contacts c ON p.user_id = c.contact_user_id " +
                        "WHERE p.user_id = ? OR c.user_id = ?";
         
-        try (PreparedStatement statement = connection.prepareStatement(query)) {
+        try (PreparedStatement statement = conn.prepareStatement(query)) {
             statement.setInt(1, userID); // Asignar el ID de usuario al primer parámetro
             statement.setInt(2, userID); // Asignar el ID de usuario al segundo parámetro
 
@@ -57,41 +56,43 @@ public class Home extends javax.swing.JFrame {
                 }
             }
         }
-            } catch (SQLException e) {
-            e.printStackTrace();
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+}
+
+    private void mostrarRegistroAnterior() {
+    try {
+        if (resultSet != null && resultSet.previous()) {
+            mostrarDatos(resultSet);
+        }
+    } catch (SQLException ex) {
+        Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     
-    private void mostrarRegistroAnterior() {
-        try {
-            if (resultSet.previous()) {
-                mostrarDatos(resultSet);
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    
     private void mostrarRegistroSiguiente() {
-        try {
-            if (resultSet.next()) {
-                mostrarDatos(resultSet);
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+    try {
+        if (resultSet != null && resultSet.next()) {
+            mostrarDatos(resultSet);
+        }
+    } catch (SQLException ex) {
+        Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
     
     private void mostrarDatos(ResultSet resultSet) {
-        try {
-            String texto = resultSet.getString("post_text");
-            //String video = resultSet.getInt("edad");
-            this.ta_text.setText(texto);
+    try {
+        String texto = resultSet.getString("post_text");
+        // Assuming you have a JTextArea component named "ta_text"
+        this.ta_text.setText(texto);
         } catch (SQLException ex) {
-            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+        Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
  
 
     /**
