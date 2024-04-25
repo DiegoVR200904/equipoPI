@@ -201,7 +201,7 @@ public class Login_View extends javax.swing.JFrame {
     private void pf_passActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pf_passActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_pf_passActionPerformed
-
+/*
     private void btn_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_loginActionPerformed
         // TODO add your handling code here:
         String user = tf_email.getText();
@@ -218,6 +218,23 @@ public class Login_View extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Nombre de usuario o contraseña incorrectos", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btn_loginActionPerformed
+    */
+    private void btn_loginActionPerformed(java.awt.event.ActionEvent evt) {                                          
+        // TODO add your handling code here:
+        String user = tf_email.getText();
+        String pass = new String(pf_pass.getPassword());
+ 
+        if (ConexionLogin.verificarCredenciales(user, pass)) {
+            // Credenciales válidas, realizar acciones después del inicio de sesión
+            JOptionPane.showMessageDialog(this, "Inicio de sesión exitoso", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+            Home inicio = new Home(this.RegresaID());
+            inicio.setVisible(true);
+            this.setVisible(false);
+        } else {
+            // Credenciales incorrectas
+            JOptionPane.showMessageDialog(this, "Nombre de usuario o contraseña incorrectos", "Error", JOptionPane.ERROR_MESSAGE);
+        }    
+    }
     
     private void btn_newActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_newActionPerformed
         // TODO add your handling code here:

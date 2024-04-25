@@ -19,47 +19,43 @@ import models.DB_Connection;
 public class Home extends javax.swing.JFrame {
     private Connection connection;
     private ResultSet resultSet;
-
-    public Home() {
+    private int id;
+ 
+    public Home(int id) {
         initComponents();
         setResizable(false);
         setTitle("Inicio");     
-        
+        this.id = id; 
         try {
             connection = DB_Connection.getConnection();
         } catch (SQLException ex) {
             Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        mostrarPrimerRegistro(); // Assuming this method exists
+        mostrarPrimerRegistro();
     }
-    
     private void mostrarPrimerRegistro() {
-    Login_View loginView = new Login_View();
-    int userID = loginView.RegresaID(); // Obtener el ID del usuario
-
-    try (Connection conn = DB_Connection.getConnection()) {
+ 
+    try (Connection connection = DB_Connection.getConnection()) {
         String query = "SELECT DISTINCT p.post_text, p.post_type, i.image_data, v.video_data " +
                        "FROM Posts p " +
                        "LEFT JOIN Images i ON p.post_id = i.post_id " +
                        "LEFT JOIN Videos v ON p.post_id = v.post_id " +
                        "LEFT JOIN Contacts c ON p.user_id = c.contact_user_id " +
                        "WHERE p.user_id = ? OR c.user_id = ?";
-        
-        try (PreparedStatement statement = conn.prepareStatement(query)) {
-            statement.setInt(1, userID); // Asignar el ID de usuario al primer parámetro
-            statement.setInt(2, userID); // Asignar el ID de usuario al segundo parámetro
-
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setInt(1, id); // Asignar el ID de usuario al primer parámetro
+            statement.setInt(2, id); // Asignar el ID de usuario al segundo parámetro
+ 
             try (ResultSet resultSet = statement.executeQuery()) {
                 if (resultSet.next()) {
                     mostrarDatos(resultSet);
                 }
             }
         }
-    } catch (SQLException e) {
-        e.printStackTrace();
+            } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
-}
 
     private void mostrarRegistroAnterior() {
     try {
@@ -330,8 +326,9 @@ public class Home extends javax.swing.JFrame {
         
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Home().setVisible(true);
+              public void run() {
+                int userID = 123;
+                new Home(userID).setVisible(true);
             }
         });
     }
