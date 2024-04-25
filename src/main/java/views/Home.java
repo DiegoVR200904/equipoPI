@@ -33,43 +33,45 @@ public class Home extends javax.swing.JFrame {
         }
         mostrarPrimerRegistro();
     }
-    private void mostrarPrimerRegistro() {       
-        try {
-            String query = "SELECT DISTINCT p.post_text, p.post_type, i.image_data, v.video_data " +
-                       "FROM Posts p " +
-                       "LEFT JOIN Images i ON p.post_id = i.post_id " +
-                       "LEFT JOIN Videos v ON p.post_id = v.post_id " +
-                       "LEFT JOIN Contacts c ON p.user_id = c.contact_user_id " +
-                       "WHERE p.user_id = ? OR c.user_id = ?";
-            PreparedStatement statement = this.connection.prepareStatement(query);
-            statement.setInt(1, id); // Asignar el ID de usuario al primer parámetro
-            statement.setInt(2, id); // Asignar el ID de usuario al segundo parámetro
- 
-            this.resultSet = statement.executeQuery();            
-        } catch (SQLException ex) {
-            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
-        }
+private void mostrarPrimerRegistro() {       
+    try {
+        String query = "SELECT DISTINCT p.post_text, p.post_type, i.image_data, v.video_data " +
+                   "FROM Posts p " +
+                   "LEFT JOIN Images i ON p.post_id = i.post_id " +
+                   "LEFT JOIN Videos v ON p.post_id = v.post_id " +
+                   "LEFT JOIN Contacts c ON p.user_id = c.contact_user_id " +
+                   "WHERE p.user_id = ? OR c.user_id = ?";
+        PreparedStatement statement = this.connection.prepareStatement(query, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        statement.setInt(1, id); // Asignar el ID de usuario al primer parámetro
+        statement.setInt(2, id); // Asignar el ID de usuario al segundo parámetro
+
+        this.resultSet = statement.executeQuery();            
+    } catch (SQLException ex) {
+        Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
     }
- 
-    
-    private void mostrarRegistroAnterior() {
-        try {
-            if (this.resultSet.previous()) {
-                mostrarDatos();
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+}
+
+private void mostrarRegistroAnterior() {
+    try {
+        if (this.resultSet != null && !this.resultSet.isBeforeFirst()) {
+            this.resultSet.previous();
+            mostrarDatos();
         }
+    } catch (SQLException ex) {
+        Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
     }
-    private void mostrarRegistroSiguiente() {
-        try {
-            if (this.resultSet.next()) {
-                mostrarDatos();
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+}
+
+private void mostrarRegistroSiguiente() {
+    try {
+        if (this.resultSet != null && this.resultSet.next()) {
+            mostrarDatos();
         }
+    } catch (SQLException ex) {
+        Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
     }
+}
+
     private void mostrarDatos() {
         try {
             String texto = this.resultSet.getString("post_text");
