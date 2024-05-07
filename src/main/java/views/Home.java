@@ -101,6 +101,7 @@ private void mostrarRegistroSiguiente() {
         btn_friends = new javax.swing.JButton();
         btn_videos = new javax.swing.JButton();
         btn_home = new javax.swing.JButton();
+        btn_createPost = new javax.swing.JButton();
         lbl_title = new javax.swing.JLabel();
         lbl_image1 = new javax.swing.JLabel();
         if_video = new javax.swing.JInternalFrame();
@@ -133,6 +134,15 @@ private void mostrarRegistroSiguiente() {
         btn_home.setBackground(new java.awt.Color(27, 27, 27));
         btn_home.setBorder(null);
 
+        btn_createPost.setBackground(new java.awt.Color(27, 27, 27));
+        btn_createPost.setIcon(new javax.swing.ImageIcon("C:\\Users\\salva\\OneDrive\\Documentos\\NetBeansProjects\\spookbook\\src\\main\\java\\img\\agregar-publicacion.png")); // NOI18N
+        btn_createPost.setBorder(null);
+        btn_createPost.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_createPostActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnl_barLayout = new javax.swing.GroupLayout(pnl_bar);
         pnl_bar.setLayout(pnl_barLayout);
         pnl_barLayout.setHorizontalGroup(
@@ -151,6 +161,11 @@ private void mostrarRegistroSiguiente() {
                 .addGap(18, 18, 18)
                 .addComponent(btn_videos)
                 .addGap(86, 86, 86))
+            .addGroup(pnl_barLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_barLayout.createSequentialGroup()
+                    .addContainerGap(975, Short.MAX_VALUE)
+                    .addComponent(btn_createPost)
+                    .addGap(112, 112, 112)))
         );
         pnl_barLayout.setVerticalGroup(
             pnl_barLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -158,9 +173,9 @@ private void mostrarRegistroSiguiente() {
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jLabel1))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_barLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(38, Short.MAX_VALUE)
                 .addComponent(tf_search, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(22, 22, 22))
+                .addGap(37, 37, 37))
             .addGroup(pnl_barLayout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addGroup(pnl_barLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -169,6 +184,11 @@ private void mostrarRegistroSiguiente() {
                     .addComponent(btn_videos)
                     .addComponent(btn_friends))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(pnl_barLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnl_barLayout.createSequentialGroup()
+                    .addGap(25, 25, 25)
+                    .addComponent(btn_createPost)
+                    .addContainerGap(42, Short.MAX_VALUE)))
         );
 
         lbl_title.setFont(new java.awt.Font("Manjari", 1, 24)); // NOI18N
@@ -192,7 +212,6 @@ private void mostrarRegistroSiguiente() {
         );
 
         btn_previous.setBackground(new java.awt.Color(51, 51, 51));
-        btn_previous.setIcon(new javax.swing.ImageIcon("C:\\Users\\Aesther\\Documents\\NetBeansProjects\\equipoPI\\src\\main\\java\\img\\previous-50.png")); // NOI18N
         btn_previous.setBorder(null);
         btn_previous.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -201,7 +220,6 @@ private void mostrarRegistroSiguiente() {
         });
 
         btn_next.setBackground(new java.awt.Color(51, 51, 51));
-        btn_next.setIcon(new javax.swing.ImageIcon("C:\\Users\\Aesther\\Documents\\NetBeansProjects\\equipoPI\\src\\main\\java\\img\\next-50.png")); // NOI18N
         btn_next.setBorder(null);
         btn_next.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -290,6 +308,12 @@ private void mostrarRegistroSiguiente() {
         this.mostrarRegistroSiguiente();
     }//GEN-LAST:event_btn_nextActionPerformed
 
+    private void btn_createPostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_createPostActionPerformed
+        CreatePost_View createPost = new CreatePost_View(id);
+        createPost.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btn_createPostActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -327,6 +351,7 @@ private void mostrarRegistroSiguiente() {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_createPost;
     private javax.swing.JButton btn_friends;
     private javax.swing.JButton btn_home;
     private javax.swing.JButton btn_next;
