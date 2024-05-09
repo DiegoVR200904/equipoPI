@@ -3,6 +3,9 @@
 * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
 */
 package views;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,6 +13,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import models.DB_Connection;
 /**
@@ -72,9 +76,33 @@ private void mostrarRegistroSiguiente() {
     }
 }
 
+private static ImageIcon bytesToImageIcon(byte[] multimedia) {
+        try {
+            // Convert bytes to BufferedImage
+            ByteArrayInputStream bis = new ByteArrayInputStream(multimedia);
+            BufferedImage bImage = ImageIO.read(bis);
+
+            // Convert BufferedImage to ImageIcon
+            return new ImageIcon(bImage);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     private void mostrarDatos() {
         try {
             String texto = this.resultSet.getString("post_text");
+            byte[] imagen = this.resultSet.getBytes("image_data");
+            
+            ImageIcon imageIcon = bytesToImageIcon(imagen);
+                if (imageIcon != null) {
+                    this.lbl_image1.setIcon(imageIcon);
+                } else {
+                    this.ta_text.setText("Failed to load image");
+                }
+            
+            
             //String video = resultSet.getInt("edad");
             this.ta_text.setText(texto);
         } catch (SQLException ex) {
