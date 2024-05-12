@@ -59,7 +59,7 @@
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="scroll" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="85" max="32767" attributes="0"/>
+              <EmptySpace pref="86" max="32767" attributes="0"/>
               <Component id="btnImage" min="-2" pref="41" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
           </Group>
@@ -68,6 +68,12 @@
   </Layout>
   <SubComponents>
     <Component class="circle.label.Label_User_icon" name="label_User_icon1">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value=""/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btnImage">
       <Properties>
