@@ -1,5 +1,6 @@
 package models;
 
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -46,8 +47,10 @@ public class Manejador {
             // Convert bytes to BufferedImage
             ByteArrayInputStream bis = new ByteArrayInputStream(multimedia);
             BufferedImage bImage = ImageIO.read(bis);
-            // Convert BufferedImage to ImageIcon
-            return new ImageIcon(bImage);
+             // Redimensionar la imagen a 50x50
+            Image resizedImage = bImage.getScaledInstance(75, 75, Image.SCALE_SMOOTH);
+            // Convertir la imagen redimensionada a ImageIcon
+            return new ImageIcon(resizedImage);
         } catch (IOException e) {
             e.printStackTrace();
             return null;
