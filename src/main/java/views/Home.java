@@ -3,6 +3,7 @@
 * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
 */
 package views;
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -91,23 +92,34 @@ private static ImageIcon bytesToImageIcon(byte[] multimedia) {
         }
     }
 
-    private void mostrarDatos() {
+   private void mostrarDatos() {
+        String postype;
+        
         try {
             String texto = this.resultSet.getString("post_text");
-            
-            byte[] imagen = this.resultSet.getBytes("image_data");
-            
-            ImageIcon imageIcon = bytesToImageIcon(imagen);
-                if (imageIcon != null) {
-                    this.lbl_image1.setIcon(imageIcon);
-                } else {
-                    System.out.println("no cargo imagen xd");
-                    //this.ta_text.setText("Failed to load image");
-                }
-            
-            
+            switch(postype = this.resultSet.getString("post_type")){
+                case "text":
+                    this.ta_text.setText(texto);
+                    this.lbl_image1.setIcon(null);
+                    break;
+                case "image":
+                    byte[] imagen = this.resultSet.getBytes("image_data");
+                    ImageIcon imageIcon = bytesToImageIcon(imagen);
+                        if (imageIcon != null) {
+                            Image scaledImage = imageIcon.getImage().getScaledInstance(lbl_image1.getWidth(), lbl_image1.getHeight(), Image.SCALE_SMOOTH);
+                            ImageIcon scaledIcon = new ImageIcon(scaledImage);
+                            this.lbl_image1.setIcon(scaledIcon);
+                        } else {
+                            System.out.println("no cargo imagen xd");
+                            //this.ta_text.setText("Failed to load image");
+                    }
+                    break;
+                case "video":
+                    break;
+                default:
+                    break;   
+            }
             //String video = resultSet.getInt("edad");
-            this.ta_text.setText(texto);
         } catch (SQLException ex) {
             Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -182,7 +194,7 @@ private static ImageIcon bytesToImageIcon(byte[] multimedia) {
         });
 
         btn_createPost.setBackground(new java.awt.Color(27, 27, 27));
-        btn_createPost.setIcon(new javax.swing.ImageIcon("C:\\Users\\salva\\OneDrive\\Documentos\\NetBeansProjects\\spookbook\\src\\main\\java\\img\\agregar-publicacion.png")); // NOI18N
+        btn_createPost.setIcon(new javax.swing.ImageIcon("C:\\Users\\Aesther\\Documents\\NetBeansProjects\\equipoPI\\src\\main\\java\\img\\agregar-publicacion.png")); // NOI18N
         btn_createPost.setBorder(null);
         btn_createPost.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
