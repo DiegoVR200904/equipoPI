@@ -1,10 +1,12 @@
 package models;
 
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 
 public class Manejador {
@@ -36,6 +38,20 @@ public class Manejador {
             extension = fileName.substring(dotIndex + 1);
         }
         return extension;
+    }
+    
+    
+    public static ImageIcon bytesToImageIcon(byte[] multimedia) {
+        try {
+            // Convert bytes to BufferedImage
+            ByteArrayInputStream bis = new ByteArrayInputStream(multimedia);
+            BufferedImage bImage = ImageIO.read(bis);
+            // Convert BufferedImage to ImageIcon
+            return new ImageIcon(bImage);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }
 

@@ -1,9 +1,12 @@
 package views;
+import java.awt.Image;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import models.Manejador;
 import models.DB_Connection;
 /**
@@ -24,6 +27,20 @@ public class CreatePost_View extends javax.swing.JFrame {
         this.id = id; 
         try {
             connection = DB_Connection.getConnection();
+            
+            String sql = "SELECT image_data FROM Images WHERE image_id = (SELECT profile_image_id FROM Users WHERE user_id = ?)";
+        
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1,id);
+            ResultSet resultSet = statement.executeQuery();
+            
+            if (resultSet.next()) {
+                    // Obtener la imagen de perfil como un array de bytes
+                    byte[] imageData = resultSet.getBytes("image_data");
+                     CLabel.setIcon(Manejador.bytesToImageIcon(imageData));
+                }
+            
+            
         } catch (SQLException ex) {
             Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -38,7 +55,7 @@ public class CreatePost_View extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        label_User_icon1 = new circle.label.Label_User_icon();
+        CLabel = new circle.label.Label_User_icon();
         btnImage = new javax.swing.JButton();
         scroll = new javax.swing.JScrollPane();
         txtComent = new javax.swing.JTextArea();
@@ -47,8 +64,8 @@ public class CreatePost_View extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        label_User_icon1.setBackground(new java.awt.Color(255, 255, 255));
-        label_User_icon1.setText("");
+        CLabel.setBackground(new java.awt.Color(255, 255, 255));
+        CLabel.setText("");
 
         btnImage.setText("Imagen/Foto");
         btnImage.addActionListener(new java.awt.event.ActionListener() {
@@ -84,10 +101,10 @@ public class CreatePost_View extends javax.swing.JFrame {
                         .addComponent(btnImage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addComponent(label_User_icon1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addComponent(CLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(Tittle)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
                         .addComponent(btnCreate_Publication, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
@@ -100,12 +117,12 @@ public class CreatePost_View extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(label_User_icon1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(CLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(Tittle))
                     .addComponent(btnCreate_Publication))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(scroll, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 86, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
                 .addComponent(btnImage, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34))
         );
@@ -184,10 +201,10 @@ public class CreatePost_View extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private circle.label.Label_User_icon CLabel;
     private javax.swing.JLabel Tittle;
     private javax.swing.JButton btnCreate_Publication;
     private javax.swing.JButton btnImage;
-    private circle.label.Label_User_icon label_User_icon1;
     private javax.swing.JScrollPane scroll;
     private javax.swing.JTextArea txtComent;
     // End of variables declaration//GEN-END:variables

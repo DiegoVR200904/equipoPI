@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package views;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,15 +7,8 @@ import javax.swing.JOptionPane;
 import models.ConexionLogin;
 import models.DB_Connection;
 
-/**
- *
- * @author ghostpatron
- */
 public class Login_View extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Login
-     */
     public Login_View() {
         initComponents();
         setResizable(false);

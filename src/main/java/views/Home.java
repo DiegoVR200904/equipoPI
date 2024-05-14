@@ -155,11 +155,9 @@ private static ImageIcon bytesToImageIcon(byte[] multimedia) {
         tf_search.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249, 128, 170)));
 
         btn_search.setBackground(new java.awt.Color(27, 27, 27));
-        btn_search.setIcon(new javax.swing.ImageIcon("C:\\Users\\erika\\OneDrive\\Documentos\\NetBeansProjects\\repositorioclonado\\Pruebaimages\\src\\main\\java\\img\\2-40.png")); // NOI18N
         btn_search.setBorder(null);
 
         btn_friends.setBackground(new java.awt.Color(27, 27, 27));
-        btn_friends.setIcon(new javax.swing.ImageIcon("C:\\Users\\erika\\OneDrive\\Documentos\\NetBeansProjects\\repositorioclonado\\Pruebaimages\\src\\main\\java\\img\\3-40.png")); // NOI18N
         btn_friends.setBorder(null);
         btn_friends.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -168,7 +166,6 @@ private static ImageIcon bytesToImageIcon(byte[] multimedia) {
         });
 
         btn_videos.setBackground(new java.awt.Color(27, 27, 27));
-        btn_videos.setIcon(new javax.swing.ImageIcon("C:\\Users\\erika\\OneDrive\\Documentos\\NetBeansProjects\\repositorioclonado\\Pruebaimages\\src\\main\\java\\img\\5-40.png")); // NOI18N
         btn_videos.setBorder(null);
         btn_videos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -177,7 +174,6 @@ private static ImageIcon bytesToImageIcon(byte[] multimedia) {
         });
 
         btn_home.setBackground(new java.awt.Color(27, 27, 27));
-        btn_home.setIcon(new javax.swing.ImageIcon("C:\\Users\\erika\\OneDrive\\Documentos\\NetBeansProjects\\repositorioclonado\\Pruebaimages\\src\\main\\java\\img\\4-40.png")); // NOI18N
         btn_home.setBorder(null);
         btn_home.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -186,7 +182,7 @@ private static ImageIcon bytesToImageIcon(byte[] multimedia) {
         });
 
         btn_createPost.setBackground(new java.awt.Color(27, 27, 27));
-        btn_createPost.setIcon(new javax.swing.ImageIcon("C:\\Users\\erika\\OneDrive\\Documentos\\NetBeansProjects\\repositorioclonado\\equipoPI\\src\\main\\java\\img\\agregar-publicacion.png")); // NOI18N
+        btn_createPost.setIcon(new javax.swing.ImageIcon("C:\\Users\\salva\\OneDrive\\Documentos\\NetBeansProjects\\spookbook\\src\\main\\java\\img\\agregar-publicacion.png")); // NOI18N
         btn_createPost.setBorder(null);
         btn_createPost.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -195,7 +191,6 @@ private static ImageIcon bytesToImageIcon(byte[] multimedia) {
         });
 
         btn_Profile.setBackground(new java.awt.Color(51, 51, 51));
-        btn_Profile.setIcon(new javax.swing.ImageIcon("C:\\Users\\erika\\OneDrive\\Documentos\\NetBeansProjects\\repositorioclonado\\Pruebaimages\\src\\main\\java\\img\\previous-50.png")); // NOI18N
         btn_Profile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_ProfileActionPerformed(evt);
@@ -271,7 +266,6 @@ private static ImageIcon bytesToImageIcon(byte[] multimedia) {
         );
 
         btn_previous.setBackground(new java.awt.Color(51, 51, 51));
-        btn_previous.setIcon(new javax.swing.ImageIcon("C:\\Users\\erika\\OneDrive\\Documentos\\NetBeansProjects\\repositorioclonado\\equipoPI\\src\\main\\java\\img\\previous-50.png")); // NOI18N
         btn_previous.setBorder(null);
         btn_previous.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -280,7 +274,6 @@ private static ImageIcon bytesToImageIcon(byte[] multimedia) {
         });
 
         btn_next.setBackground(new java.awt.Color(51, 51, 51));
-        btn_next.setIcon(new javax.swing.ImageIcon("C:\\Users\\erika\\OneDrive\\Documentos\\NetBeansProjects\\repositorioclonado\\equipoPI\\src\\main\\java\\img\\next-50.png")); // NOI18N
         btn_next.setBorder(null);
         btn_next.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
