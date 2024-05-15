@@ -64,6 +64,7 @@ public class CreatePost_View extends javax.swing.JFrame {
         txtComent = new javax.swing.JTextArea();
         Tittle = new javax.swing.JLabel();
         btnCreate_Publication = new javax.swing.JButton();
+        btn_home = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(102, 102, 102));
@@ -103,6 +104,13 @@ public class CreatePost_View extends javax.swing.JFrame {
             }
         });
 
+        btn_home.setText("Inicio");
+        btn_home.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_homeActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -111,6 +119,10 @@ public class CreatePost_View extends javax.swing.JFrame {
                 .addContainerGap(441, Short.MAX_VALUE)
                 .addComponent(btnCreate_Publication, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(21, 21, 21))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(231, 231, 231)
+                .addComponent(btn_home)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addContainerGap()
@@ -130,7 +142,9 @@ public class CreatePost_View extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addComponent(btnCreate_Publication)
-                .addContainerGap(364, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 192, Short.MAX_VALUE)
+                .addComponent(btn_home)
+                .addGap(149, 149, 149))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addContainerGap()
@@ -196,6 +210,13 @@ public class CreatePost_View extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnCreate_PublicationActionPerformed
 
+    private void btn_homeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_homeActionPerformed
+        // TODO add your handling code here:
+        Home inicio = new Home(id);
+        inicio.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btn_homeActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -237,6 +258,7 @@ public class CreatePost_View extends javax.swing.JFrame {
     private javax.swing.JLabel Tittle;
     private javax.swing.JButton btnCreate_Publication;
     private javax.swing.JButton btnImage;
+    private javax.swing.JButton btn_home;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane scroll;
     private javax.swing.JTextArea txtComent;

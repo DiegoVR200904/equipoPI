@@ -37,8 +37,8 @@ public class Home extends javax.swing.JFrame {
             Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
         }
         this.mostrarPrimerRegistro();
-        this.mostrarDatos();
     }
+    
 private void mostrarPrimerRegistro() {       
     try {
         String query = "SELECT DISTINCT p.post_text, p.post_type, i.image_data, v.video_data\n" +
@@ -60,8 +60,8 @@ private void mostrarPrimerRegistro() {
 
 private void mostrarRegistroAnterior() {
     try {
-        if (this.resultSet != null && !this.resultSet.previous()) {
-            //this.resultSet.previous();
+        if (this.resultSet != null && !this.resultSet.isBeforeFirst()) {
+            this.resultSet.previous();
             mostrarDatos();
         }
     } catch (SQLException ex) {
@@ -438,7 +438,6 @@ private static ImageIcon bytesToImageIcon(byte[] multimedia) {
 
     private void btn_likeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_likeActionPerformed
         // TODO add your handling code here:
-        this.mostrarPrimerRegistro();
         String query = "DECLARE @id_post INT;\n" + "SET @id_post = SCOPE_IDENTITY();\n" + "UPDATE Reactions\n" +
         "SET \n" + "likes = likes + 1\n" + "WHERE post_id = @id_post;";
         
