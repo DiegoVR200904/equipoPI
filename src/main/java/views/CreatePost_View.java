@@ -176,14 +176,14 @@ public class CreatePost_View extends javax.swing.JFrame {
             String type = "image";
             byte[] multimedia = imagenBytes;
 
+            if(multimedia == null){
+                type = "text";
+            }
+            
             statement.setInt(1, usuarioId);
             statement.setString(2, contenido);
             statement.setString(3, type);
             statement.setBytes(4, multimedia);
-            
-            if(multimedia == null){
-                type = "text";
-            }
             
             statement.executeUpdate();
             statement.close();

@@ -36,7 +36,8 @@ public class Home extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
         }
-        mostrarPrimerRegistro();
+        this.mostrarPrimerRegistro();
+        this.mostrarDatos();
     }
 private void mostrarPrimerRegistro() {       
     try {
@@ -59,8 +60,8 @@ private void mostrarPrimerRegistro() {
 
 private void mostrarRegistroAnterior() {
     try {
-        if (this.resultSet != null && !this.resultSet.isBeforeFirst()) {
-            this.resultSet.previous();
+        if (this.resultSet != null && !this.resultSet.previous()) {
+            //this.resultSet.previous();
             mostrarDatos();
         }
     } catch (SQLException ex) {
@@ -412,10 +413,9 @@ private static ImageIcon bytesToImageIcon(byte[] multimedia) {
     }//GEN-LAST:event_btn_createPostActionPerformed
 
     private void btn_ProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ProfileActionPerformed
-      Profile Profile = new Profile(id);
+        Profile Profile = new Profile(id);
         Profile.setVisible(true);
-        this.setVisible(false);
-      
+        this.setVisible(false);      
     }//GEN-LAST:event_btn_ProfileActionPerformed
 
     private void btn_videosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_videosActionPerformed
@@ -438,6 +438,7 @@ private static ImageIcon bytesToImageIcon(byte[] multimedia) {
 
     private void btn_likeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_likeActionPerformed
         // TODO add your handling code here:
+        this.mostrarPrimerRegistro();
         String query = "DECLARE @id_post INT;\n" + "SET @id_post = SCOPE_IDENTITY();\n" + "UPDATE Reactions\n" +
         "SET \n" + "likes = likes + 1\n" + "WHERE post_id = @id_post;";
         
