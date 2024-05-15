@@ -425,7 +425,7 @@ private static ImageIcon bytesToImageIcon(byte[] multimedia) {
     }//GEN-LAST:event_btn_videosActionPerformed
 
     private void btn_homeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_homeActionPerformed
-       Home Home = new Home(id);
+        Home Home = new Home(id);
         Home.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btn_homeActionPerformed
