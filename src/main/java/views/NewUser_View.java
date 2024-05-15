@@ -21,26 +21,6 @@ public class NewUser_View extends javax.swing.JFrame {
         setResizable(false);
         setTitle("Crea Nuevo Usuario");          
     }
-    
-    /*
-    private void realizarConsulta() {
-        
-        try{
-            Connection connection = DB_Connection.getConnection();
-
-            //Consulta
-            String query = "SELECT * FROM users";
-            PreparedStatement statement = connection.prepareStatement(query);
-            ResultSet resultSet = statement.executeQuery();
-
-            // Cerrar recursos
-            resultSet.close();
-            statement.close();
-            connection.close();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(this, "Error al realizar la consulta: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        }
-    }*/
 
     /**
      * This method is called from within the constructor to initialize the form.

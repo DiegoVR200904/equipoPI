@@ -99,16 +99,16 @@ private static ImageIcon bytesToImageIcon(byte[] multimedia) {
             String texto = this.resultSet.getString("post_text");
             switch(postype = this.resultSet.getString("post_type")){
                 case "text":
-                    this.ta_text.setText(texto);
-                    this.lbl_image1.setIcon(null);
+                    this.lbl_text.setText(texto);
+                    this.lbl_text.setIcon(null);
                     break;
                 case "image":
                     byte[] imagen = this.resultSet.getBytes("image_data");
                     ImageIcon imageIcon = bytesToImageIcon(imagen);
                         if (imageIcon != null) {
-                            Image scaledImage = imageIcon.getImage().getScaledInstance(lbl_image1.getWidth(), lbl_image1.getHeight(), Image.SCALE_SMOOTH);
+                            Image scaledImage = imageIcon.getImage().getScaledInstance(lbl_image.getWidth(), lbl_image.getHeight(), Image.SCALE_SMOOTH);
                             ImageIcon scaledIcon = new ImageIcon(scaledImage);
-                            this.lbl_image1.setIcon(scaledIcon);
+                            this.lbl_image.setIcon(scaledIcon);
                         } else {
                             System.out.println("no cargo imagen xd");
                             //this.ta_text.setText("Failed to load image");
@@ -147,12 +147,14 @@ private static ImageIcon bytesToImageIcon(byte[] multimedia) {
         btn_createPost = new javax.swing.JButton();
         btn_Profile = new javax.swing.JButton();
         lbl_title = new javax.swing.JLabel();
-        lbl_image1 = new javax.swing.JLabel();
-        if_video = new javax.swing.JInternalFrame();
+        lbl_text = new javax.swing.JLabel();
         btn_previous = new javax.swing.JButton();
         btn_next = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        ta_text = new javax.swing.JTextArea();
+        lbl_image = new javax.swing.JLabel();
+        btn_like = new javax.swing.JButton();
+        btn_love = new javax.swing.JButton();
+        btn_laugh = new javax.swing.JButton();
+        btn_comments = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -167,9 +169,11 @@ private static ImageIcon bytesToImageIcon(byte[] multimedia) {
         tf_search.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249, 128, 170)));
 
         btn_search.setBackground(new java.awt.Color(27, 27, 27));
+        btn_search.setIcon(new javax.swing.ImageIcon("/home/ghostpatron/NetBeansProjects/CloneV2/src/main/java/img/2-40.png")); // NOI18N
         btn_search.setBorder(null);
 
         btn_friends.setBackground(new java.awt.Color(27, 27, 27));
+        btn_friends.setIcon(new javax.swing.ImageIcon("/home/ghostpatron/NetBeansProjects/CloneV2/src/main/java/img/3-40.png")); // NOI18N
         btn_friends.setBorder(null);
         btn_friends.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -178,6 +182,7 @@ private static ImageIcon bytesToImageIcon(byte[] multimedia) {
         });
 
         btn_videos.setBackground(new java.awt.Color(27, 27, 27));
+        btn_videos.setIcon(new javax.swing.ImageIcon("/home/ghostpatron/NetBeansProjects/CloneV2/src/main/java/img/5-40.png")); // NOI18N
         btn_videos.setBorder(null);
         btn_videos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -186,6 +191,7 @@ private static ImageIcon bytesToImageIcon(byte[] multimedia) {
         });
 
         btn_home.setBackground(new java.awt.Color(27, 27, 27));
+        btn_home.setIcon(new javax.swing.ImageIcon("/home/ghostpatron/NetBeansProjects/CloneV2/src/main/java/img/4-40.png")); // NOI18N
         btn_home.setBorder(null);
         btn_home.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -194,7 +200,7 @@ private static ImageIcon bytesToImageIcon(byte[] multimedia) {
         });
 
         btn_createPost.setBackground(new java.awt.Color(27, 27, 27));
-        btn_createPost.setIcon(new javax.swing.ImageIcon("C:\\Users\\Aesther\\Documents\\NetBeansProjects\\equipoPI\\src\\main\\java\\img\\agregar-publicacion.png")); // NOI18N
+        btn_createPost.setIcon(new javax.swing.ImageIcon("/home/ghostpatron/NetBeansProjects/CloneV2/src/main/java/img/agregar-publicacion.png")); // NOI18N
         btn_createPost.setBorder(null);
         btn_createPost.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -202,7 +208,9 @@ private static ImageIcon bytesToImageIcon(byte[] multimedia) {
             }
         });
 
-        btn_Profile.setBackground(new java.awt.Color(51, 51, 51));
+        btn_Profile.setBackground(new java.awt.Color(27, 27, 27));
+        btn_Profile.setIcon(new javax.swing.ImageIcon("/home/ghostpatron/NetBeansProjects/CloneV2/src/main/java/img/Perfil rosa.png")); // NOI18N
+        btn_Profile.setBorder(null);
         btn_Profile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_ProfileActionPerformed(evt);
@@ -214,70 +222,59 @@ private static ImageIcon bytesToImageIcon(byte[] multimedia) {
         pnl_barLayout.setHorizontalGroup(
             pnl_barLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_barLayout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(tf_search, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btn_search)
-                .addGap(180, 180, 180)
-                .addComponent(btn_videos)
-                .addGap(110, 110, 110)
-                .addComponent(btn_friends)
-                .addGap(161, 161, 161)
-                .addComponent(btn_createPost)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btn_home)
-                .addGap(38, 38, 38)
-                .addComponent(btn_Profile)
-                .addContainerGap())
+                .addGroup(pnl_barLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnl_barLayout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addComponent(jLabel1))
+                    .addGroup(pnl_barLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(tf_search, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btn_search)
+                        .addGap(65, 65, 65)
+                        .addComponent(btn_videos)
+                        .addGap(18, 18, 18)
+                        .addComponent(btn_friends)
+                        .addGap(18, 18, 18)
+                        .addComponent(btn_home)
+                        .addGap(18, 18, 18)
+                        .addComponent(btn_createPost)
+                        .addGap(78, 78, 78)
+                        .addComponent(btn_Profile)))
+                .addContainerGap(101, Short.MAX_VALUE))
         );
         pnl_barLayout.setVerticalGroup(
             pnl_barLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_barLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel1))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_barLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(pnl_barLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btn_search)
-                    .addComponent(tf_search, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(21, 21, 21))
             .addGroup(pnl_barLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addGroup(pnl_barLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(pnl_barLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(btn_friends)
-                        .addComponent(btn_videos)
-                        .addComponent(btn_createPost))
+                .addGroup(pnl_barLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnl_barLayout.createSequentialGroup()
-                        .addGroup(pnl_barLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(tf_search, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel1))
+                    .addGroup(pnl_barLayout.createSequentialGroup()
+                        .addGroup(pnl_barLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btn_Profile)
-                            .addComponent(btn_home))
-                        .addGap(8, 8, 8)))
-                .addContainerGap(31, Short.MAX_VALUE))
+                            .addComponent(btn_friends, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btn_videos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btn_home, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btn_createPost, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap(15, Short.MAX_VALUE))))
+            .addGroup(pnl_barLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btn_search, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         lbl_title.setFont(new java.awt.Font("Manjari", 1, 24)); // NOI18N
         lbl_title.setForeground(new java.awt.Color(255, 255, 255));
         lbl_title.setText("Publicaciones");
 
-        lbl_image1.setForeground(new java.awt.Color(255, 102, 153));
-
-        if_video.setVisible(true);
-
-        javax.swing.GroupLayout if_videoLayout = new javax.swing.GroupLayout(if_video.getContentPane());
-        if_video.getContentPane().setLayout(if_videoLayout);
-        if_videoLayout.setHorizontalGroup(
-            if_videoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 397, Short.MAX_VALUE)
-        );
-        if_videoLayout.setVerticalGroup(
-            if_videoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 230, Short.MAX_VALUE)
-        );
+        lbl_text.setForeground(new java.awt.Color(255, 102, 153));
+        lbl_text.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 102, 153)));
 
         btn_previous.setBackground(new java.awt.Color(51, 51, 51));
+        btn_previous.setIcon(new javax.swing.ImageIcon("/home/ghostpatron/NetBeansProjects/CloneV2/src/main/java/img/previous-50.png")); // NOI18N
         btn_previous.setBorder(null);
         btn_previous.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -286,6 +283,7 @@ private static ImageIcon bytesToImageIcon(byte[] multimedia) {
         });
 
         btn_next.setBackground(new java.awt.Color(51, 51, 51));
+        btn_next.setIcon(new javax.swing.ImageIcon("/home/ghostpatron/NetBeansProjects/CloneV2/src/main/java/img/next-50.png")); // NOI18N
         btn_next.setBorder(null);
         btn_next.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -293,33 +291,73 @@ private static ImageIcon bytesToImageIcon(byte[] multimedia) {
             }
         });
 
-        ta_text.setColumns(20);
-        ta_text.setRows(5);
-        jScrollPane1.setViewportView(ta_text);
+        lbl_image.setForeground(new java.awt.Color(255, 51, 102));
+        lbl_image.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 51, 153)));
+
+        btn_like.setBackground(new java.awt.Color(51, 51, 51));
+        btn_like.setIcon(new javax.swing.ImageIcon("/home/ghostpatron/NetBeansProjects/CloneV2/src/main/java/img/Like rosa.png")); // NOI18N
+        btn_like.setBorder(null);
+        btn_like.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_likeActionPerformed(evt);
+            }
+        });
+
+        btn_love.setBackground(new java.awt.Color(51, 51, 51));
+        btn_love.setIcon(new javax.swing.ImageIcon("/home/ghostpatron/NetBeansProjects/CloneV2/src/main/java/img/Corazon rosa.png")); // NOI18N
+        btn_love.setBorder(null);
+        btn_love.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_loveActionPerformed(evt);
+            }
+        });
+
+        btn_laugh.setBackground(new java.awt.Color(51, 51, 51));
+        btn_laugh.setIcon(new javax.swing.ImageIcon("/home/ghostpatron/NetBeansProjects/CloneV2/src/main/java/img/Risa rosa.png")); // NOI18N
+        btn_laugh.setBorder(null);
+        btn_laugh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_laughActionPerformed(evt);
+            }
+        });
+
+        btn_comments.setBackground(new java.awt.Color(51, 51, 51));
+        btn_comments.setIcon(new javax.swing.ImageIcon("/home/ghostpatron/NetBeansProjects/CloneV2/src/main/java/img/comment2.png")); // NOI18N
+        btn_comments.setBorder(null);
+        btn_comments.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_commentsActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(pnl_bar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(491, Short.MAX_VALUE)
-                .addComponent(lbl_title)
-                .addGap(444, 444, 444))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(35, 35, 35)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btn_previous)
-                        .addGap(128, 128, 128)
-                        .addComponent(btn_next))
+                        .addGap(270, 270, 270)
+                        .addComponent(lbl_title))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(if_video, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 495, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lbl_image1, javax.swing.GroupLayout.PREFERRED_SIZE, 528, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(106, Short.MAX_VALUE))
+                        .addGap(73, 73, 73)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(btn_previous)
+                                .addGap(102, 102, 102)
+                                .addComponent(btn_like)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btn_love)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btn_laugh)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btn_comments)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btn_next))
+                            .addComponent(lbl_text, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 528, Short.MAX_VALUE)
+                            .addComponent(lbl_image, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -327,41 +365,30 @@ private static ImageIcon bytesToImageIcon(byte[] multimedia) {
                 .addComponent(pnl_bar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(lbl_title, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                .addComponent(lbl_text, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lbl_image, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(36, 36, 36)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(lbl_image1, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(if_video, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btn_previous))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(btn_next)))
-                        .addGap(87, 87, 87))))
+                    .addComponent(btn_next)
+                    .addComponent(btn_previous)
+                    .addComponent(btn_like)
+                    .addComponent(btn_love)
+                    .addComponent(btn_laugh)
+                    .addComponent(btn_comments))
+                .addGap(74, 74, 74))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -409,6 +436,55 @@ private static ImageIcon bytesToImageIcon(byte[] multimedia) {
         this.setVisible(false);*/
     }//GEN-LAST:event_btn_friendsActionPerformed
 
+    private void btn_likeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_likeActionPerformed
+        // TODO add your handling code here:
+        String query = "DECLARE @id_post INT;\n" + "SET @id_post = SCOPE_IDENTITY();\n" + "UPDATE Reactions\n" +
+        "SET \n" + "likes = likes + 1\n" + "WHERE post_id = @id_post;";
+        
+        try {
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.executeUpdate();
+            statement.close();
+            connection.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btn_likeActionPerformed
+
+    private void btn_loveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_loveActionPerformed
+        // TODO add your handling code here:
+        String query = "DECLARE @id_post INT;\n" + "SET @id_post = SCOPE_IDENTITY();\n" + "UPDATE Reactions\n" +
+        "SET \n" + "loves = loves + 1\n" + "WHERE post_id = @id_post;";
+        
+        try {
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.executeUpdate();
+            statement.close();
+            connection.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btn_loveActionPerformed
+
+    private void btn_laughActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_laughActionPerformed
+        // TODO add your handling code here:
+        String query = "DECLARE @id_post INT;\n" + "SET @id_post = SCOPE_IDENTITY();\n" + "UPDATE Reactions\n" +
+        "SET \n" + "laughs = laughs + 1\n" + "WHERE post_id = @id_post;";
+        
+        try {
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.executeUpdate();
+            statement.close();
+            connection.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btn_laughActionPerformed
+
+    private void btn_commentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_commentsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_commentsActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -447,21 +523,23 @@ private static ImageIcon bytesToImageIcon(byte[] multimedia) {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_Profile;
+    private javax.swing.JButton btn_comments;
     private javax.swing.JButton btn_createPost;
     private javax.swing.JButton btn_friends;
     private javax.swing.JButton btn_home;
+    private javax.swing.JButton btn_laugh;
+    private javax.swing.JButton btn_like;
+    private javax.swing.JButton btn_love;
     private javax.swing.JButton btn_next;
     private javax.swing.JButton btn_previous;
     private javax.swing.JButton btn_search;
     private javax.swing.JButton btn_videos;
-    private javax.swing.JInternalFrame if_video;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lbl_image1;
+    private javax.swing.JLabel lbl_image;
+    private javax.swing.JLabel lbl_text;
     private javax.swing.JLabel lbl_title;
     private javax.swing.JPanel pnl_bar;
-    private javax.swing.JTextArea ta_text;
     private javax.swing.JTextField tf_search;
     // End of variables declaration//GEN-END:variables
 }

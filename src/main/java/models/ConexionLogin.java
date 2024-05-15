@@ -49,24 +49,5 @@ public class ConexionLogin {
             ex.printStackTrace();
             return false;
         }
-    }    
-    /*
-    public static boolean CambiarDatos(String user_id,String username,String lastname, String password) {
-        try (Connection connection = DB_Connection.getConnection()) {
-            String query = "UPDATE Users SET first_name = ?, last_name = ?, password = ? WHERE user_id = ?";
-            try (PreparedStatement statement = connection.prepareStatement(query)) {
-                statement.setString(1, username);
-                statement.setString(2, lastname);
-                statement.setString(3, password);
-                statement.setString(4, user_id);
-
-
-                int filasAfectadas = statement.executeUpdate();
-                return filasAfectadas > 0; // Retorna true si se insertó al menos una fila
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            return false;
-        }
-    } */   
+    }      
 }
