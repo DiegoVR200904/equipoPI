@@ -36,7 +36,7 @@ public class Home extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
         }
-        this.mostrarPrimerRegistro();
+        mostrarPrimerRegistro();
     }
     
 private void mostrarPrimerRegistro() {       
@@ -93,15 +93,14 @@ private static ImageIcon bytesToImageIcon(byte[] multimedia) {
         }
     }
 
-   private void mostrarDatos() {
-        String postype;
-        
+    private void mostrarDatos() {  
         try {
             String texto = this.resultSet.getString("post_text");
-            switch(postype = this.resultSet.getString("post_type")){
+            String postype = this.resultSet.getString("post_type");
+            switch(postype){
                 case "text":
                     this.lbl_text.setText(texto);
-                    this.lbl_text.setIcon(null);
+                    this.lbl_image.setIcon(null);
                     break;
                 case "image":
                     byte[] imagen = this.resultSet.getBytes("image_data");
