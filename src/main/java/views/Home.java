@@ -103,6 +103,7 @@ private static ImageIcon bytesToImageIcon(byte[] multimedia) {
                     this.lbl_image.setIcon(null);
                     break;
                 case "image":
+                    this.lbl_text.setText(texto);
                     byte[] imagen = this.resultSet.getBytes("image_data");
                     ImageIcon imageIcon = bytesToImageIcon(imagen);
                         if (imageIcon != null) {
@@ -447,9 +448,7 @@ private static ImageIcon bytesToImageIcon(byte[] multimedia) {
             return; // Sale del método si hay un error en el ResultSet
         }
 
-        String query = "UPDATE Reactions\n" +
-                       "SET likes = likes + 1\n" +
-                       "WHERE post_id = ?;"; // Usamos un marcador de posición para el id_post
+        String query = "";
 
         try {
             PreparedStatement statement = connection.prepareStatement(query);
