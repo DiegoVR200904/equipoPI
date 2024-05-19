@@ -438,21 +438,15 @@ private static ImageIcon bytesToImageIcon(byte[] multimedia) {
 
     private void btn_likeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_likeActionPerformed
         // TODO add your handling code here:
-    int id_post = 0; // O el tipo de dato adecuado
         try {
-            if (this.resultSet.next()) {
-                id_post = this.resultSet.getInt("post_id"); // Ajusta el nombre de la columna según corresponda
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
-            return; // Sale del método si hay un error en el ResultSet
-        }
-
-        String query = "";
-
-        try {
-            PreparedStatement statement = connection.prepareStatement(query);
-            statement.setInt(1, id_post); // Establecemos el valor del marcador de posición
+            int id_post = this.resultSet.getInt("post_id");
+            
+            String reaction_query = "UPDATE Reactions \n"
+                    + "SET likes = likes + 1 \n"
+                    + "WHERE post_id = ?";
+            
+            PreparedStatement statement = connection.prepareStatement(reaction_query);
+            statement.setInt(1, id_post);
             statement.executeUpdate();
             statement.close();
             connection.close();
@@ -462,12 +456,15 @@ private static ImageIcon bytesToImageIcon(byte[] multimedia) {
     }//GEN-LAST:event_btn_likeActionPerformed
 
     private void btn_loveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_loveActionPerformed
-        // TODO add your handling code here:
-        String query = "DECLARE @id_post INT;\n" + "SET @id_post = SCOPE_IDENTITY();\n" + "UPDATE Reactions\n" +
-        "SET \n" + "loves = loves + 1\n" + "WHERE post_id = @id_post;";
-        
         try {
-            PreparedStatement statement = connection.prepareStatement(query);
+            int id_post = this.resultSet.getInt("post_id");
+            
+            String reaction_query = "UPDATE Reactions \n"
+                    + "SET loves = loves + 1 \n"
+                    + "WHERE post_id = ?";
+            
+            PreparedStatement statement = connection.prepareStatement(reaction_query);
+            statement.setInt(1, id_post);
             statement.executeUpdate();
             statement.close();
             connection.close();
@@ -477,12 +474,15 @@ private static ImageIcon bytesToImageIcon(byte[] multimedia) {
     }//GEN-LAST:event_btn_loveActionPerformed
 
     private void btn_laughActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_laughActionPerformed
-        // TODO add your handling code here:
-        String query = "DECLARE @id_post INT;\n" + "SET @id_post = SCOPE_IDENTITY();\n" + "UPDATE Reactions\n" +
-        "SET \n" + "laughs = laughs + 1\n" + "WHERE post_id = @id_post;";
-        
-        try {
-            PreparedStatement statement = connection.prepareStatement(query);
+       try {
+            int id_post = this.resultSet.getInt("post_id");
+            
+            String reaction_query = "UPDATE Reactions \n"
+                    + "SET laughs = laughs + 1 \n"
+                    + "WHERE post_id = ?";
+            
+            PreparedStatement statement = connection.prepareStatement(reaction_query);
+            statement.setInt(1, id_post);
             statement.executeUpdate();
             statement.close();
             connection.close();

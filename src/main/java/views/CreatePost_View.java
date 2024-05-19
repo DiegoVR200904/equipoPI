@@ -181,7 +181,9 @@ public class CreatePost_View extends javax.swing.JFrame {
                 + "DECLARE @id_principal INT;\n" 
                 + "SET @id_principal = SCOPE_IDENTITY();\n"
                 + "INSERT INTO Images(post_id, image_data)\n" 
-                + "VALUES (@id_principal,?);";
+                + "VALUES (@id_principal,?);\n"
+                + "INSERT INTO Reactions (post_id, likes, laughs, loves)\n"
+                + "VALUES (@id_principal, 0, 0, 0)";
         try {
             PreparedStatement statement = connection.prepareStatement(query);
             // Supongamos que estos datos vienen de algún lugar en tu aplicación

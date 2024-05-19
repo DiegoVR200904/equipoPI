@@ -3,15 +3,25 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package views;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import javax.swing.JOptionPane;
 import models.ConexionLogin;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import models.Manejador;
 /**
  *
  * @author ghostpatron
  */
 public class NewUser_View extends javax.swing.JFrame {
+    private Connection connection;
+    private byte[] imagenBytes;
 
     /**
      * Creates new form Login
@@ -46,6 +56,7 @@ public class NewUser_View extends javax.swing.JFrame {
         lbl_birthdate = new javax.swing.JLabel();
         tf_birthdate = new javax.swing.JTextField();
         btn_login = new javax.swing.JButton();
+        btn_profile_pic = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setSize(700,800);
@@ -143,6 +154,16 @@ public class NewUser_View extends javax.swing.JFrame {
             }
         });
 
+        btn_profile_pic.setBackground(new java.awt.Color(249, 128, 170));
+        btn_profile_pic.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
+        btn_profile_pic.setForeground(new java.awt.Color(51, 51, 51));
+        btn_profile_pic.setText("Subir foto de perfil");
+        btn_profile_pic.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_profile_picActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnl_fondoLayout = new javax.swing.GroupLayout(pnl_fondo);
         pnl_fondo.setLayout(pnl_fondoLayout);
         pnl_fondoLayout.setHorizontalGroup(
@@ -151,37 +172,37 @@ public class NewUser_View extends javax.swing.JFrame {
                 .addContainerGap(149, Short.MAX_VALUE)
                 .addGroup(pnl_fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_fondoLayout.createSequentialGroup()
-                        .addGroup(pnl_fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_fondoLayout.createSequentialGroup()
-                                    .addGroup(pnl_fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(lbl_4)
-                                        .addComponent(tf_firstname, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGap(30, 30, 30)
-                                    .addGroup(pnl_fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(tf_lastname, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(lbl_5)))
-                                .addComponent(pf_pass, javax.swing.GroupLayout.PREFERRED_SIZE, 415, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_fondoLayout.createSequentialGroup()
-                                    .addGroup(pnl_fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(pnl_fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(pnl_fondoLayout.createSequentialGroup()
-                                                .addComponent(tf_email, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_fondoLayout.createSequentialGroup()
-                                                .addComponent(lbl_2)
-                                                .addGap(212, 212, 212)))
-                                        .addGroup(pnl_fondoLayout.createSequentialGroup()
-                                            .addComponent(lbl_3)
-                                            .addGap(194, 194, 194)))
-                                    .addGroup(pnl_fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(lbl_birthdate)
-                                        .addComponent(tf_birthdate, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(pnl_fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_fondoLayout.createSequentialGroup()
+                                .addGroup(pnl_fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lbl_4)
+                                    .addComponent(tf_firstname, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(30, 30, 30)
+                                .addGroup(pnl_fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(tf_lastname, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lbl_5)))
+                            .addComponent(pf_pass, javax.swing.GroupLayout.PREFERRED_SIZE, 415, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_fondoLayout.createSequentialGroup()
+                                .addGroup(pnl_fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(pnl_fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(pnl_fondoLayout.createSequentialGroup()
+                                            .addComponent(tf_email, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_fondoLayout.createSequentialGroup()
+                                            .addComponent(lbl_2)
+                                            .addGap(212, 212, 212)))
+                                    .addGroup(pnl_fondoLayout.createSequentialGroup()
+                                        .addComponent(lbl_3)
+                                        .addGap(194, 194, 194)))
+                                .addGroup(pnl_fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lbl_birthdate)
+                                    .addComponent(tf_birthdate, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(pnl_fondoLayout.createSequentialGroup()
                                 .addComponent(btn_register)
-                                .addGap(94, 94, 94)
-                                .addComponent(btn_login)
-                                .addGap(59, 59, 59)))
+                                .addGap(32, 32, 32)
+                                .addComponent(btn_profile_pic)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btn_login)))
                         .addGap(144, 144, 144))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_fondoLayout.createSequentialGroup()
                         .addComponent(lbl_1)
@@ -220,7 +241,8 @@ public class NewUser_View extends javax.swing.JFrame {
                 .addGap(31, 31, 31)
                 .addGroup(pnl_fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_register)
-                    .addComponent(btn_login))
+                    .addComponent(btn_login)
+                    .addComponent(btn_profile_pic))
                 .addGap(43, 43, 43))
         );
 
@@ -249,6 +271,31 @@ public class NewUser_View extends javax.swing.JFrame {
 
     private void btn_registerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_registerActionPerformed
         // TODO add your handling code here:
+        byte[] multimedia = imagenBytes;
+        int imageID = 0;
+        String image_query = "INSERT INTO Images(post_id, image_data) \n"
+                + "VALUES(?, ?)";
+        
+        try{
+            connection.setAutoCommit(false);
+            PreparedStatement statement = connection.prepareStatement(image_query, Statement.RETURN_GENERATED_KEYS);
+            
+            statement.setInt(1, 0);
+            statement.setBytes(2, multimedia);
+            statement.executeUpdate();
+            
+            ResultSet generatedkeys = statement.getGeneratedKeys();
+            if(generatedkeys.next()){
+                imageID = generatedkeys.getInt(1);
+            }
+            statement.close();
+            connection.commit();
+            connection.close();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(NewUser_View.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         tf_birthdate.setEnabled(false);
         tf_email.setEnabled(false);
         tf_firstname.setEnabled(false);
@@ -262,16 +309,7 @@ public class NewUser_View extends javax.swing.JFrame {
         String email = tf_email.getText();
         String pass = new String(pf_pass.getPassword());
         
-        //DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        LocalDate aux = LocalDate.parse(bday);
-        LocalDate now = LocalDate.now();
-        //System.out.print(aux);
-        Period period = Period.between(aux, now);
-        int age = period.getYears();
-        
-        int pic = 0;
-        
-        ConexionLogin.insertarUsuario(name, last, email, bday, pass, age, 1);
+        ConexionLogin.insertarUsuario(name, last, email, pass, bday, imageID, 0);   
     }//GEN-LAST:event_btn_registerActionPerformed
 
     private void tf_firstnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_firstnameActionPerformed
@@ -297,6 +335,11 @@ public class NewUser_View extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.tf_birthdate.setText("");
     }//GEN-LAST:event_tf_birthdateMouseClicked
+
+    private void btn_profile_picActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_profile_picActionPerformed
+        // TODO add your handling code here:
+        imagenBytes = Manejador.leerImagen();
+    }//GEN-LAST:event_btn_profile_picActionPerformed
 
     /**
      * @param args the command line arguments
@@ -338,6 +381,7 @@ public class NewUser_View extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_login;
+    private javax.swing.JButton btn_profile_pic;
     private javax.swing.JButton btn_register;
     private javax.swing.JLabel lbl_1;
     private javax.swing.JLabel lbl_2;

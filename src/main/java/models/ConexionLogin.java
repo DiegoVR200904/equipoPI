@@ -30,17 +30,18 @@ public class ConexionLogin {
         }
     }
     
-    
-    public static boolean insertarUsuario(String username, String lastname, String email, String birthday, String password, int age, int picture) {
+    public static boolean insertarUsuario(String username, String lastname, String email, String birthday, String password, int pic_p, int pic_c) {
         try (Connection connection = DB_Connection.getConnection()) {
-            String query = "INSERT INTO Users (first_name, last_name, email, birthdate, password) VALUES (?, ?, ?, ?, ?)";
+            String query = "INSERT INTO Users (first_name, last_name, email, password, birthdate, "
+                    + "profile_image_id, cover_image_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
             try (PreparedStatement statement = connection.prepareStatement(query)) {
                 statement.setString(1, username);
                 statement.setString(2, lastname);
                 statement.setString(3, email);
-                statement.setString(4, birthday);
-                statement.setString(5, password);
-
+                statement.setString(4, password);
+                statement.setString(5, birthday);
+                statement.setInt(6, pic_p);
+                statement.setInt(7, pic_c);
 
                 int filasAfectadas = statement.executeUpdate();
                 return filasAfectadas > 0; // Retorna true si se insertó al menos una fila
@@ -49,5 +50,6 @@ public class ConexionLogin {
             ex.printStackTrace();
             return false;
         }
-    }      
+    }  
+    
 }
