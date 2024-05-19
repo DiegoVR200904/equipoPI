@@ -14,6 +14,7 @@ import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import models.DB_Connection;
 import models.Manejador;
 /**
  *
@@ -29,7 +30,13 @@ public class NewUser_View extends javax.swing.JFrame {
     public NewUser_View() {
         initComponents();
         setResizable(false);
-        setTitle("Crea Nuevo Usuario");          
+        setTitle("Crea Nuevo Usuario");
+        
+        try{
+            connection = DB_Connection.getConnection();
+        } catch (SQLException ex) {
+            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -270,46 +277,79 @@ public class NewUser_View extends javax.swing.JFrame {
     }//GEN-LAST:event_pf_passActionPerformed
 
     private void btn_registerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_registerActionPerformed
-        // TODO add your handling code here:
-        byte[] multimedia = imagenBytes;
-        int imageID = 0;
-        String image_query = "INSERT INTO Images(post_id, image_data) \n"
-                + "VALUES(?, ?)";
-        
-        try{
-            connection.setAutoCommit(false);
-            PreparedStatement statement = connection.prepareStatement(image_query, Statement.RETURN_GENERATED_KEYS);
-            
-            statement.setInt(1, 0);
-            statement.setBytes(2, multimedia);
-            statement.executeUpdate();
-            
-            ResultSet generatedkeys = statement.getGeneratedKeys();
-            if(generatedkeys.next()){
-                imageID = generatedkeys.getInt(1);
-            }
-            statement.close();
-            connection.commit();
-            connection.close();
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(NewUser_View.class.getName()).log(Level.SEVERE, null, ex);
+    byte[] multimedia = imagenBytes;
+    int imageID = 0;
+    String image_query = "INSERT INTO Images(post_id, image_data) VALUES(?, ?)";
+
+    PreparedStatement statement = null;
+    ResultSet generatedKeys = null;
+
+    try {
+        connection.setAutoCommit(false);
+        statement = connection.prepareStatement(image_query, Statement.RETURN_GENERATED_KEYS);
+
+        statement.setInt(1, 0);  // Assuming post_id is 0 for the new image
+        statement.setBytes(2, multimedia);
+        statement.executeUpdate();
+
+        generatedKeys = statement.getGeneratedKeys();
+        if (generatedKeys.next()) {
+            imageID = generatedKeys.getInt(1);
         }
-        
+
+        connection.commit();
+
+        // Disable UI components after successful registration
         tf_birthdate.setEnabled(false);
         tf_email.setEnabled(false);
         tf_firstname.setEnabled(false);
         tf_lastname.setEnabled(false);
         pf_pass.setEnabled(false);
         btn_register.setEnabled(false);
-        
+
+        // Gather user information from the text fields
         String name = tf_firstname.getText();
         String last = tf_lastname.getText();
         String bday = tf_birthdate.getText();
         String email = tf_email.getText();
         String pass = new String(pf_pass.getPassword());
+
+        // Insert the user into the database
+        ConexionLogin.insertarUsuario(name, last, email, pass, bday, imageID, 0);
         
-        ConexionLogin.insertarUsuario(name, last, email, pass, bday, imageID, 0);   
+    } catch (SQLException ex) {
+        if (connection != null) {
+            try {
+                connection.rollback(); // Rollback the transaction on error
+            } catch (SQLException e) {
+                Logger.getLogger(NewUser_View.class.getName()).log(Level.SEVERE, null, e);
+            }
+        }
+        Logger.getLogger(NewUser_View.class.getName()).log(Level.SEVERE, null, ex);
+    } finally {
+        // Close resources
+        if (generatedKeys != null) {
+            try {
+                generatedKeys.close();
+            } catch (SQLException e) {
+                Logger.getLogger(NewUser_View.class.getName()).log(Level.SEVERE, null, e);
+            }
+        }
+        if (statement != null) {
+            try {
+                statement.close();
+            } catch (SQLException e) {
+                Logger.getLogger(NewUser_View.class.getName()).log(Level.SEVERE, null, e);
+            }
+        }
+        if (connection != null) {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                Logger.getLogger(NewUser_View.class.getName()).log(Level.SEVERE, null, e);
+            }
+        }
+    }
     }//GEN-LAST:event_btn_registerActionPerformed
 
     private void tf_firstnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_firstnameActionPerformed

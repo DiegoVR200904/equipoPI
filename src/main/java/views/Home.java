@@ -41,7 +41,7 @@ public class Home extends javax.swing.JFrame {
     
 private void mostrarPrimerRegistro() {       
     try {
-        String query = "SELECT DISTINCT p.post_text, p.post_type, i.image_data, v.video_data\n" +
+        String query = "SELECT DISTINCT p.post_id, p.post_text, p.post_type, i.image_data, v.video_data\n" +
                    "FROM Posts p\n" +
                    "LEFT JOIN Images i ON p.post_id = i.post_id \n" +
                    "LEFT JOIN Videos v ON p.post_id = v.post_id \n" +
