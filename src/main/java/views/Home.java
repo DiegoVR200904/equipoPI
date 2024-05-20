@@ -449,7 +449,7 @@ private static ImageIcon bytesToImageIcon(byte[] multimedia) {
             statement.setInt(1, id_post);
             statement.executeUpdate();
             statement.close();
-            connection.close();
+            //connection.close();
         } catch (SQLException ex) {
             Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -467,7 +467,7 @@ private static ImageIcon bytesToImageIcon(byte[] multimedia) {
             statement.setInt(1, id_post);
             statement.executeUpdate();
             statement.close();
-            connection.close();
+            //connection.close();
         } catch (SQLException ex) {
             Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -485,7 +485,7 @@ private static ImageIcon bytesToImageIcon(byte[] multimedia) {
             statement.setInt(1, id_post);
             statement.executeUpdate();
             statement.close();
-            connection.close();
+            //connection.close();
         } catch (SQLException ex) {
             Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
         }

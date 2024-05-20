@@ -279,7 +279,7 @@ public class NewUser_View extends javax.swing.JFrame {
     private void btn_registerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_registerActionPerformed
     byte[] multimedia = imagenBytes;
     int imageID = 0;
-    String image_query = "INSERT INTO Images(post_id, image_data) VALUES(?, ?)";
+    String image_query = "INSERT INTO Images(image_data) VALUES(?)";
 
     PreparedStatement statement = null;
     ResultSet generatedKeys = null;
@@ -288,8 +288,8 @@ public class NewUser_View extends javax.swing.JFrame {
         connection.setAutoCommit(false);
         statement = connection.prepareStatement(image_query, Statement.RETURN_GENERATED_KEYS);
 
-        statement.setInt(1, 0);  // Assuming post_id is 0 for the new image
-        statement.setBytes(2, multimedia);
+        //statement.setInt(1, 0);  // Assuming post_id is 0 for the new image
+        statement.setBytes(1, multimedia);
         statement.executeUpdate();
 
         generatedKeys = statement.getGeneratedKeys();
