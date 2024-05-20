@@ -491,8 +491,21 @@ private static ImageIcon bytesToImageIcon(byte[] multimedia) {
         }
     }//GEN-LAST:event_btn_laughActionPerformed
 
+    int Regresa_ID_Post(){
+        int id_post = -1;
+        try {
+            id_post = this.resultSet.getInt("post_id");
+        } catch (SQLException ex) {
+            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return id_post;
+    }
+    
     private void btn_commentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_commentsActionPerformed
         // TODO add your handling code here:
+        Comments com = new Comments(this.Regresa_ID_Post(), id);
+        com.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btn_commentsActionPerformed
 
     /**
