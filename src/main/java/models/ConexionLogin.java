@@ -34,7 +34,7 @@ public class ConexionLogin {
     public static boolean insertarUsuario(String username, String lastname, String email, String birthday, String password, int pic_p) {
         try (Connection connection = DB_Connection.getConnection()) {
             String query = "INSERT INTO Users (first_name, last_name, email, password, birthdate, "
-                    + "profile_image_id, cover_image_id) VALUES (?, ?, ?, ?, ?, ?)";
+                    + "profile_image_id) VALUES (?, ?, ?, ?, ?, ?)";
             try (PreparedStatement statement = connection.prepareStatement(query)) {
                 statement.setString(1, username);
                 statement.setString(2, lastname);
