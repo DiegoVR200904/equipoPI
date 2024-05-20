@@ -314,7 +314,7 @@ public class NewUser_View extends javax.swing.JFrame {
 
         
         // Insert the user into the database
-        ConexionLogin.insertarUsuario(name, last, email, bday, pass, imageID, 0);
+        ConexionLogin.insertarUsuario(name, last, email, bday, pass, imageID);
         
     } catch (SQLException ex) {
         if (connection != null) {
