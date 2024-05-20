@@ -4,17 +4,12 @@
  */
 package views;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 import models.ConexionLogin;
-import java.time.*;
-import java.time.format.DateTimeFormatter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import models.DB_Connection;
@@ -317,17 +312,9 @@ public class NewUser_View extends javax.swing.JFrame {
         String email = tf_email.getText();
         String pass = new String(pf_pass.getPassword());
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        Date date = null;
-        try {
-            date = (Date) dateFormat.parse(bday);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        
         
         // Insert the user into the database
-        ConexionLogin.insertarUsuario(name, last, email, date, pass, imageID, 0);
+        ConexionLogin.insertarUsuario(name, last, email, bday, pass, imageID, 0);
         
     } catch (SQLException ex) {
         if (connection != null) {
