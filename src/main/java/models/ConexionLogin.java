@@ -5,6 +5,7 @@
 package models;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -30,7 +31,7 @@ public class ConexionLogin {
         }
     }
     
-    public static boolean insertarUsuario(String username, String lastname, String email, String birthday, String password, int pic_p, int pic_c) {
+    public static boolean insertarUsuario(String username, String lastname, String email, Date birthday, String password, int pic_p, int pic_c) {
         try (Connection connection = DB_Connection.getConnection()) {
             String query = "INSERT INTO Users (first_name, last_name, email, password, birthdate, "
                     + "profile_image_id, cover_image_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
@@ -39,7 +40,7 @@ public class ConexionLogin {
                 statement.setString(2, lastname);
                 statement.setString(3, email);
                 statement.setString(4, password);
-                statement.setString(5, birthday);
+                statement.setDate(5, birthday);
                 statement.setInt(6, pic_p);
                 statement.setInt(7, pic_c);
 
