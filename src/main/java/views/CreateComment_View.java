@@ -53,6 +53,7 @@ public class CreateComment_View extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         ta_comment_text = new javax.swing.JTextArea();
         btn_comment = new javax.swing.JButton();
+        btn_return = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -83,6 +84,16 @@ public class CreateComment_View extends javax.swing.JFrame {
             }
         });
 
+        btn_return.setBackground(new java.awt.Color(255, 102, 153));
+        btn_return.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
+        btn_return.setText("Inicio");
+        btn_return.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 102, 153)));
+        btn_return.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_returnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnl_bgLayout = new javax.swing.GroupLayout(pnl_bg);
         pnl_bg.setLayout(pnl_bgLayout);
         pnl_bgLayout.setHorizontalGroup(
@@ -94,9 +105,13 @@ public class CreateComment_View extends javax.swing.JFrame {
             .addGroup(pnl_bgLayout.createSequentialGroup()
                 .addGap(52, 52, 52)
                 .addGroup(pnl_bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btn_comment)
                     .addComponent(jLabel1)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 461, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnl_bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(pnl_bgLayout.createSequentialGroup()
+                            .addComponent(btn_comment)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btn_return))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 461, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(65, Short.MAX_VALUE))
         );
         pnl_bgLayout.setVerticalGroup(
@@ -109,7 +124,9 @@ public class CreateComment_View extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
-                .addComponent(btn_comment)
+                .addGroup(pnl_bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn_comment)
+                    .addComponent(btn_return))
                 .addContainerGap(58, Short.MAX_VALUE))
         );
 
@@ -129,7 +146,8 @@ public class CreateComment_View extends javax.swing.JFrame {
 
     private void btn_commentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_commentActionPerformed
         // TODO add your handling code here:
-        String comment_query = "INSERTO INTO Comments(id_post, id_user, text)"
+        this.showYesNoDialog();
+        /*String comment_query = "INSERT INTO Comments(post_id, user_id, text)"
                 + "VALUES(?, ?, ?)";
         
         try {
@@ -151,16 +169,45 @@ public class CreateComment_View extends javax.swing.JFrame {
         } catch (SQLException e) {
             // Manejar cualquier excepción que pueda ocurrir al ejecutar la consulta SQL
             e.printStackTrace();
-        }
-        
-        
+        }*/
         
     }//GEN-LAST:event_btn_commentActionPerformed
+
+    private void btn_returnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_returnActionPerformed
+        // TODO add your handling code here:
+        Home Home = new Home(id_u);
+        Home.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btn_returnActionPerformed
 
     private void showYesNoDialog() {
         int response = JOptionPane.showConfirmDialog(this, "Seguro que quieras comentar?", "Confirmar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         
         if (response == JOptionPane.YES_OPTION) {
+                String comment_query = "INSERT INTO Comments(post_id, user_id, text)"
+                    + "VALUES(?, ?, ?)";
+
+                try {
+                PreparedStatement statement = connection.prepareStatement(comment_query);
+                // Supongamos que estos datos vienen de algún lugar en tu aplicación
+                int usuarioID = id_u;
+                int publicacionID = id_p;
+                String text = this.ta_comment_text.getText();
+
+                statement.setInt(1, publicacionID);
+                statement.setInt(2, usuarioID);
+                statement.setString(3, text);
+
+                statement.executeUpdate();
+                statement.close();
+                connection.close();
+
+                System.out.println("Comentario insertado correctamente en la base de datos.");
+            } catch (SQLException e) {
+                // Manejar cualquier excepción que pueda ocurrir al ejecutar la consulta SQL
+                e.printStackTrace();
+            }
+            
             Comments com = new Comments(id_p, id_u);
             com.setVisible(true);
             this.setVisible(false);
@@ -209,6 +256,7 @@ public class CreateComment_View extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_comment;
+    private javax.swing.JButton btn_return;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbl_title;

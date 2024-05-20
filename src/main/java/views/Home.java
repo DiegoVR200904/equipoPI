@@ -170,11 +170,9 @@ private static ImageIcon bytesToImageIcon(byte[] multimedia) {
         tf_search.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249, 128, 170)));
 
         btn_search.setBackground(new java.awt.Color(27, 27, 27));
-        btn_search.setIcon(new javax.swing.ImageIcon("/home/ghostpatron/NetBeansProjects/CloneV2/src/main/java/img/2-40.png")); // NOI18N
         btn_search.setBorder(null);
 
         btn_friends.setBackground(new java.awt.Color(27, 27, 27));
-        btn_friends.setIcon(new javax.swing.ImageIcon("/home/ghostpatron/NetBeansProjects/CloneV2/src/main/java/img/3-40.png")); // NOI18N
         btn_friends.setBorder(null);
         btn_friends.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -183,7 +181,6 @@ private static ImageIcon bytesToImageIcon(byte[] multimedia) {
         });
 
         btn_videos.setBackground(new java.awt.Color(27, 27, 27));
-        btn_videos.setIcon(new javax.swing.ImageIcon("/home/ghostpatron/NetBeansProjects/CloneV2/src/main/java/img/5-40.png")); // NOI18N
         btn_videos.setBorder(null);
         btn_videos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -192,7 +189,6 @@ private static ImageIcon bytesToImageIcon(byte[] multimedia) {
         });
 
         btn_home.setBackground(new java.awt.Color(27, 27, 27));
-        btn_home.setIcon(new javax.swing.ImageIcon("/home/ghostpatron/NetBeansProjects/CloneV2/src/main/java/img/4-40.png")); // NOI18N
         btn_home.setBorder(null);
         btn_home.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -201,7 +197,7 @@ private static ImageIcon bytesToImageIcon(byte[] multimedia) {
         });
 
         btn_createPost.setBackground(new java.awt.Color(27, 27, 27));
-        btn_createPost.setIcon(new javax.swing.ImageIcon("/home/ghostpatron/NetBeansProjects/CloneV2/src/main/java/img/agregar-publicacion.png")); // NOI18N
+        btn_createPost.setIcon(new javax.swing.ImageIcon("C:\\Users\\Aesther\\Documents\\NetBeansProjects\\equipoPI\\src\\main\\java\\img\\agregar-publicacion.png")); // NOI18N
         btn_createPost.setBorder(null);
         btn_createPost.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -210,7 +206,7 @@ private static ImageIcon bytesToImageIcon(byte[] multimedia) {
         });
 
         btn_Profile.setBackground(new java.awt.Color(27, 27, 27));
-        btn_Profile.setIcon(new javax.swing.ImageIcon("/home/ghostpatron/NetBeansProjects/CloneV2/src/main/java/img/Perfil rosa.png")); // NOI18N
+        btn_Profile.setIcon(new javax.swing.ImageIcon("C:\\Users\\Aesther\\Documents\\NetBeansProjects\\equipoPI\\src\\main\\java\\img\\Perfil rosa.png")); // NOI18N
         btn_Profile.setBorder(null);
         btn_Profile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -242,7 +238,7 @@ private static ImageIcon bytesToImageIcon(byte[] multimedia) {
                         .addComponent(btn_createPost)
                         .addGap(78, 78, 78)
                         .addComponent(btn_Profile)))
-                .addContainerGap(101, Short.MAX_VALUE))
+                .addContainerGap(178, Short.MAX_VALUE))
         );
         pnl_barLayout.setVerticalGroup(
             pnl_barLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -260,7 +256,7 @@ private static ImageIcon bytesToImageIcon(byte[] multimedia) {
                             .addComponent(btn_videos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btn_home, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btn_createPost, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addContainerGap(15, Short.MAX_VALUE))))
+                        .addContainerGap())))
             .addGroup(pnl_barLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btn_search, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -275,7 +271,7 @@ private static ImageIcon bytesToImageIcon(byte[] multimedia) {
         lbl_text.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 102, 153)));
 
         btn_previous.setBackground(new java.awt.Color(51, 51, 51));
-        btn_previous.setIcon(new javax.swing.ImageIcon("/home/ghostpatron/NetBeansProjects/CloneV2/src/main/java/img/previous-50.png")); // NOI18N
+        btn_previous.setIcon(new javax.swing.ImageIcon("C:\\Users\\Aesther\\Documents\\NetBeansProjects\\equipoPI\\src\\main\\java\\img\\previous-50.png")); // NOI18N
         btn_previous.setBorder(null);
         btn_previous.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -284,7 +280,7 @@ private static ImageIcon bytesToImageIcon(byte[] multimedia) {
         });
 
         btn_next.setBackground(new java.awt.Color(51, 51, 51));
-        btn_next.setIcon(new javax.swing.ImageIcon("/home/ghostpatron/NetBeansProjects/CloneV2/src/main/java/img/next-50.png")); // NOI18N
+        btn_next.setIcon(new javax.swing.ImageIcon("C:\\Users\\Aesther\\Documents\\NetBeansProjects\\equipoPI\\src\\main\\java\\img\\next-50.png")); // NOI18N
         btn_next.setBorder(null);
         btn_next.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -296,7 +292,7 @@ private static ImageIcon bytesToImageIcon(byte[] multimedia) {
         lbl_image.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 51, 153)));
 
         btn_like.setBackground(new java.awt.Color(51, 51, 51));
-        btn_like.setIcon(new javax.swing.ImageIcon("/home/ghostpatron/NetBeansProjects/CloneV2/src/main/java/img/Like rosa.png")); // NOI18N
+        btn_like.setIcon(new javax.swing.ImageIcon("C:\\Users\\Aesther\\Documents\\NetBeansProjects\\equipoPI\\src\\main\\java\\img\\Like rosa.png")); // NOI18N
         btn_like.setBorder(null);
         btn_like.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -305,7 +301,7 @@ private static ImageIcon bytesToImageIcon(byte[] multimedia) {
         });
 
         btn_love.setBackground(new java.awt.Color(51, 51, 51));
-        btn_love.setIcon(new javax.swing.ImageIcon("/home/ghostpatron/NetBeansProjects/CloneV2/src/main/java/img/Corazon rosa.png")); // NOI18N
+        btn_love.setIcon(new javax.swing.ImageIcon("C:\\Users\\Aesther\\Documents\\NetBeansProjects\\equipoPI\\src\\main\\java\\img\\Corazon rosa.png")); // NOI18N
         btn_love.setBorder(null);
         btn_love.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -314,7 +310,6 @@ private static ImageIcon bytesToImageIcon(byte[] multimedia) {
         });
 
         btn_laugh.setBackground(new java.awt.Color(51, 51, 51));
-        btn_laugh.setIcon(new javax.swing.ImageIcon("/home/ghostpatron/NetBeansProjects/CloneV2/src/main/java/img/Risa rosa.png")); // NOI18N
         btn_laugh.setBorder(null);
         btn_laugh.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -323,7 +318,7 @@ private static ImageIcon bytesToImageIcon(byte[] multimedia) {
         });
 
         btn_comments.setBackground(new java.awt.Color(51, 51, 51));
-        btn_comments.setIcon(new javax.swing.ImageIcon("/home/ghostpatron/NetBeansProjects/CloneV2/src/main/java/img/comment2.png")); // NOI18N
+        btn_comments.setIcon(new javax.swing.ImageIcon("C:\\Users\\Aesther\\Documents\\NetBeansProjects\\equipoPI\\src\\main\\java\\img\\comment2.png")); // NOI18N
         btn_comments.setBorder(null);
         btn_comments.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -366,7 +361,7 @@ private static ImageIcon bytesToImageIcon(byte[] multimedia) {
                 .addComponent(pnl_bar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(lbl_title, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lbl_text, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lbl_image, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)

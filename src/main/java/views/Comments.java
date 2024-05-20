@@ -54,11 +54,13 @@ public class Comments extends javax.swing.JFrame {
     }
     
     private ResultSet fetchData() throws SQLException {
-        String query = "SELECT u.email, c.text FROM Comments c, Users u "
-                + "WHERE u.id_user = c.id_user";
-        Statement statement = connection.createStatement();
-        resultSet = statement.executeQuery(query);
-        return resultSet;
+        String query = "SELECT u.first_name,u.last_name, c.text FROM Comments c, Users u "
+                + "WHERE c.post_id = ? and c.user_id = u.user_id;";
+       
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        preparedStatement.setInt(1, id_p);
+        ResultSet resultSet = preparedStatement.executeQuery();
+    return resultSet;  
     }
     
     private void closeResources() {
@@ -217,7 +219,7 @@ public class Comments extends javax.swing.JFrame {
         // TODO add your handling code here:
         CreateComment_View  crc = new CreateComment_View(id_u, id_p);
         crc.setVisible(true);
-        crc.setVisible(false);
+        this.setVisible(false);
     }//GEN-LAST:event_btn_createActionPerformed
 
     /**
