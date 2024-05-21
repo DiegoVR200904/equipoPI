@@ -107,7 +107,6 @@ private void mostrarDatos() {
         pnl_bar = new javax.swing.JPanel();
         btn_friends = new javax.swing.JButton();
         btn_createPost = new javax.swing.JButton();
-        btn_videos = new javax.swing.JButton();
         btn_home = new javax.swing.JButton();
         btn_Return = new javax.swing.JButton();
 
@@ -141,7 +140,7 @@ private void mostrarDatos() {
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Editar Informacion");
 
-        pf_Editpass.setBackground(new java.awt.Color(204, 204, 204));
+        pf_Editpass.setBackground(new java.awt.Color(153, 153, 153));
 
         jPanel3.setBackground(new java.awt.Color(255, 153, 204));
         jPanel3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -161,7 +160,7 @@ private void mostrarDatos() {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE)
+                .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
                 .addGap(18, 18, 18))
         );
         jPanel3Layout.setVerticalGroup(
@@ -223,7 +222,10 @@ private void mostrarDatos() {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap(74, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(pf_Editpass, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 58, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -235,21 +237,19 @@ private void mostrarDatos() {
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                 .addGap(17, 17, 17)
                                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(55, 55, 55))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(pf_Editpass, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 161, Short.MAX_VALUE)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(26, 26, 26)))
+                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGap(64, 64, 64)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(74, 74, 74)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -271,7 +271,8 @@ private void mostrarDatos() {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel3)
                         .addGap(30, 30, 30)
-                        .addComponent(pf_Editpass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(pf_Editpass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pnl_bar.setBackground(new java.awt.Color(27, 27, 27));
@@ -296,15 +297,6 @@ private void mostrarDatos() {
             }
         });
 
-        btn_videos.setBackground(new java.awt.Color(27, 27, 27));
-        btn_videos.setIcon(new javax.swing.ImageIcon("C:\\Users\\erika\\OneDrive\\Documentos\\NetBeansProjects\\repositorioclonado\\Pruebaimages\\src\\main\\java\\img\\5-40.png")); // NOI18N
-        btn_videos.setBorder(null);
-        btn_videos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_videosActionPerformed(evt);
-            }
-        });
-
         btn_home.setBackground(new java.awt.Color(27, 27, 27));
         btn_home.setIcon(new javax.swing.ImageIcon("C:\\Users\\erika\\OneDrive\\Documentos\\NetBeansProjects\\repositorioclonado\\Pruebaimages\\src\\main\\java\\img\\4-40.png")); // NOI18N
         btn_home.setBorder(null);
@@ -314,8 +306,8 @@ private void mostrarDatos() {
             }
         });
 
-        btn_Return.setBackground(new java.awt.Color(51, 51, 51));
-        btn_Return.setIcon(new javax.swing.ImageIcon("C:\\Users\\erika\\OneDrive\\Documentos\\NetBeansProjects\\repositorioclonado\\Pruebaimages\\src\\main\\java\\img\\previous-50.png")); // NOI18N
+        btn_Return.setBackground(new java.awt.Color(0, 0, 0));
+        btn_Return.setIcon(new javax.swing.ImageIcon("C:\\Users\\erika\\OneDrive\\Documentos\\NetBeansProjects\\repositorioclonado\\Pruebaimages\\src\\main\\java\\img\\usuario.png")); // NOI18N
         btn_Return.setBorder(null);
         btn_Return.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -330,13 +322,11 @@ private void mostrarDatos() {
             .addGroup(pnl_barLayout.createSequentialGroup()
                 .addGap(38, 38, 38)
                 .addComponent(btn_friends)
-                .addGap(84, 84, 84)
+                .addGap(147, 147, 147)
                 .addComponent(btn_createPost)
-                .addGap(72, 72, 72)
-                .addComponent(btn_videos)
-                .addGap(153, 153, 153)
+                .addGap(202, 202, 202)
                 .addComponent(btn_home)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 224, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 234, Short.MAX_VALUE)
                 .addComponent(btn_Return)
                 .addGap(82, 82, 82))
         );
@@ -347,11 +337,10 @@ private void mostrarDatos() {
                 .addGroup(pnl_barLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btn_Return)
                     .addGroup(pnl_barLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(btn_videos)
                         .addComponent(btn_createPost)
                         .addComponent(btn_friends)
                         .addComponent(btn_home)))
-                .addContainerGap(8, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -359,19 +348,17 @@ private void mostrarDatos() {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(pnl_bar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 855, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pnl_bar, javax.swing.GroupLayout.PREFERRED_SIZE, 855, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(pnl_bar, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -384,9 +371,9 @@ private void mostrarDatos() {
     }//GEN-LAST:event_btn_ReturnActionPerformed
 
     private void btn_friendsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_friendsActionPerformed
-        /*Friends_View Friends_View = new Friends_View(id);
-        Friends_View.setVisible(true);
-        this.setVisible(false);*/
+        Friends amigo = new Friends(id);
+        amigo.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btn_friendsActionPerformed
 
     private void btn_createPostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_createPostActionPerformed
@@ -445,12 +432,6 @@ private void mostrarDatos() {
         this.setVisible(false);
     }//GEN-LAST:event_btn_homeActionPerformed
 
-    private void btn_videosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_videosActionPerformed
-         /* Videos_View Videos_View = new Videos_View(id);
-        Videos_View.setVisible(true);
-        this.setVisible(false);*/
-    }//GEN-LAST:event_btn_videosActionPerformed
-
                                        
 
                                     
@@ -496,7 +477,6 @@ private void mostrarDatos() {
     private javax.swing.JButton btn_createPost;
     private javax.swing.JButton btn_friends;
     private javax.swing.JButton btn_home;
-    private javax.swing.JButton btn_videos;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

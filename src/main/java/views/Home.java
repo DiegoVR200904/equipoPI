@@ -37,6 +37,7 @@ public class Home extends javax.swing.JFrame {
             Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
         }
         mostrarPrimerRegistro();
+       
     }
     
 private void mostrarPrimerRegistro() {       
@@ -125,6 +126,7 @@ private static ImageIcon bytesToImageIcon(byte[] multimedia) {
             Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+ 
 
  
 
@@ -170,6 +172,7 @@ private static ImageIcon bytesToImageIcon(byte[] multimedia) {
         tf_search.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249, 128, 170)));
 
         btn_search.setBackground(new java.awt.Color(27, 27, 27));
+        btn_search.setIcon(new javax.swing.ImageIcon("C:\\Users\\erika\\OneDrive\\Documentos\\NetBeansProjects\\repositorioclonado\\Pruebaimages\\src\\main\\java\\img\\2-40.png")); // NOI18N
         btn_search.setBorder(null);
 
         btn_friends.setBackground(new java.awt.Color(27, 27, 27));
@@ -190,6 +193,7 @@ private static ImageIcon bytesToImageIcon(byte[] multimedia) {
         });
 
         btn_home.setBackground(new java.awt.Color(27, 27, 27));
+        btn_home.setIcon(new javax.swing.ImageIcon("C:\\Users\\erika\\OneDrive\\Documentos\\NetBeansProjects\\repositorioclonado\\Pruebaimages\\src\\main\\java\\img\\4-40.png")); // NOI18N
         btn_home.setBorder(null);
         btn_home.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -198,6 +202,7 @@ private static ImageIcon bytesToImageIcon(byte[] multimedia) {
         });
 
         btn_createPost.setBackground(new java.awt.Color(27, 27, 27));
+        btn_createPost.setIcon(new javax.swing.ImageIcon("C:\\Users\\erika\\OneDrive\\Documentos\\NetBeansProjects\\repositorioclonado\\Pruebaimages\\src\\main\\java\\img\\agregar-publicacion.png")); // NOI18N
         btn_createPost.setBorder(null);
         btn_createPost.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -206,7 +211,7 @@ private static ImageIcon bytesToImageIcon(byte[] multimedia) {
         });
 
         btn_Profile.setBackground(new java.awt.Color(27, 27, 27));
-        btn_Profile.setIcon(new javax.swing.ImageIcon("C:\\Users\\erika\\OneDrive\\Documentos\\NetBeansProjects\\repositorioclonado\\Pruebaimages\\src\\main\\java\\img\\5-40.png")); // NOI18N
+        btn_Profile.setIcon(new javax.swing.ImageIcon("C:\\Users\\erika\\OneDrive\\Documentos\\NetBeansProjects\\repositorioclonado\\Pruebaimages\\src\\main\\java\\img\\usuario.png")); // NOI18N
         btn_Profile.setBorder(null);
         btn_Profile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -230,37 +235,38 @@ private static ImageIcon bytesToImageIcon(byte[] multimedia) {
                         .addComponent(btn_search)
                         .addGap(65, 65, 65)
                         .addComponent(btn_videos)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btn_friends)
-                        .addGap(18, 18, 18)
+                        .addGap(29, 29, 29)
                         .addComponent(btn_home)
-                        .addGap(18, 18, 18)
+                        .addGap(65, 65, 65)
                         .addComponent(btn_createPost)
-                        .addGap(78, 78, 78)
-                        .addComponent(btn_Profile)))
-                .addContainerGap(138, Short.MAX_VALUE))
+                        .addGap(54, 54, 54)
+                        .addComponent(btn_Profile, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGap(30, 30, 30))
         );
         pnl_barLayout.setVerticalGroup(
             pnl_barLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_barLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btn_search, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(pnl_barLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(pnl_barLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnl_barLayout.createSequentialGroup()
-                        .addComponent(tf_search, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(pnl_barLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tf_search, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btn_friends)
+                            .addComponent(btn_home)
+                            .addComponent(btn_Profile, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel1))
                     .addGroup(pnl_barLayout.createSequentialGroup()
                         .addGroup(pnl_barLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btn_Profile)
-                            .addComponent(btn_friends, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btn_videos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btn_home, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btn_createPost, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(btn_createPost, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE))
                         .addContainerGap())))
-            .addGroup(pnl_barLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btn_search, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         lbl_title.setFont(new java.awt.Font("Manjari", 1, 24)); // NOI18N
@@ -340,7 +346,9 @@ private static ImageIcon bytesToImageIcon(byte[] multimedia) {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(73, 73, 73)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(lbl_text, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lbl_image, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(btn_previous)
                                 .addGap(102, 102, 102)
                                 .addComponent(btn_like)
@@ -351,9 +359,7 @@ private static ImageIcon bytesToImageIcon(byte[] multimedia) {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(btn_comments)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 130, Short.MAX_VALUE)
-                                .addComponent(btn_next))
-                            .addComponent(lbl_text, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lbl_image, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addComponent(btn_next)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -362,7 +368,7 @@ private static ImageIcon bytesToImageIcon(byte[] multimedia) {
                 .addComponent(pnl_bar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(lbl_title, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
                 .addComponent(lbl_text, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lbl_image, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -374,7 +380,7 @@ private static ImageIcon bytesToImageIcon(byte[] multimedia) {
                     .addComponent(btn_love)
                     .addComponent(btn_laugh)
                     .addComponent(btn_comments))
-                .addGap(74, 74, 74))
+                .addGap(58, 58, 58))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -409,7 +415,7 @@ private static ImageIcon bytesToImageIcon(byte[] multimedia) {
     }//GEN-LAST:event_btn_createPostActionPerformed
 
     private void btn_ProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ProfileActionPerformed
-        Profile Profile = new Profile(id);
+       Profile  Profile = new Profile(id);
         Profile.setVisible(true);
         this.setVisible(false);      
     }//GEN-LAST:event_btn_ProfileActionPerformed

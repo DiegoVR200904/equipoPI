@@ -113,6 +113,7 @@ public class Friends extends javax.swing.JFrame {
         tbl_comments = new javax.swing.JTable();
         lbl_title = new javax.swing.JLabel();
         btn_add_friend = new javax.swing.JButton();
+        btn_home = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -140,10 +141,20 @@ public class Friends extends javax.swing.JFrame {
         lbl_title.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
         lbl_title.setText("Tus amigos");
 
-        btn_add_friend.setText("Agregar amigo");
+        btn_add_friend.setText("Agregar amigos");
+        btn_add_friend.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btn_add_friend.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_add_friendActionPerformed(evt);
+            }
+        });
+
+        btn_home.setBackground(new java.awt.Color(255, 153, 153));
+        btn_home.setIcon(new javax.swing.ImageIcon("C:\\Users\\erika\\OneDrive\\Documentos\\NetBeansProjects\\repositorioclonado\\Pruebaimages\\src\\main\\java\\img\\Home black.png")); // NOI18N
+        btn_home.setBorder(null);
+        btn_home.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_homeActionPerformed(evt);
             }
         });
 
@@ -154,14 +165,17 @@ public class Friends extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(81, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btn_add_friend)
+                    .addComponent(btn_add_friend, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 512, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(63, 63, 63))
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                             .addComponent(lbl_title)
-                            .addGap(270, 270, 270)))))
+                            .addGap(270, 270, 270))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                            .addComponent(btn_home)
+                            .addGap(297, 297, 297)))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -171,8 +185,10 @@ public class Friends extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btn_add_friend)
-                .addContainerGap(94, Short.MAX_VALUE))
+                .addComponent(btn_add_friend, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addComponent(btn_home)
+                .addGap(15, 15, 15))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -195,6 +211,12 @@ public class Friends extends javax.swing.JFrame {
         nuevo.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btn_add_friendActionPerformed
+
+    private void btn_homeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_homeActionPerformed
+        Home Home = new Home(id);
+        Home.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btn_homeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -235,6 +257,7 @@ public class Friends extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_add_friend;
+    private javax.swing.JButton btn_home;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lbl_title;

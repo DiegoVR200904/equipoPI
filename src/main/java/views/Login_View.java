@@ -97,6 +97,8 @@ public class Login_View extends javax.swing.JFrame {
             }
         });
 
+        lbl_icon.setIcon(new javax.swing.ImageIcon("C:\\Users\\erika\\OneDrive\\Documentos\\NetBeansProjects\\repositorioclonado\\Pruebaimages\\src\\main\\java\\img\\firstfixed-200.png")); // NOI18N
+
         jSeparator1.setBackground(new java.awt.Color(255, 255, 255));
         jSeparator1.setForeground(new java.awt.Color(255, 255, 255));
 

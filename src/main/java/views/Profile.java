@@ -105,7 +105,6 @@ public class Profile extends javax.swing.JFrame {
         tf_search = new javax.swing.JTextField();
         btn_search = new javax.swing.JButton();
         btn_friends = new javax.swing.JButton();
-        btn_videos = new javax.swing.JButton();
         btn_home = new javax.swing.JButton();
         btn_createPost = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
@@ -145,15 +144,6 @@ public class Profile extends javax.swing.JFrame {
         btn_friends.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_friendsActionPerformed(evt);
-            }
-        });
-
-        btn_videos.setBackground(new java.awt.Color(27, 27, 27));
-        btn_videos.setIcon(new javax.swing.ImageIcon("C:\\Users\\erika\\OneDrive\\Documentos\\NetBeansProjects\\repositorioclonado\\Pruebaimages\\src\\main\\java\\img\\5-40.png")); // NOI18N
-        btn_videos.setBorder(null);
-        btn_videos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_videosActionPerformed(evt);
             }
         });
 
@@ -272,9 +262,9 @@ public class Profile extends javax.swing.JFrame {
                                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 684, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(jPanel1Layout.createSequentialGroup()
                                     .addComponent(btn_Post)
-                                    .addGap(85, 85, 85)
+                                    .addGap(37, 37, 37)
                                     .addComponent(btn_Friends)
-                                    .addGap(389, 389, 389))))
+                                    .addGap(422, 422, 422))))
                         .addGap(117, 117, 117))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -334,15 +324,13 @@ public class Profile extends javax.swing.JFrame {
                 .addComponent(tf_search, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btn_search)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btn_videos)
-                .addGap(114, 114, 114)
-                .addComponent(btn_friends)
                 .addGap(123, 123, 123)
-                .addComponent(btn_createPost)
+                .addComponent(btn_friends)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btn_createPost)
+                .addGap(174, 174, 174)
                 .addComponent(btn_home)
-                .addGap(89, 89, 89))
+                .addGap(87, 87, 87))
             .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         pnl_barLayout.setVerticalGroup(
@@ -354,7 +342,6 @@ public class Profile extends javax.swing.JFrame {
                         .addGroup(pnl_barLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(btn_createPost)
                             .addGroup(pnl_barLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(btn_videos)
                                 .addComponent(btn_search)
                                 .addComponent(btn_friends)
                                 .addGroup(pnl_barLayout.createSequentialGroup()
@@ -419,7 +406,9 @@ public class Profile extends javax.swing.JFrame {
     }//GEN-LAST:event_tf_countfriendsActionPerformed
 
     private void btn_friendsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_friendsActionPerformed
-        // TODO add your handling code here:
+        Friends amigo = new Friends(id);
+        amigo.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btn_friendsActionPerformed
 
     private void btn_homeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_homeActionPerformed
@@ -427,12 +416,6 @@ public class Profile extends javax.swing.JFrame {
         Home.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btn_homeActionPerformed
-
-    private void btn_videosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_videosActionPerformed
-         /* Videos_View Videos_View = new Videos_View(id);
-        Videos_View.setVisible(true);
-        this.setVisible(false);*/
-    }//GEN-LAST:event_btn_videosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -480,7 +463,6 @@ public class Profile extends javax.swing.JFrame {
     private javax.swing.JButton btn_friends;
     private javax.swing.JButton btn_home;
     private javax.swing.JButton btn_search;
-    private javax.swing.JButton btn_videos;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu5;

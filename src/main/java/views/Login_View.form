@@ -189,6 +189,11 @@
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lbl_icon">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="2" name="C:\Users\erika\OneDrive\Documentos\NetBeansProjects\repositorioclonado\Pruebaimages\src\main\java\img\firstfixed-200.png"/>
+            </Property>
+          </Properties>
         </Component>
         <Component class="javax.swing.JSeparator" name="jSeparator1">
           <Properties>

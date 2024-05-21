@@ -95,7 +95,7 @@ public class NewUser_View extends javax.swing.JFrame {
             }
         });
 
-        lbl_icon.setIcon(new javax.swing.ImageIcon("/home/ghostpatron/NetBeansProjects/CloneV2/src/main/java/img/logo3-150.png")); // NOI18N
+        lbl_icon.setIcon(new javax.swing.ImageIcon("C:\\Users\\erika\\OneDrive\\Documentos\\NetBeansProjects\\repositorioclonado\\Pruebaimages\\src\\main\\java\\img\\logo3-150.png")); // NOI18N
 
         btn_register.setBackground(new java.awt.Color(249, 128, 170));
         btn_register.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
