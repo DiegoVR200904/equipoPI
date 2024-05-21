@@ -173,6 +173,7 @@ private static ImageIcon bytesToImageIcon(byte[] multimedia) {
         btn_search.setBorder(null);
 
         btn_friends.setBackground(new java.awt.Color(27, 27, 27));
+        btn_friends.setIcon(new javax.swing.ImageIcon("C:\\Users\\erika\\OneDrive\\Documentos\\NetBeansProjects\\repositorioclonado\\Pruebaimages\\src\\main\\java\\img\\3-40.png")); // NOI18N
         btn_friends.setBorder(null);
         btn_friends.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -197,7 +198,6 @@ private static ImageIcon bytesToImageIcon(byte[] multimedia) {
         });
 
         btn_createPost.setBackground(new java.awt.Color(27, 27, 27));
-        btn_createPost.setIcon(new javax.swing.ImageIcon("C:\\Users\\Aesther\\Documents\\NetBeansProjects\\equipoPI\\src\\main\\java\\img\\agregar-publicacion.png")); // NOI18N
         btn_createPost.setBorder(null);
         btn_createPost.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -206,7 +206,7 @@ private static ImageIcon bytesToImageIcon(byte[] multimedia) {
         });
 
         btn_Profile.setBackground(new java.awt.Color(27, 27, 27));
-        btn_Profile.setIcon(new javax.swing.ImageIcon("C:\\Users\\Aesther\\Documents\\NetBeansProjects\\equipoPI\\src\\main\\java\\img\\Perfil rosa.png")); // NOI18N
+        btn_Profile.setIcon(new javax.swing.ImageIcon("C:\\Users\\erika\\OneDrive\\Documentos\\NetBeansProjects\\repositorioclonado\\Pruebaimages\\src\\main\\java\\img\\5-40.png")); // NOI18N
         btn_Profile.setBorder(null);
         btn_Profile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -238,7 +238,7 @@ private static ImageIcon bytesToImageIcon(byte[] multimedia) {
                         .addComponent(btn_createPost)
                         .addGap(78, 78, 78)
                         .addComponent(btn_Profile)))
-                .addContainerGap(178, Short.MAX_VALUE))
+                .addContainerGap(138, Short.MAX_VALUE))
         );
         pnl_barLayout.setVerticalGroup(
             pnl_barLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -271,7 +271,7 @@ private static ImageIcon bytesToImageIcon(byte[] multimedia) {
         lbl_text.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 102, 153)));
 
         btn_previous.setBackground(new java.awt.Color(51, 51, 51));
-        btn_previous.setIcon(new javax.swing.ImageIcon("C:\\Users\\Aesther\\Documents\\NetBeansProjects\\equipoPI\\src\\main\\java\\img\\previous-50.png")); // NOI18N
+        btn_previous.setIcon(new javax.swing.ImageIcon("C:\\Users\\erika\\OneDrive\\Documentos\\NetBeansProjects\\repositorioclonado\\Pruebaimages\\src\\main\\java\\img\\previous-50.png")); // NOI18N
         btn_previous.setBorder(null);
         btn_previous.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -280,7 +280,7 @@ private static ImageIcon bytesToImageIcon(byte[] multimedia) {
         });
 
         btn_next.setBackground(new java.awt.Color(51, 51, 51));
-        btn_next.setIcon(new javax.swing.ImageIcon("C:\\Users\\Aesther\\Documents\\NetBeansProjects\\equipoPI\\src\\main\\java\\img\\next-50.png")); // NOI18N
+        btn_next.setIcon(new javax.swing.ImageIcon("C:\\Users\\erika\\OneDrive\\Documentos\\NetBeansProjects\\repositorioclonado\\Pruebaimages\\src\\main\\java\\img\\next-50.png")); // NOI18N
         btn_next.setBorder(null);
         btn_next.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -292,7 +292,7 @@ private static ImageIcon bytesToImageIcon(byte[] multimedia) {
         lbl_image.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 51, 153)));
 
         btn_like.setBackground(new java.awt.Color(51, 51, 51));
-        btn_like.setIcon(new javax.swing.ImageIcon("C:\\Users\\Aesther\\Documents\\NetBeansProjects\\equipoPI\\src\\main\\java\\img\\Like rosa.png")); // NOI18N
+        btn_like.setIcon(new javax.swing.ImageIcon("C:\\Users\\erika\\OneDrive\\Documentos\\NetBeansProjects\\repositorioclonado\\Pruebaimages\\src\\main\\java\\img\\Like rosa.png")); // NOI18N
         btn_like.setBorder(null);
         btn_like.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -301,7 +301,7 @@ private static ImageIcon bytesToImageIcon(byte[] multimedia) {
         });
 
         btn_love.setBackground(new java.awt.Color(51, 51, 51));
-        btn_love.setIcon(new javax.swing.ImageIcon("C:\\Users\\Aesther\\Documents\\NetBeansProjects\\equipoPI\\src\\main\\java\\img\\Corazon rosa.png")); // NOI18N
+        btn_love.setIcon(new javax.swing.ImageIcon("C:\\Users\\erika\\OneDrive\\Documentos\\NetBeansProjects\\repositorioclonado\\Pruebaimages\\src\\main\\java\\img\\Corazon rosa.png")); // NOI18N
         btn_love.setBorder(null);
         btn_love.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -310,6 +310,7 @@ private static ImageIcon bytesToImageIcon(byte[] multimedia) {
         });
 
         btn_laugh.setBackground(new java.awt.Color(51, 51, 51));
+        btn_laugh.setIcon(new javax.swing.ImageIcon("C:\\Users\\erika\\OneDrive\\Documentos\\NetBeansProjects\\repositorioclonado\\Pruebaimages\\src\\main\\java\\img\\Risa rosa.png")); // NOI18N
         btn_laugh.setBorder(null);
         btn_laugh.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -318,7 +319,7 @@ private static ImageIcon bytesToImageIcon(byte[] multimedia) {
         });
 
         btn_comments.setBackground(new java.awt.Color(51, 51, 51));
-        btn_comments.setIcon(new javax.swing.ImageIcon("C:\\Users\\Aesther\\Documents\\NetBeansProjects\\equipoPI\\src\\main\\java\\img\\comment2.png")); // NOI18N
+        btn_comments.setIcon(new javax.swing.ImageIcon("C:\\Users\\erika\\OneDrive\\Documentos\\NetBeansProjects\\repositorioclonado\\Pruebaimages\\src\\main\\java\\img\\comment2.png")); // NOI18N
         btn_comments.setBorder(null);
         btn_comments.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -349,9 +350,9 @@ private static ImageIcon bytesToImageIcon(byte[] multimedia) {
                                 .addComponent(btn_laugh)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(btn_comments)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 130, Short.MAX_VALUE)
                                 .addComponent(btn_next))
-                            .addComponent(lbl_text, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 528, Short.MAX_VALUE)
+                            .addComponent(lbl_text, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(lbl_image, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -426,9 +427,9 @@ private static ImageIcon bytesToImageIcon(byte[] multimedia) {
     }//GEN-LAST:event_btn_homeActionPerformed
 
     private void btn_friendsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_friendsActionPerformed
-      /*Friends_View Friends_View = new Friends_View(id);
-        Friends_View.setVisible(true);
-        this.setVisible(false);*/
+        Friends amigo = new Friends(id);
+        amigo.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btn_friendsActionPerformed
 
     private void btn_likeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_likeActionPerformed

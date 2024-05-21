@@ -8,9 +8,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.Period;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import models.ConexionLogin;
 //import models.ConexionLogin;
 import models.DB_Connection;
 
@@ -41,17 +44,16 @@ private int id;
         //this.Modificarinfo();
      
         this.EditInfo();
-           this.mostrarDatos();
+        this.mostrarDatos();
         
     }
 private void EditInfo(){
         try {
-        String query = "SELECT u.first_name, u.last_name, COUNT(c.contact_id) AS friends\n" +
-        "FROM Users u\n" +
-        "LEFT JOIN Contacts c ON u.user_id = c.user_id\n" +
-        "WHERE u.user_id = ? \n" +
-        "GROUP BY u.user_id, u.first_name, u.last_name;"
-       ;
+        String query = "SELECT *" +
+        "FROM Users \n"
+                + "Where user_id=?" ;
+        
+       
         PreparedStatement statement = this.connection.prepareStatement(query, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
         statement.setInt(1, id); // Asignar el ID de usuario al primer parámetro
 
@@ -63,76 +65,24 @@ private void EditInfo(){
 
 
 private void mostrarDatos() {
-     
     try {
         if (resultSet.next()) { 
          
            
         String UserName = this.resultSet.getString("first_name");
-         String UserLast = this.resultSet.getString("last_name");
-        // String friendsCount = this.resultSet.getString("friends");
-         
-         // String userid = this.resultSet.getString("user_id");
-         // this.tf_extraerid.setText(userid);
-         
-         this.lbl_NameE.setText(UserName+" "+UserLast);
-          this.lbl_Last.setText(UserLast);
-         //this.lbl_Last.setText(friendsCount ); 
-      
-          
-         
-            
+        String UserLast = this.resultSet.getString("last_name");
+       
+        this.lbl_NameE.setText(UserName);
+        this.lbl_Last.setText(UserLast);
+        
         } else {
             this.lbl_Last.setText("No se encontraron amigos"); 
-            //this.lbl_NameE.setText("No se encontraron datos de perfil");
+            this.lbl_NameE.setText("No se encontraron datos de perfil");
         }
     } catch (SQLException ex) {
         Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
     }
 }
-/*
-public void Modificarinfo(int userId, String firstName,String LastName, String newPassword){
-    try {
-        Connection conecction=null;
-        PreparedStatement statement=null;
-        connection = DB_Connection.getConnection();
-        
-        String query1="UDAPTE Users SET first_name=?, last_name=?,password=? WHERE user_id=?";
-        statement=connection.prepareStatement(query1);
-        
-        statement.setString(1, firstName);
-        statement.setString(2, LastName);
-        statement.setString(3, newPassword);
-        statement.setInt(4, userId);
-        
-        int rowsUpdated= statement.executeUpdate();
-         if (rowsUpdated>0){
-             System.out.println("Actualizado");
-             
-         } else{
-             System.out.println("NO SE ACTUALIZOO");
-             
-         }
-         
-         
-        
-                
-    } catch (SQLException ex) {
-        Logger.getLogger(Edit_Information.class.getName()).log(Level.SEVERE, null, ex);
-    }finally{
-        //if(statement != null){
-         //   statement.close();
-            
-        }
-        if(connection!=null){
-            connection.close();
-        }
-    }
-
-
-    
-    
-}*/
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -150,7 +100,6 @@ public void Modificarinfo(int userId, String firstName,String LastName, String n
         pf_Editpass = new javax.swing.JPasswordField();
         jPanel3 = new javax.swing.JPanel();
         jButton3 = new javax.swing.JButton();
-        tf_extraerid = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         Logo = new javax.swing.JLabel();
         lbl_NameE = new javax.swing.JTextField();
@@ -198,7 +147,7 @@ public void Modificarinfo(int userId, String firstName,String LastName, String n
         jPanel3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jButton3.setBackground(new java.awt.Color(255, 153, 204));
-        jButton3.setText("Guardar Cmabios");
+        jButton3.setText("Guardar Cambios");
         jButton3.setBorder(null);
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -219,9 +168,6 @@ public void Modificarinfo(int userId, String firstName,String LastName, String n
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
         );
-
-        tf_extraerid.setEditable(false);
-        tf_extraerid.setBackground(new java.awt.Color(255, 255, 255));
 
         jPanel2.setBackground(new java.awt.Color(0, 0, 0));
         jPanel2.setToolTipText("");
@@ -291,10 +237,8 @@ public void Modificarinfo(int userId, String firstName,String LastName, String n
                                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(tf_extraerid, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(55, 55, 55))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addComponent(pf_Editpass, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -313,10 +257,8 @@ public void Modificarinfo(int userId, String firstName,String LastName, String n
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addGap(53, 53, 53)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(tf_extraerid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1))
-                        .addGap(29, 29, 29)
+                        .addComponent(jLabel1)
+                        .addGap(31, 31, 31)
                         .addComponent(tf_EditName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -324,9 +266,9 @@ public void Modificarinfo(int userId, String firstName,String LastName, String n
                         .addComponent(jLabel2)
                         .addGap(27, 27, 27)
                         .addComponent(tf_Editlast, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
+                        .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel3)
                         .addGap(30, 30, 30)
                         .addComponent(pf_Editpass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
@@ -437,8 +379,8 @@ public void Modificarinfo(int userId, String firstName,String LastName, String n
 
     private void btn_ReturnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ReturnActionPerformed
        Profile Profile = new Profile(id);
-        Profile.setVisible(true);
-        this.setVisible(false);
+       Profile.setVisible(true);
+       this.setVisible(false);
     }//GEN-LAST:event_btn_ReturnActionPerformed
 
     private void btn_friendsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_friendsActionPerformed
@@ -456,30 +398,47 @@ public void Modificarinfo(int userId, String firstName,String LastName, String n
     private void tf_EditlastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_EditlastActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tf_EditlastActionPerformed
-
+ public void CambiarDatos(String username,String lastname, String password) {
+    try {
+        String query1 = "UPDATE Users SET first_name = ?, last_name = ?, password = ? Where user_id = ?";
+        PreparedStatement statement = connection.prepareStatement(query1);
+        statement.setString(1, username);
+        statement.setString(2, lastname);
+        statement.setString(3, password);
+        statement.setInt(4, this.id);
+         int rowsAffected = statement.executeUpdate();
+        if (rowsAffected > 0) {
+            System.out.println("Datos actualizados correctamente.");
+        } else {
+            System.out.println("No se pudieron actualizar los datos.");
+        }
+        //int filasAfectadas = statement.executeUpdate();
+        //return filasAfectadas > 0; // Retorna true si se insertó al menos una fila    
+    } catch (SQLException ex) {
+        Logger.getLogger(Edit_Information.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    
+}  
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
 
-     /*
-        tf_EditName.setEnabled(false);
-        tf_Editlast.setEnabled(false);
-        pf_Editpass.setEnabled(false);
-         tf_extraerid.setEnabled(false);
-          
+    
            
-        String user_id =tf_extraerid.getText();
+        //String user_id =tf_extraerid.getText();
         String name = tf_EditName.getText();
         String last = tf_Editlast.getText();
       
         String pass = new String(pf_Editpass.getPassword());
         
-        //DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-      
-        
+            tf_EditName.setText("");
+            tf_Editlast.setText("");
+            pf_Editpass.setText("");
+        this.CambiarDatos(name, last, pass);
        
         
-        ConexionLogin.insertarUsuario(name, last, pass,user_id);        // TODO add your handling code here:*/
     }//GEN-LAST:event_jButton3ActionPerformed
 
+   
+    
     private void btn_homeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_homeActionPerformed
        Home Home = new Home(id);
         Home.setVisible(true);
@@ -554,6 +513,5 @@ public void Modificarinfo(int userId, String firstName,String LastName, String n
     private javax.swing.JPanel pnl_bar;
     private javax.swing.JTextField tf_EditName;
     private javax.swing.JTextField tf_Editlast;
-    private javax.swing.JTextField tf_extraerid;
     // End of variables declaration//GEN-END:variables
 }

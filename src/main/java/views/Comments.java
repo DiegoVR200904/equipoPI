@@ -4,6 +4,7 @@
  */
 package views;
 
+import java.awt.Color;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -33,7 +34,7 @@ public class Comments extends javax.swing.JFrame {
     public Comments(int id_post, int id_user) {
         initComponents();
         setResizable(false);
-        setTitle("Comentarios"); 
+        setTitle("Comentarios");
         this.id_p = id_post;
         this.id_u = id_user;
         
@@ -51,6 +52,13 @@ public class Comments extends javax.swing.JFrame {
         } finally {
             closeResources();
         }
+        this.tbl_comments.setTableHeader(null);
+        this.jScrollPane2.setColumnHeaderView(null);
+        
+        Color bgColor = Color.DARK_GRAY;
+        this.jScrollPane2.getViewport().setBackground(bgColor);
+        this.jScrollPane2.setOpaque(false);
+        
     }
     
     private ResultSet fetchData() throws SQLException {
@@ -60,6 +68,7 @@ public class Comments extends javax.swing.JFrame {
         PreparedStatement preparedStatement = connection.prepareStatement(query);
         preparedStatement.setInt(1, id_p);
         ResultSet resultSet = preparedStatement.executeQuery();
+        
     return resultSet;  
     }
     
@@ -125,6 +134,10 @@ public class Comments extends javax.swing.JFrame {
 
         pnl_bg.setBackground(new java.awt.Color(51, 51, 51));
 
+        jScrollPane2.setBackground(new java.awt.Color(102, 102, 102));
+
+        tbl_comments.setBackground(new java.awt.Color(102, 102, 102));
+        tbl_comments.setForeground(new java.awt.Color(255, 255, 255));
         tbl_comments.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -136,6 +149,8 @@ public class Comments extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tbl_comments.setGridColor(new java.awt.Color(102, 102, 102));
+        tbl_comments.setSelectionBackground(new java.awt.Color(204, 204, 204));
         jScrollPane2.setViewportView(tbl_comments);
 
         jLabel1.setFont(new java.awt.Font("Liberation Sans", 0, 24)); // NOI18N

@@ -41,7 +41,10 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="pnl_bar" min="-2" max="-2" attributes="0"/>
+          <Group type="102" attributes="0">
+              <Component id="pnl_bar" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="123" max="32767" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -240,11 +243,7 @@
                                           <Component id="btn_Post" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace min="-2" pref="85" max="-2" attributes="0"/>
                                           <Component id="btn_Friends" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="82" max="-2" attributes="0"/>
-                                          <Component id="btn_ImagesUser" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="88" max="-2" attributes="0"/>
-                                          <Component id="btn_VideosUser" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="75" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="389" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -309,8 +308,6 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="btn_Friends" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="btn_Post" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btn_ImagesUser" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btn_VideosUser" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
                   </Group>
@@ -408,34 +405,6 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_FriendsActionPerformed"/>
-              </Events>
-            </Component>
-            <Component class="javax.swing.JButton" name="btn_ImagesUser">
-              <Properties>
-                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="cc" green="99" red="ff" type="rgb"/>
-                </Property>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Tahoma" size="12" style="1"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Fotos"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_ImagesUserActionPerformed"/>
-              </Events>
-            </Component>
-            <Component class="javax.swing.JButton" name="btn_VideosUser">
-              <Properties>
-                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="cc" green="99" red="ff" type="rgb"/>
-                </Property>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Tahoma" size="12" style="1"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Videos"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_VideosUserActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btn_Post">
