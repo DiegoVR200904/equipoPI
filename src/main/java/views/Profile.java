@@ -449,7 +449,7 @@ public class Profile extends javax.swing.JFrame {
         }
         
         insert_img.setInt(1, imageID);
-        insert_img.setInt(1, id);
+        insert_img.setInt(2, id);
         insert_img.executeUpdate();
         
         connection.commit();
