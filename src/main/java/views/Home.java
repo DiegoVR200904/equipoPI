@@ -42,12 +42,29 @@ public class Home extends javax.swing.JFrame {
     
 private void mostrarPrimerRegistro() {       
     try {
-        String query = "SELECT DISTINCT p.post_id, p.post_text, p.post_type, i.image_data, v.video_data\n" +
-                   "FROM Posts p\n" +
-                   "LEFT JOIN Images i ON p.post_id = i.post_id \n" +
-                   "LEFT JOIN Videos v ON p.post_id = v.post_id \n" +
-                   "LEFT JOIN Contacts c ON p.user_id = c.contact_user_id \n" +
-                   "WHERE p.user_id = ? OR c.user_id = ?";
+            String query = "SELECT DISTINCT \n" +
+            "    p.post_id, \n" +
+            "    p.post_text, \n" +
+            "    p.post_type, \n" +
+            "    i.image_data, \n" +
+            "    v.video_data,\n" +
+            "    COALESCE(SUM(r.likes), 0) AS Likes,\n" +
+            "    COALESCE(SUM(r.laughs), 0) AS Laughs,\n" +
+            "    COALESCE(SUM(r.loves), 0) AS Loves\n" +
+            "FROM \n" +
+            "    Posts p\n" +
+            "LEFT JOIN \n" +
+            "    Images i ON p.post_id = i.post_id \n" +
+            "LEFT JOIN \n" +
+            "    Videos v ON p.post_id = v.post_id \n" +
+            "LEFT JOIN \n" +
+            "    Contacts c ON p.user_id = c.contact_user_id \n" +
+            "LEFT JOIN \n" +
+            "    Reactions r ON p.post_id = r.post_id\n" +
+            "WHERE \n" +
+            "    p.user_id = ? OR c.user_id = ?\n" +
+            "GROUP BY \n" +
+            "    p.post_id, p.post_text, p.post_type, i.image_data, v.video_data;";
         
         PreparedStatement statement = this.connection.prepareStatement(query, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
         statement.setInt(1, id); // Asignar el ID de usuario al primer parámetro
@@ -98,6 +115,9 @@ private static ImageIcon bytesToImageIcon(byte[] multimedia) {
         try {
             String texto = this.resultSet.getString("post_text");
             String postype = this.resultSet.getString("post_type");
+            String likes = this.resultSet.getString("Likes");
+            String laughs = this.resultSet.getString("Laughs");
+            String loves = this.resultSet.getString("Loves");
             switch(postype){
                 case "text":
                     this.lbl_text.setText(texto);
@@ -121,6 +141,10 @@ private static ImageIcon bytesToImageIcon(byte[] multimedia) {
                 default:
                     break;   
             }
+            this.lbl_like_count.setText(likes);
+            this.lbl_love_count.setText(loves);
+            this.lbl_laughs_count.setText(laughs);
+            
             //String video = resultSet.getInt("edad");
         } catch (SQLException ex) {
             Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
@@ -155,6 +179,9 @@ private static ImageIcon bytesToImageIcon(byte[] multimedia) {
         btn_love = new javax.swing.JButton();
         btn_laugh = new javax.swing.JButton();
         btn_comments = new javax.swing.JButton();
+        lbl_like_count = new javax.swing.JLabel();
+        lbl_love_count = new javax.swing.JLabel();
+        lbl_laughs_count = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -212,7 +239,7 @@ private static ImageIcon bytesToImageIcon(byte[] multimedia) {
                         .addGap(65, 65, 65)
                         .addComponent(btn_createPost)
                         .addGap(54, 54, 54)
-                        .addComponent(btn_Profile, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(btn_Profile, javax.swing.GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE)))
                 .addGap(30, 30, 30))
         );
         pnl_barLayout.setVerticalGroup(
@@ -240,6 +267,7 @@ private static ImageIcon bytesToImageIcon(byte[] multimedia) {
         lbl_text.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 102, 153)));
 
         btn_previous.setBackground(new java.awt.Color(51, 51, 51));
+        btn_previous.setIcon(new javax.swing.ImageIcon("/home/ghostpatron/NetBeansProjects/equipoPI/src/main/java/img/previous-50.png")); // NOI18N
         btn_previous.setBorder(null);
         btn_previous.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -248,6 +276,7 @@ private static ImageIcon bytesToImageIcon(byte[] multimedia) {
         });
 
         btn_next.setBackground(new java.awt.Color(51, 51, 51));
+        btn_next.setIcon(new javax.swing.ImageIcon("/home/ghostpatron/NetBeansProjects/equipoPI/src/main/java/img/next-50.png")); // NOI18N
         btn_next.setBorder(null);
         btn_next.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -259,6 +288,7 @@ private static ImageIcon bytesToImageIcon(byte[] multimedia) {
         lbl_image.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 51, 153)));
 
         btn_like.setBackground(new java.awt.Color(51, 51, 51));
+        btn_like.setIcon(new javax.swing.ImageIcon("/home/ghostpatron/NetBeansProjects/equipoPI/src/main/java/img/Like rosa.png")); // NOI18N
         btn_like.setBorder(null);
         btn_like.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -267,6 +297,7 @@ private static ImageIcon bytesToImageIcon(byte[] multimedia) {
         });
 
         btn_love.setBackground(new java.awt.Color(51, 51, 51));
+        btn_love.setIcon(new javax.swing.ImageIcon("/home/ghostpatron/NetBeansProjects/equipoPI/src/main/java/img/Corazon rosa.png")); // NOI18N
         btn_love.setBorder(null);
         btn_love.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -275,6 +306,7 @@ private static ImageIcon bytesToImageIcon(byte[] multimedia) {
         });
 
         btn_laugh.setBackground(new java.awt.Color(51, 51, 51));
+        btn_laugh.setIcon(new javax.swing.ImageIcon("/home/ghostpatron/NetBeansProjects/equipoPI/src/main/java/img/Risa rosa.png")); // NOI18N
         btn_laugh.setBorder(null);
         btn_laugh.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -289,6 +321,15 @@ private static ImageIcon bytesToImageIcon(byte[] multimedia) {
                 btn_commentsActionPerformed(evt);
             }
         });
+
+        lbl_like_count.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_like_count.setText("likes");
+
+        lbl_love_count.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_love_count.setText("loves");
+
+        lbl_laughs_count.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_laughs_count.setText("loves");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -307,15 +348,21 @@ private static ImageIcon bytesToImageIcon(byte[] multimedia) {
                             .addComponent(lbl_image, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(btn_previous)
-                                .addGap(102, 102, 102)
-                                .addComponent(btn_like)
+                                .addGap(101, 101, 101)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(lbl_like_count, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btn_like, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btn_love)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(btn_love, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(lbl_love_count, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btn_laugh)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(btn_laugh, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(lbl_laughs_count, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(btn_comments)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 130, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btn_next)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -325,7 +372,7 @@ private static ImageIcon bytesToImageIcon(byte[] multimedia) {
                 .addComponent(pnl_bar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(lbl_title, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lbl_text, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lbl_image, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -333,11 +380,17 @@ private static ImageIcon bytesToImageIcon(byte[] multimedia) {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btn_next)
                     .addComponent(btn_previous)
-                    .addComponent(btn_like)
                     .addComponent(btn_love)
                     .addComponent(btn_laugh)
-                    .addComponent(btn_comments))
-                .addGap(58, 58, 58))
+                    .addComponent(btn_comments)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(btn_like)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbl_like_count)
+                            .addComponent(lbl_love_count)
+                            .addComponent(lbl_laughs_count))))
+                .addGap(45, 45, 45))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -406,6 +459,9 @@ private static ImageIcon bytesToImageIcon(byte[] multimedia) {
         } catch (SQLException ex) {
             Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
         }
+        Home casa = new Home(id);
+        casa.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btn_likeActionPerformed
 
     private void btn_loveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_loveActionPerformed
@@ -424,6 +480,9 @@ private static ImageIcon bytesToImageIcon(byte[] multimedia) {
         } catch (SQLException ex) {
             Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
         }
+        Home casa = new Home(id);
+        casa.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btn_loveActionPerformed
 
     private void btn_laughActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_laughActionPerformed
@@ -442,6 +501,9 @@ private static ImageIcon bytesToImageIcon(byte[] multimedia) {
         } catch (SQLException ex) {
             Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
         }
+        Home casa = new Home(id);
+        casa.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btn_laughActionPerformed
 
     int Regresa_ID_Post(){
@@ -511,6 +573,9 @@ private static ImageIcon bytesToImageIcon(byte[] multimedia) {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lbl_image;
+    private javax.swing.JLabel lbl_laughs_count;
+    private javax.swing.JLabel lbl_like_count;
+    private javax.swing.JLabel lbl_love_count;
     private javax.swing.JLabel lbl_text;
     private javax.swing.JLabel lbl_title;
     private javax.swing.JPanel pnl_bar;
