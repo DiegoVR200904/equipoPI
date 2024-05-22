@@ -368,8 +368,8 @@ public class Profile extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_FriendsActionPerformed
 
     private void insertarProfileImage(int img_id, int user_id){
-        String imagen_perfil_query = "UPDATE Users"
-                    + "SET profile_image_id = ?"
+        String imagen_perfil_query = "UPDATE Users "
+                    + "SET profile_image_id = ? "
                     + "WHERE user_id = ?";
         
         try {    
@@ -388,8 +388,8 @@ public class Profile extends javax.swing.JFrame {
     }
     
     private void insertarCoverImage(int img_id, int user_id){
-        String imagen_perfil_query = "UPDATE Users"
-                    + "SET cover_image_id = ?"
+        String imagen_perfil_query = "UPDATE Users "
+                    + "SET cover_image_id = ? "
                     + "WHERE user_id = ?";
         
         try {    
