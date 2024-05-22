@@ -4,6 +4,7 @@
  */
 package views;
  
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -11,11 +12,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import models.DB_Connection;
+import models.Manejador;
 
 /**
  *
@@ -26,6 +29,7 @@ public class Profile extends javax.swing.JFrame {
     private int id;
     private Connection connection;
     private ResultSet resultSet;
+    private byte[] imagenBytes;
     
     /**
      * Creates new form Profile
@@ -43,7 +47,6 @@ public class Profile extends javax.swing.JFrame {
         }
         this.profile_info();
         this.mostrarDatos();
-       // this.MostrarFoto();
     }
     /**
      * Creates new form Profile
@@ -51,40 +54,60 @@ public class Profile extends javax.swing.JFrame {
     
   private void profile_info(){
         try {
-        String query = "SELECT u.first_name, u.last_name, COUNT(c.contact_id) AS friends\n" +
+        String query = "SELECT u.first_name, u.profile_image_id, u.cover_image_id, u.last_name, COUNT(c.contact_id) AS friends\n" +
         "FROM Users u\n" +
         "LEFT JOIN Contacts c ON u.user_id = c.user_id\n" +
         "WHERE u.user_id = ? \n" +
-        "GROUP BY u.user_id, u.first_name, u.last_name;"
-       ;
+        "GROUP BY u.user_id, u.first_name, u.last_name;\n " + 
+        "SELECT i1.image_data AS profile_image_data, i2.image_data AS cover_image_data\n" +
+        "FROM Users u\n" +
+        "LEFT JOIN Images i1 ON u.profile_image_id = i1.image_id\n" +
+        "LEFT JOIN Images i2 ON u.cover_image_id = i2.image_id\n" +
+        "WHERE u.user_id = ?;";
+        
         PreparedStatement statement = this.connection.prepareStatement(query, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
         statement.setInt(1, id); // Asignar el ID de usuario al primer parámetro
-
+        statement.setInt(2, id);
+        
         this.resultSet = statement.executeQuery();            
         } catch (SQLException ex) {
         Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
      
-
-
-   
+  
     private void mostrarDatos() {
      
     try {
         if (resultSet.next()) { 
             
-       
         String UserName = this.resultSet.getString("first_name");
-         String UserLast = this.resultSet.getString("last_name");
-         String friendsCount = this.resultSet.getString("friends");
-         
-       this.tf_name.setText(UserName+" "+UserLast);
-         this.tf_countfriends.setText(friendsCount ); 
-      
+        String UserLast = this.resultSet.getString("last_name");
+        String friendsCount = this.resultSet.getString("friends");
+        byte[] imagen_cover = this.resultSet.getBytes("profile_image_data");
+        byte[] imagen_profile = this.resultSet.getBytes("cover_image_data");
+        
+            ImageIcon imageIcon = bytesToImageIcon(imagen_cover);
+                        if (imageIcon != null) {
+                            Image scaledImage = imageIcon.getImage().getScaledInstance(lbl_Cover.getWidth(), lbl_Cover.getHeight(), Image.SCALE_SMOOTH);
+                            ImageIcon scaledIcon = new ImageIcon(scaledImage);
+                            this.lbl_Cover.setIcon(scaledIcon);
+                        } else {
+                            System.out.println("no cargo imagen xd");
+                        }
+                        
+            ImageIcon imageIcon_2 = bytesToImageIcon(imagen_profile);
+                        if (imageIcon_2 != null) {
+                            Image scaledImage = imageIcon_2.getImage().getScaledInstance(lbl_perfil_imagen.getWidth(), lbl_perfil_imagen.getHeight(), Image.SCALE_SMOOTH);
+                            ImageIcon scaledIcon = new ImageIcon(scaledImage);
+                            this.lbl_perfil_imagen.setIcon(scaledIcon);
+                        } else {
+                            System.out.println("no cargo imagen xd");
+                        }            
+        
+        this.tf_name.setText(UserName+" "+UserLast);
+        this.tf_countfriends.setText(friendsCount );
           
-         
-            
         } else {
             this.tf_countfriends.setText("No se encontraron amigos"); 
             this.tf_name.setText("No se encontraron datos de perfil");
@@ -102,8 +125,6 @@ public class Profile extends javax.swing.JFrame {
         jMenu5 = new javax.swing.JMenu();
         pnl_bar = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        tf_search = new javax.swing.JTextField();
-        btn_search = new javax.swing.JButton();
         btn_friends = new javax.swing.JButton();
         btn_home = new javax.swing.JButton();
         btn_createPost = new javax.swing.JButton();
@@ -112,13 +133,12 @@ public class Profile extends javax.swing.JFrame {
         jSeparator2 = new javax.swing.JSeparator();
         btn_CoverEdit = new javax.swing.JButton();
         btn_EditProfile = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
-        lbl_ProfileImg = new javax.swing.JLabel();
         btn_Friends = new javax.swing.JButton();
-        btn_Post = new javax.swing.JButton();
         tf_countfriends = new javax.swing.JTextField();
         tf_name = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
+        btn_ProfilePicEdit = new javax.swing.JButton();
+        lbl_perfil_imagen = new javax.swing.JLabel();
 
         jMenu5.setText("jMenu5");
 
@@ -127,19 +147,10 @@ public class Profile extends javax.swing.JFrame {
         pnl_bar.setBackground(new java.awt.Color(27, 27, 27));
         pnl_bar.setForeground(new java.awt.Color(27, 27, 27));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\erika\\OneDrive\\Documentos\\NetBeansProjects\\repositorioclonado\\Pruebaimages\\src\\main\\java\\img\\logo4-64.png")); // NOI18N
-
-        tf_search.setBackground(new java.awt.Color(102, 102, 102));
-        tf_search.setFont(new java.awt.Font("Garuda", 0, 14)); // NOI18N
-        tf_search.setForeground(new java.awt.Color(249, 128, 170));
-        tf_search.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249, 128, 170)));
-
-        btn_search.setBackground(new java.awt.Color(27, 27, 27));
-        btn_search.setIcon(new javax.swing.ImageIcon("C:\\Users\\erika\\OneDrive\\Documentos\\NetBeansProjects\\repositorioclonado\\Pruebaimages\\src\\main\\java\\img\\2-40.png")); // NOI18N
-        btn_search.setBorder(null);
+        jLabel2.setIcon(new javax.swing.ImageIcon("/home/ghostpatron/NetBeansProjects/equipoPI/src/main/java/img/logo4-64.png")); // NOI18N
 
         btn_friends.setBackground(new java.awt.Color(27, 27, 27));
-        btn_friends.setIcon(new javax.swing.ImageIcon("C:\\Users\\erika\\OneDrive\\Documentos\\NetBeansProjects\\repositorioclonado\\Pruebaimages\\src\\main\\java\\img\\3-40.png")); // NOI18N
+        btn_friends.setIcon(new javax.swing.ImageIcon("/home/ghostpatron/NetBeansProjects/equipoPI/src/main/java/img/friends.png")); // NOI18N
         btn_friends.setBorder(null);
         btn_friends.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -148,7 +159,7 @@ public class Profile extends javax.swing.JFrame {
         });
 
         btn_home.setBackground(new java.awt.Color(27, 27, 27));
-        btn_home.setIcon(new javax.swing.ImageIcon("C:\\Users\\erika\\OneDrive\\Documentos\\NetBeansProjects\\repositorioclonado\\Pruebaimages\\src\\main\\java\\img\\4-40.png")); // NOI18N
+        btn_home.setIcon(new javax.swing.ImageIcon("/home/ghostpatron/NetBeansProjects/equipoPI/src/main/java/img/home.png")); // NOI18N
         btn_home.setBorder(null);
         btn_home.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -157,7 +168,7 @@ public class Profile extends javax.swing.JFrame {
         });
 
         btn_createPost.setBackground(new java.awt.Color(27, 27, 27));
-        btn_createPost.setIcon(new javax.swing.ImageIcon("C:\\Users\\erika\\OneDrive\\Documentos\\NetBeansProjects\\repositorioclonado\\equipoPI\\src\\main\\java\\img\\agregar-publicacion.png")); // NOI18N
+        btn_createPost.setIcon(new javax.swing.ImageIcon("/home/ghostpatron/NetBeansProjects/equipoPI/src/main/java/img/agregar-publicacion.png")); // NOI18N
         btn_createPost.setBorder(null);
         btn_createPost.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -169,10 +180,12 @@ public class Profile extends javax.swing.JFrame {
 
         lbl_Cover.setBackground(new java.awt.Color(255, 204, 255));
         lbl_Cover.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        lbl_Cover.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 102, 153)));
 
-        jSeparator2.setBackground(new java.awt.Color(255, 255, 255));
+        jSeparator2.setBackground(new java.awt.Color(255, 102, 153));
+        jSeparator2.setForeground(new java.awt.Color(255, 102, 153));
 
-        btn_CoverEdit.setBackground(new java.awt.Color(249, 128, 170));
+        btn_CoverEdit.setBackground(new java.awt.Color(255, 102, 153));
         btn_CoverEdit.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
         btn_CoverEdit.setText("Cambiar foto de portada");
         btn_CoverEdit.addActionListener(new java.awt.event.ActionListener() {
@@ -181,7 +194,7 @@ public class Profile extends javax.swing.JFrame {
             }
         });
 
-        btn_EditProfile.setBackground(new java.awt.Color(249, 128, 170));
+        btn_EditProfile.setBackground(new java.awt.Color(255, 102, 153));
         btn_EditProfile.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
         btn_EditProfile.setText("Editar perfil");
         btn_EditProfile.addActionListener(new java.awt.event.ActionListener() {
@@ -190,38 +203,12 @@ public class Profile extends javax.swing.JFrame {
             }
         });
 
-        jPanel2.setBackground(new java.awt.Color(255, 204, 255));
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(lbl_ProfileImg, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(lbl_ProfileImg, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-
-        btn_Friends.setBackground(new java.awt.Color(255, 153, 204));
+        btn_Friends.setBackground(new java.awt.Color(255, 102, 153));
         btn_Friends.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btn_Friends.setText("Amigos");
         btn_Friends.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_FriendsActionPerformed(evt);
-            }
-        });
-
-        btn_Post.setBackground(new java.awt.Color(255, 153, 204));
-        btn_Post.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        btn_Post.setText("Publicaciones");
-        btn_Post.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_PostActionPerformed(evt);
             }
         });
 
@@ -243,52 +230,58 @@ public class Profile extends javax.swing.JFrame {
         tf_name.setForeground(new java.awt.Color(255, 0, 153));
         tf_name.setBorder(null);
 
-        jLabel1.setForeground(new java.awt.Color(255, 102, 204));
+        jLabel1.setForeground(new java.awt.Color(255, 102, 153));
         jLabel1.setText("amigos");
+
+        btn_ProfilePicEdit.setBackground(new java.awt.Color(255, 102, 153));
+        btn_ProfilePicEdit.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
+        btn_ProfilePicEdit.setText("Cambiar foto de perfil");
+        btn_ProfilePicEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_ProfilePicEditActionPerformed(evt);
+            }
+        });
+
+        lbl_perfil_imagen.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 102, 153)));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbl_Cover, javax.swing.GroupLayout.PREFERRED_SIZE, 608, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 684, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(btn_Post)
-                                    .addGap(37, 37, 37)
-                                    .addComponent(btn_Friends)
-                                    .addGap(422, 422, 422))))
-                        .addGap(117, 117, 117))
+                        .addGap(174, 174, 174)
+                        .addComponent(tf_countfriends, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(tf_countfriends, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(73, 73, 73)
-                                .addComponent(tf_name, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btn_CoverEdit)
-                            .addComponent(btn_EditProfile, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(190, 190, 190))))
+                        .addGap(190, 190, 190)
+                        .addComponent(tf_name, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(lbl_perfil_imagen, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(btn_EditProfile, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btn_CoverEdit, javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(btn_ProfilePicEdit, javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 677, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(btn_Friends))
+                                    .addGap(2, 2, 2))))
+                        .addComponent(lbl_Cover, javax.swing.GroupLayout.PREFERRED_SIZE, 865, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 32, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(24, 24, 24)
+                .addComponent(lbl_Cover, javax.swing.GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addComponent(lbl_Cover, javax.swing.GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(14, 14, 14)
@@ -298,19 +291,21 @@ public class Profile extends javax.swing.JFrame {
                                     .addComponent(tf_countfriends, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel1)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(12, 12, 12)
                                 .addComponent(btn_EditProfile)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btn_CoverEdit)))
-                        .addGap(37, 37, 37)
-                        .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                                .addComponent(btn_CoverEdit)
+                                .addGap(18, 18, 18)
+                                .addComponent(btn_ProfilePicEdit)))
+                        .addGap(12, 12, 12)
+                        .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btn_Friends)
+                        .addGap(6, 6, 6))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(42, 42, 42)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_Friends)
-                    .addComponent(btn_Post))
-                .addGap(16, 16, 16))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lbl_perfil_imagen, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(46, 46, 46))
         );
 
         javax.swing.GroupLayout pnl_barLayout = new javax.swing.GroupLayout(pnl_bar);
@@ -320,15 +315,11 @@ public class Profile extends javax.swing.JFrame {
             .addGroup(pnl_barLayout.createSequentialGroup()
                 .addGap(8, 8, 8)
                 .addComponent(jLabel2)
-                .addGap(37, 37, 37)
-                .addComponent(tf_search, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btn_search)
-                .addGap(123, 123, 123)
-                .addComponent(btn_friends)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btn_friends)
+                .addGap(18, 18, 18)
                 .addComponent(btn_createPost)
-                .addGap(174, 174, 174)
+                .addGap(18, 18, 18)
                 .addComponent(btn_home)
                 .addGap(87, 87, 87))
             .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -336,24 +327,15 @@ public class Profile extends javax.swing.JFrame {
         pnl_barLayout.setVerticalGroup(
             pnl_barLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_barLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(pnl_barLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnl_barLayout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addGroup(pnl_barLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btn_createPost)
-                            .addGroup(pnl_barLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(btn_search)
-                                .addComponent(btn_friends)
-                                .addGroup(pnl_barLayout.createSequentialGroup()
-                                    .addGap(8, 8, 8)
-                                    .addComponent(tf_search, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(btn_home)))
-                    .addGroup(pnl_barLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel2)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel2)
+                    .addGroup(pnl_barLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(btn_createPost)
+                        .addComponent(btn_home)
+                        .addComponent(btn_friends)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -364,34 +346,135 @@ public class Profile extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(pnl_bar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(123, Short.MAX_VALUE))
+            .addComponent(pnl_bar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_FriendsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_FriendsActionPerformed
-      /* Friends_View Friends_View= new Friends_View(id);
-      Friends_View.setVisible(true);
+        Friends amigo = new Friends(id);
+        amigo.setVisible(true);
         this.setVisible(false);
-        */
     }//GEN-LAST:event_btn_FriendsActionPerformed
 
+    private void insertarProfileImage(int img_id, int user_id){
+        String imagen_perfil_query = "UPDATE Users"
+                    + "SET profile_image_id = ?"
+                    + "WHERE user_id = ?";
+        
+        try {    
+            PreparedStatement statement = connection.prepareStatement(imagen_perfil_query);
+            statement.setInt(1, img_id);
+            statement.setInt(2, user_id);
+            
+            statement.executeUpdate();
+            statement.close();
+            connection.close();
+            System.out.println("Se actualizo la imagen de perfil correctamente en la base de datos.");
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Profile.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    private void insertarCoverImage(int img_id, int user_id){
+        String imagen_perfil_query = "UPDATE Users"
+                    + "SET cover_image_id = ?"
+                    + "WHERE user_id = ?";
+        
+        try {    
+            PreparedStatement statement = connection.prepareStatement(imagen_perfil_query);
+            statement.setInt(1, img_id);
+            statement.setInt(2, user_id);
+            
+            statement.executeUpdate();
+            statement.close();
+            connection.close();
+            System.out.println("Se actualizo la imagen de perfil correctamente en la base de datos.");
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Profile.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+        
+    private static ImageIcon bytesToImageIcon(byte[] multimedia) {
+        try {
+            // Convert bytes to BufferedImage
+            ByteArrayInputStream bis = new ByteArrayInputStream(multimedia);
+            BufferedImage bImage = ImageIO.read(bis);
+
+            // Convert BufferedImage to ImageIcon
+            return new ImageIcon(bImage);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    
+    
     private void btn_CoverEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CoverEditActionPerformed
-        CreatePost_View createPost = new CreatePost_View(id);
-        createPost.setVisible(true);
-        this.setVisible(false);   
+        imagenBytes = Manejador.leerImagen();
+        
+        byte[] multimedia = imagenBytes;
+        int imageID = 0;
+        String image_query = "INSERT INTO Images(image_data) VALUES(?)";
+        
+        PreparedStatement statement = null;
+        ResultSet generatedKeys = null;
+
+            try {
+                connection.setAutoCommit(false);
+                statement = connection.prepareStatement(image_query, Statement.RETURN_GENERATED_KEYS);
+
+                statement.setBytes(1, multimedia);
+                statement.executeUpdate();
+
+                generatedKeys = statement.getGeneratedKeys();
+                if (generatedKeys.next()) {
+                    imageID = generatedKeys.getInt(1);
+                }
+                connection.commit();
+                } catch (SQLException ex) {
+                if (connection != null) {
+                    try {
+                        connection.rollback(); // Rollback the transaction on error
+                    } catch (SQLException e) {
+                        Logger.getLogger(NewUser_View.class.getName()).log(Level.SEVERE, null, e);
+                    }
+                }
+                Logger.getLogger(NewUser_View.class.getName()).log(Level.SEVERE, null, ex);
+            } finally {
+                // Close resources
+                if (generatedKeys != null) {
+                    try {
+                        generatedKeys.close();
+                    } catch (SQLException e) {
+                        Logger.getLogger(NewUser_View.class.getName()).log(Level.SEVERE, null, e);
+                    }
+                }
+                if (statement != null) {
+                    try {
+                        statement.close();
+                    } catch (SQLException e) {
+                        Logger.getLogger(NewUser_View.class.getName()).log(Level.SEVERE, null, e);
+                    }
+                }
+                if (connection != null) {
+                    try {
+                        connection.close();
+                    } catch (SQLException e) {
+                        Logger.getLogger(NewUser_View.class.getName()).log(Level.SEVERE, null, e);
+                    }
+                }
+            }
+            this.insertarCoverImage(imageID, id);
+            this.mostrarDatos();
     }//GEN-LAST:event_btn_CoverEditActionPerformed
 
-    private void btn_PostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_PostActionPerformed
-  
-    }//GEN-LAST:event_btn_PostActionPerformed
-
     private void btn_EditProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_EditProfileActionPerformed
-     Edit_Information Edit_Information= new Edit_Information(id);
-      Edit_Information.setVisible(true);
+        Edit_Information Edit_Information= new Edit_Information(id);
+        Edit_Information.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btn_EditProfileActionPerformed
 
@@ -412,10 +495,70 @@ public class Profile extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_friendsActionPerformed
 
     private void btn_homeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_homeActionPerformed
-         Home Home = new Home(id);
+        Home Home = new Home(id);
         Home.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btn_homeActionPerformed
+
+    private void btn_ProfilePicEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ProfilePicEditActionPerformed
+        // TODO add your handling code here:
+        imagenBytes = Manejador.leerImagen();
+        
+        byte[] multimedia = imagenBytes;
+        int imageID = 0;
+        String image_query = "INSERT INTO Images(image_data) VALUES(?)";
+        
+        PreparedStatement statement = null;
+        ResultSet generatedKeys = null;
+
+            try {
+                connection.setAutoCommit(false);
+                statement = connection.prepareStatement(image_query, Statement.RETURN_GENERATED_KEYS);
+
+                statement.setBytes(1, multimedia);
+                statement.executeUpdate();
+
+                generatedKeys = statement.getGeneratedKeys();
+                if (generatedKeys.next()) {
+                    imageID = generatedKeys.getInt(1);
+                }
+                connection.commit();
+                } catch (SQLException ex) {
+                if (connection != null) {
+                    try {
+                        connection.rollback(); // Rollback the transaction on error
+                    } catch (SQLException e) {
+                        Logger.getLogger(NewUser_View.class.getName()).log(Level.SEVERE, null, e);
+                    }
+                }
+                Logger.getLogger(NewUser_View.class.getName()).log(Level.SEVERE, null, ex);
+            } finally {
+                // Close resources
+                if (generatedKeys != null) {
+                    try {
+                        generatedKeys.close();
+                    } catch (SQLException e) {
+                        Logger.getLogger(NewUser_View.class.getName()).log(Level.SEVERE, null, e);
+                    }
+                }
+                if (statement != null) {
+                    try {
+                        statement.close();
+                    } catch (SQLException e) {
+                        Logger.getLogger(NewUser_View.class.getName()).log(Level.SEVERE, null, e);
+                    }
+                }
+                if (connection != null) {
+                    try {
+                        connection.close();
+                    } catch (SQLException e) {
+                        Logger.getLogger(NewUser_View.class.getName()).log(Level.SEVERE, null, e);
+                    }
+                }
+            }
+            this.insertarProfileImage(imageID, id);
+            this.mostrarDatos();
+    }//GEN-LAST:event_btn_ProfilePicEditActionPerformed
 
     /**
      * @param args the command line arguments
@@ -458,23 +601,20 @@ public class Profile extends javax.swing.JFrame {
     private javax.swing.JButton btn_CoverEdit;
     private javax.swing.JButton btn_EditProfile;
     private javax.swing.JButton btn_Friends;
-    private javax.swing.JButton btn_Post;
+    private javax.swing.JButton btn_ProfilePicEdit;
     private javax.swing.JButton btn_createPost;
     private javax.swing.JButton btn_friends;
     private javax.swing.JButton btn_home;
-    private javax.swing.JButton btn_search;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JLabel lbl_Cover;
-    public static javax.swing.JLabel lbl_ProfileImg;
+    private javax.swing.JLabel lbl_perfil_imagen;
     private javax.swing.JPanel pnl_bar;
     private javax.swing.JTextField tf_countfriends;
     private javax.swing.JTextField tf_name;
-    private javax.swing.JTextField tf_search;
     // End of variables declaration//GEN-END:variables
 }

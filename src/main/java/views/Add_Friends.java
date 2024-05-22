@@ -39,8 +39,7 @@ public class Add_Friends extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(Profile.class.getName()).log(Level.SEVERE, null, ex);
         }
-       
-        
+        mostrarPrimerRegistro();
         
     }
     
@@ -327,9 +326,9 @@ private static ImageIcon bytesToImageIcon(byte[] multimedia) {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_friendsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_friendsActionPerformed
-        /*Friends_View Friends_View = new Friends_View(id);
-        Friends_View.setVisible(true);
-        this.setVisible(false);*/
+        Friends amigo = new Friends(id);
+        amigo.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btn_friendsActionPerformed
 
     private void btn_homeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_homeActionPerformed
@@ -362,17 +361,17 @@ private static ImageIcon bytesToImageIcon(byte[] multimedia) {
 
     private void btn_addfriendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addfriendActionPerformed
         // TODO add your handling code here:
-        String add_friend_query = "INSERT INTO Comments(post_id, user_id, text)"
-                + "VALUES(?, ?, ?)";
+        String add_friend_query = "INSERT INTO Contacts (user_id, contact_user_id)\n" +
+                                "VALUES (?, ?);";
         
-       /* try {
+        try {
             PreparedStatement statement = connection.prepareStatement(add_friend_query);
             // Supongamos que estos datos vienen de algún lugar en tu aplicación
             int usuarioID = id;
+            int contact_id = this.resultSet.getInt("user_id");
             
-            statement.setInt(1, publicacionID);
-            statement.setInt(2, usuarioID);
-            statement.setString(3, text);
+            statement.setInt(1, id);
+            statement.setInt(2, contact_id);
             
             statement.executeUpdate();
             statement.close();
@@ -383,7 +382,7 @@ private static ImageIcon bytesToImageIcon(byte[] multimedia) {
             // Manejar cualquier excepción que pueda ocurrir al ejecutar la consulta SQL
             e.printStackTrace();
         }
-        this.btn_addfriend.enable(false);*/
+        this.btn_addfriend.setEnabled(false);
     }//GEN-LAST:event_btn_addfriendActionPerformed
 
     /**
