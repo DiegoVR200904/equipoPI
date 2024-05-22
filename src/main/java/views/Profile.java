@@ -481,8 +481,9 @@ public class Profile extends javax.swing.JFrame {
             }
         }
     }
-        this.setVisible(false);
-        this.setVisible(true);
+        Profile  Profile = new Profile(id);
+        Profile.setVisible(true);
+        this.setVisible(false);   
     }//GEN-LAST:event_btn_CoverEditActionPerformed
 
     private void btn_EditProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_EditProfileActionPerformed
@@ -571,8 +572,9 @@ public class Profile extends javax.swing.JFrame {
             }
         }
     }
-        this.setVisible(false);
-        this.setVisible(true);
+        Profile  Profile = new Profile(id);
+        Profile.setVisible(true);
+        this.setVisible(false);   
     }//GEN-LAST:event_btn_ProfilePicEditActionPerformed
 
     /**
