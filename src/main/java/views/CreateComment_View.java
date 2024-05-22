@@ -146,31 +146,7 @@ public class CreateComment_View extends javax.swing.JFrame {
 
     private void btn_commentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_commentActionPerformed
         // TODO add your handling code here:
-        this.showYesNoDialog();
-        /*String comment_query = "INSERT INTO Comments(post_id, user_id, text)"
-                + "VALUES(?, ?, ?)";
-        
-        try {
-            PreparedStatement statement = connection.prepareStatement(comment_query);
-            // Supongamos que estos datos vienen de algún lugar en tu aplicación
-            int usuarioID = id_u;
-            int publicacionID = id_p;
-            String text = this.ta_comment_text.getText();
-            
-            statement.setInt(1, publicacionID);
-            statement.setInt(2, usuarioID);
-            statement.setString(3, text);
-            
-            statement.executeUpdate();
-            statement.close();
-            connection.close();
-
-            System.out.println("Comentario insertado correctamente en la base de datos.");
-        } catch (SQLException e) {
-            // Manejar cualquier excepción que pueda ocurrir al ejecutar la consulta SQL
-            e.printStackTrace();
-        }*/
-        
+        this.showYesNoDialog(); 
     }//GEN-LAST:event_btn_commentActionPerformed
 
     private void btn_returnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_returnActionPerformed

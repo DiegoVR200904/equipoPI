@@ -4,12 +4,18 @@
  */
 package views;
 
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import models.DB_Connection;
 
 /**
@@ -23,8 +29,8 @@ public class Add_Friends extends javax.swing.JFrame {
     
   
     public Add_Friends(int id) {
-         setResizable(false);
-        setTitle("Perfil");     
+        setResizable(false);
+        setTitle("Agregar Amigo");     
         this.id = id; 
         initComponents();
         
@@ -38,7 +44,7 @@ public class Add_Friends extends javax.swing.JFrame {
         
     }
     
-    private void mostrarPrimerRegistro() {       
+private void mostrarPrimerRegistro() {       
     try {
         String query = "SELECT u.first_name, u.last_name, u.user_id, i.image_data\n" +
         "FROM Users u\n" + "JOIN Images i ON u.profile_image_id = i.image_id\n" +
@@ -53,8 +59,66 @@ public class Add_Friends extends javax.swing.JFrame {
         Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
     }
 }
-
     
+private void mostrarRegistroAnterior() {
+    try {
+        if (this.resultSet != null && !this.resultSet.isBeforeFirst()) {
+            this.resultSet.previous();
+            mostrarDatos();
+        }
+    } catch (SQLException ex) {
+        Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+    }
+}
+
+private void mostrarRegistroSiguiente() {
+    try {
+        if (this.resultSet != null && this.resultSet.next()) {
+            mostrarDatos();
+        }
+    } catch (SQLException ex) {
+        Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+    }
+}
+
+    private void mostrarDatos() {  
+        try {
+            String nombre = this.resultSet.getString("first_name");
+            String apellido = this.resultSet.getString("last_name");
+            byte[] imagen = this.resultSet.getBytes("image_data");
+            this.lbl_name1.setText(nombre);
+            this.lbl_last.setText(apellido);
+            
+                    ImageIcon imageIcon = bytesToImageIcon(imagen);
+                        if (imageIcon != null) {
+                            Image scaledImage = imageIcon.getImage().getScaledInstance(lbl_picture.getWidth(), lbl_picture.getHeight(), Image.SCALE_SMOOTH);
+                            ImageIcon scaledIcon = new ImageIcon(scaledImage);
+                            this.lbl_picture.setIcon(scaledIcon);
+                        } else {
+                            System.out.println("no cargo imagen xd");
+                            //this.ta_text.setText("Failed to load image");
+                    }            
+        } catch (SQLException ex) {
+            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+private static ImageIcon bytesToImageIcon(byte[] multimedia) {
+        try {
+            // Convert bytes to BufferedImage
+            ByteArrayInputStream bis = new ByteArrayInputStream(multimedia);
+            BufferedImage bImage = ImageIO.read(bis);
+
+            // Convert BufferedImage to ImageIcon
+            return new ImageIcon(bImage);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -62,9 +126,7 @@ public class Add_Friends extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         pnl_bar = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        btn_search = new javax.swing.JButton();
         btn_friends = new javax.swing.JButton();
-        btn_videos = new javax.swing.JButton();
         btn_home = new javax.swing.JButton();
         btn_createPost = new javax.swing.JButton();
         btn_Profile = new javax.swing.JButton();
@@ -72,9 +134,9 @@ public class Add_Friends extends javax.swing.JFrame {
         btn_previous = new javax.swing.JButton();
         btn_next = new javax.swing.JButton();
         lbl_picture = new javax.swing.JLabel();
-        btn_add_friend = new javax.swing.JButton();
         lbl_last = new javax.swing.JLabel();
         lbl_name1 = new javax.swing.JLabel();
+        btn_addfriend = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -83,10 +145,10 @@ public class Add_Friends extends javax.swing.JFrame {
         pnl_bar.setBackground(new java.awt.Color(27, 27, 27));
         pnl_bar.setForeground(new java.awt.Color(27, 27, 27));
 
-        btn_search.setBackground(new java.awt.Color(27, 27, 27));
-        btn_search.setBorder(null);
+        jLabel1.setIcon(new javax.swing.ImageIcon("/home/ghostpatron/NetBeansProjects/equipoPI/src/main/java/img/logo4-64.png")); // NOI18N
 
         btn_friends.setBackground(new java.awt.Color(27, 27, 27));
+        btn_friends.setIcon(new javax.swing.ImageIcon("/home/ghostpatron/NetBeansProjects/equipoPI/src/main/java/img/friends.png")); // NOI18N
         btn_friends.setBorder(null);
         btn_friends.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -94,15 +156,8 @@ public class Add_Friends extends javax.swing.JFrame {
             }
         });
 
-        btn_videos.setBackground(new java.awt.Color(27, 27, 27));
-        btn_videos.setBorder(null);
-        btn_videos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_videosActionPerformed(evt);
-            }
-        });
-
         btn_home.setBackground(new java.awt.Color(27, 27, 27));
+        btn_home.setIcon(new javax.swing.ImageIcon("/home/ghostpatron/NetBeansProjects/equipoPI/src/main/java/img/home.png")); // NOI18N
         btn_home.setBorder(null);
         btn_home.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -111,6 +166,7 @@ public class Add_Friends extends javax.swing.JFrame {
         });
 
         btn_createPost.setBackground(new java.awt.Color(27, 27, 27));
+        btn_createPost.setIcon(new javax.swing.ImageIcon("/home/ghostpatron/NetBeansProjects/equipoPI/src/main/java/img/agregar-publicacion.png")); // NOI18N
         btn_createPost.setBorder(null);
         btn_createPost.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -119,7 +175,7 @@ public class Add_Friends extends javax.swing.JFrame {
         });
 
         btn_Profile.setBackground(new java.awt.Color(27, 27, 27));
-        btn_Profile.setIcon(new javax.swing.ImageIcon("C:\\Users\\erika\\OneDrive\\Documentos\\NetBeansProjects\\repositorioclonado\\Pruebaimages\\src\\main\\java\\img\\5-40.png")); // NOI18N
+        btn_Profile.setIcon(new javax.swing.ImageIcon("/home/ghostpatron/NetBeansProjects/equipoPI/src/main/java/img/Perfil rosa.png")); // NOI18N
         btn_Profile.setBorder(null);
         btn_Profile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -132,24 +188,17 @@ public class Add_Friends extends javax.swing.JFrame {
         pnl_barLayout.setHorizontalGroup(
             pnl_barLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_barLayout.createSequentialGroup()
-                .addGroup(pnl_barLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnl_barLayout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addComponent(jLabel1))
-                    .addGroup(pnl_barLayout.createSequentialGroup()
-                        .addGap(200, 200, 200)
-                        .addComponent(btn_search)
-                        .addGap(65, 65, 65)
-                        .addComponent(btn_videos)
-                        .addGap(18, 18, 18)
-                        .addComponent(btn_friends)
-                        .addGap(18, 18, 18)
-                        .addComponent(btn_home)
-                        .addGap(18, 18, 18)
-                        .addComponent(btn_createPost)
-                        .addGap(78, 78, 78)
-                        .addComponent(btn_Profile)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(22, 22, 22)
+                .addComponent(jLabel1)
+                .addGap(161, 161, 161)
+                .addComponent(btn_friends)
+                .addGap(18, 18, 18)
+                .addComponent(btn_home)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btn_createPost)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btn_Profile)
+                .addGap(38, 38, 38))
         );
         pnl_barLayout.setVerticalGroup(
             pnl_barLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -157,20 +206,16 @@ public class Add_Friends extends javax.swing.JFrame {
                 .addGap(20, 20, 20)
                 .addGroup(pnl_barLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnl_barLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel1))
-                    .addGroup(pnl_barLayout.createSequentialGroup()
-                        .addGroup(pnl_barLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(pnl_barLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btn_Profile)
-                            .addComponent(btn_friends, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btn_videos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btn_home, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btn_createPost, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addContainerGap())))
-            .addGroup(pnl_barLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btn_search, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(btn_home)
+                            .addComponent(btn_createPost, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(pnl_barLayout.createSequentialGroup()
+                        .addGroup(pnl_barLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btn_friends)
+                            .addComponent(jLabel1))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         lbl_title.setFont(new java.awt.Font("Manjari", 1, 20)); // NOI18N
@@ -178,7 +223,7 @@ public class Add_Friends extends javax.swing.JFrame {
         lbl_title.setText("Agrega Amigos");
 
         btn_previous.setBackground(new java.awt.Color(51, 51, 51));
-        btn_previous.setIcon(new javax.swing.ImageIcon("C:\\Users\\erika\\OneDrive\\Documentos\\NetBeansProjects\\repositorioclonado\\Pruebaimages\\src\\main\\java\\img\\previous-50.png")); // NOI18N
+        btn_previous.setIcon(new javax.swing.ImageIcon("/home/ghostpatron/NetBeansProjects/equipoPI/src/main/java/img/previous-50.png")); // NOI18N
         btn_previous.setBorder(null);
         btn_previous.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -187,7 +232,7 @@ public class Add_Friends extends javax.swing.JFrame {
         });
 
         btn_next.setBackground(new java.awt.Color(51, 51, 51));
-        btn_next.setIcon(new javax.swing.ImageIcon("C:\\Users\\erika\\OneDrive\\Documentos\\NetBeansProjects\\repositorioclonado\\Pruebaimages\\src\\main\\java\\img\\next-50.png")); // NOI18N
+        btn_next.setIcon(new javax.swing.ImageIcon("/home/ghostpatron/NetBeansProjects/equipoPI/src/main/java/img/next-50.png")); // NOI18N
         btn_next.setBorder(null);
         btn_next.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -198,15 +243,6 @@ public class Add_Friends extends javax.swing.JFrame {
         lbl_picture.setForeground(new java.awt.Color(255, 51, 102));
         lbl_picture.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 51, 153)));
 
-        btn_add_friend.setBackground(new java.awt.Color(51, 51, 51));
-        btn_add_friend.setIcon(new javax.swing.ImageIcon("C:\\Users\\erika\\OneDrive\\Documentos\\NetBeansProjects\\repositorioclonado\\Pruebaimages\\src\\main\\java\\img\\1-64.png")); // NOI18N
-        btn_add_friend.setBorder(null);
-        btn_add_friend.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_add_friendActionPerformed(evt);
-            }
-        });
-
         lbl_last.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lbl_last.setForeground(new java.awt.Color(255, 255, 255));
         lbl_last.setText("Apellido");
@@ -214,6 +250,16 @@ public class Add_Friends extends javax.swing.JFrame {
         lbl_name1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lbl_name1.setForeground(new java.awt.Color(255, 255, 255));
         lbl_name1.setText("Nombre");
+
+        btn_addfriend.setBackground(new java.awt.Color(255, 102, 153));
+        btn_addfriend.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
+        btn_addfriend.setText("Agregar como amigo");
+        btn_addfriend.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 102, 153)));
+        btn_addfriend.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_addfriendActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -223,31 +269,32 @@ public class Add_Friends extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(270, 270, 270)
-                        .addComponent(lbl_title))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(73, 73, 73)
                         .addComponent(btn_previous)
-                        .addGap(102, 102, 102)
+                        .addGap(151, 151, 151)
+                        .addComponent(btn_addfriend)
+                        .addGap(104, 104, 104)
+                        .addComponent(btn_next))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(220, 220, 220)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(92, 92, 92)
-                                .addComponent(btn_add_friend)
-                                .addGap(194, 194, 194)
-                                .addComponent(btn_next))
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addGroup(jPanel1Layout.createSequentialGroup()
                                     .addComponent(lbl_name1, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(lbl_last, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(lbl_picture, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(7, Short.MAX_VALUE))
+                                .addComponent(lbl_picture, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lbl_title)
+                                .addGap(42, 42, 42)))))
+                .addContainerGap(115, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(pnl_bar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
                 .addComponent(lbl_title, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lbl_picture, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -255,11 +302,13 @@ public class Add_Friends extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbl_last)
                     .addComponent(lbl_name1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btn_next)
                     .addComponent(btn_previous)
-                    .addComponent(btn_add_friend))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(btn_addfriend)))
                 .addGap(74, 74, 74))
         );
 
@@ -271,9 +320,7 @@ public class Add_Friends extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -284,12 +331,6 @@ public class Add_Friends extends javax.swing.JFrame {
         Friends_View.setVisible(true);
         this.setVisible(false);*/
     }//GEN-LAST:event_btn_friendsActionPerformed
-
-    private void btn_videosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_videosActionPerformed
-        /* Videos_View Videos_View = new Videos_View(id);
-        Videos_View.setVisible(true);
-        this.setVisible(false);*/
-    }//GEN-LAST:event_btn_videosActionPerformed
 
     private void btn_homeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_homeActionPerformed
         Home Home = new Home(id);
@@ -319,24 +360,31 @@ public class Add_Friends extends javax.swing.JFrame {
         //this.mostrarRegistroSiguiente();
     }//GEN-LAST:event_btn_nextActionPerformed
 
-    private void btn_add_friendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_add_friendActionPerformed
+    private void btn_addfriendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addfriendActionPerformed
         // TODO add your handling code here:
+        String add_friend_query = "INSERT INTO Comments(post_id, user_id, text)"
+                + "VALUES(?, ?, ?)";
+        
         try {
-            int id_post = this.resultSet.getInt("post_id");
-
-            String reaction_query = "UPDATE Reactions \n"
-            + "SET likes = likes + 1 \n"
-            + "WHERE post_id = ?";
-
-            PreparedStatement statement = connection.prepareStatement(reaction_query);
-            statement.setInt(1, id_post);
+            PreparedStatement statement = connection.prepareStatement(add_friend_query);
+            // Supongamos que estos datos vienen de algún lugar en tu aplicación
+            int usuarioID = id;
+            
+            statement.setInt(1, publicacionID);
+            statement.setInt(2, usuarioID);
+            statement.setString(3, text);
+            
             statement.executeUpdate();
             statement.close();
-            //connection.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+            connection.close();
+
+            System.out.println("Comentario insertado correctamente en la base de datos.");
+        } catch (SQLException e) {
+            // Manejar cualquier excepción que pueda ocurrir al ejecutar la consulta SQL
+            e.printStackTrace();
         }
-    }//GEN-LAST:event_btn_add_friendActionPerformed
+        this.btn_addfriend.enable(false);
+    }//GEN-LAST:event_btn_addfriendActionPerformed
 
     /**
      * @param args the command line arguments
@@ -377,14 +425,12 @@ public class Add_Friends extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_Profile;
-    private javax.swing.JButton btn_add_friend;
+    private javax.swing.JButton btn_addfriend;
     private javax.swing.JButton btn_createPost;
     private javax.swing.JButton btn_friends;
     private javax.swing.JButton btn_home;
     private javax.swing.JButton btn_next;
     private javax.swing.JButton btn_previous;
-    private javax.swing.JButton btn_search;
-    private javax.swing.JButton btn_videos;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lbl_last;

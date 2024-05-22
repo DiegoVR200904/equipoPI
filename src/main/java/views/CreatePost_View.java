@@ -74,8 +74,8 @@ public class CreatePost_View extends javax.swing.JFrame {
         CLabel.setBackground(new java.awt.Color(255, 255, 255));
         CLabel.setText("");
 
-        btnImage.setBackground(new java.awt.Color(255, 51, 102));
-        btnImage.setForeground(new java.awt.Color(255, 255, 255));
+        btnImage.setBackground(new java.awt.Color(255, 102, 153));
+        btnImage.setForeground(new java.awt.Color(51, 51, 51));
         btnImage.setText("Imagen/Foto");
         btnImage.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 51)));
         btnImage.addActionListener(new java.awt.event.ActionListener() {
@@ -94,8 +94,8 @@ public class CreatePost_View extends javax.swing.JFrame {
         Tittle.setForeground(new java.awt.Color(255, 255, 255));
         Tittle.setText("Crear Publicacion");
 
-        btnCreate_Publication.setBackground(new java.awt.Color(255, 51, 102));
-        btnCreate_Publication.setForeground(new java.awt.Color(255, 255, 255));
+        btnCreate_Publication.setBackground(new java.awt.Color(255, 102, 153));
+        btnCreate_Publication.setForeground(new java.awt.Color(51, 51, 51));
         btnCreate_Publication.setText("Publicar");
         btnCreate_Publication.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 51)));
         btnCreate_Publication.addActionListener(new java.awt.event.ActionListener() {
@@ -104,7 +104,9 @@ public class CreatePost_View extends javax.swing.JFrame {
             }
         });
 
-        btn_home.setText("Inicio");
+        btn_home.setBackground(new java.awt.Color(255, 102, 153));
+        btn_home.setIcon(new javax.swing.ImageIcon("/home/ghostpatron/NetBeansProjects/equipoPI/src/main/java/img/home-black.png")); // NOI18N
+        btn_home.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btn_home.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_homeActionPerformed(evt);
@@ -115,14 +117,14 @@ public class CreatePost_View extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(441, Short.MAX_VALUE)
-                .addComponent(btnCreate_Publication, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btn_home)
                 .addGap(21, 21, 21))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(231, 231, 231)
-                .addComponent(btn_home)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(btnCreate_Publication, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(456, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addContainerGap()
@@ -140,11 +142,11 @@ public class CreatePost_View extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addComponent(btnCreate_Publication)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 192, Short.MAX_VALUE)
+                .addContainerGap()
                 .addComponent(btn_home)
-                .addGap(149, 149, 149))
+                .addGap(147, 147, 147)
+                .addComponent(btnCreate_Publication)
+                .addContainerGap(196, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addContainerGap()
