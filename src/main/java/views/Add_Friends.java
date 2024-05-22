@@ -380,7 +380,7 @@ private static ImageIcon bytesToImageIcon(byte[] multimedia) {
             
             statement.executeUpdate();
             statement.close();
-            connection.close();
+            //connection.close();
 
             System.out.println("Comentario insertado correctamente en la base de datos.");
         } catch (SQLException e) {

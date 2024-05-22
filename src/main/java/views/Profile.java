@@ -423,65 +423,54 @@ public class Profile extends javax.swing.JFrame {
     
     
     private void btn_CoverEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CoverEditActionPerformed
+        ResultSet generatedKeys = null;
+        PreparedStatement statement = null;
+        imagenBytes = Manejador.leerImagen();
+        byte[] multimedia = imagenBytes;
+        int imageID = 0;
+        
         try {
-            imagenBytes = Manejador.leerImagen();
-            
-            byte[] multimedia = imagenBytes;
-            int imageID = 0;
-            String image_query = "INSERT INTO Images(image_data) VALUES(?)";
-            
-            PreparedStatement statement = null;
-            ResultSet generatedKeys = null;
-            
-            connection.setAutoCommit(false);
-            statement = connection.prepareStatement(image_query, Statement.RETURN_GENERATED_KEYS);
-            
-            statement.setBytes(1, multimedia);
-            statement.executeUpdate();
-            
-            generatedKeys = statement.getGeneratedKeys();
-            if (generatedKeys.next()) {
-                imageID = generatedKeys.getInt(1);
-            }
-            connection.commit();
-            /*    } catch (SQLException ex) {
-            if (connection != null) {
-            try {
-            connection.rollback(); // Rollback the transaction on error
-            } catch (SQLException e) {
-            Logger.getLogger(NewUser_View.class.getName()).log(Level.SEVERE, null, e);
-            }
-            }
-            Logger.getLogger(NewUser_View.class.getName()).log(Level.SEVERE, null, ex);
-            } finally {
-            // Close resources
-            if (generatedKeys != null) {
-            try {
-            generatedKeys.close();
-            } catch (SQLException e) {
-            Logger.getLogger(NewUser_View.class.getName()).log(Level.SEVERE, null, e);
-            }
-            }
-            if (statement != null) {
-            try {
-            statement.close();
-            } catch (SQLException e) {
-            Logger.getLogger(NewUser_View.class.getName()).log(Level.SEVERE, null, e);
-            }
-            }
-            if (connection != null) {
-            try {
-            connection.close();
-            } catch (SQLException e) {
-            Logger.getLogger(NewUser_View.class.getName()).log(Level.SEVERE, null, e);
-            }
-            }
-            }*/
-            this.insertarCoverImage(imageID, id);
-            this.mostrarDatos();
-        } catch (SQLException ex) {
-            Logger.getLogger(Profile.class.getName()).log(Level.SEVERE, null, ex);
+        String image_query = "INSERT INTO Images(image_data) VALUES(?)";
+        
+        connection.setAutoCommit(false);
+        statement = connection.prepareStatement(image_query, Statement.RETURN_GENERATED_KEYS);
+        
+        statement.setBytes(1, multimedia);
+        statement.executeUpdate();
+        
+        generatedKeys = statement.getGeneratedKeys();
+        if (generatedKeys.next()) {
+            imageID = generatedKeys.getInt(1);
         }
+        connection.commit();
+        this.insertarCoverImage(imageID, id);
+        this.mostrarDatos();
+    } catch (SQLException ex) {
+        Logger.getLogger(Profile.class.getName()).log(Level.SEVERE, null, ex);
+        try {
+            if (connection != null) {
+                connection.rollback();
+            }
+        } catch (SQLException e) {
+            Logger.getLogger(Profile.class.getName()).log(Level.SEVERE, null, e);
+        }
+    } finally {
+        // Close resources
+        if (generatedKeys != null) {
+            try {
+                generatedKeys.close();
+            } catch (SQLException e) {
+                Logger.getLogger(Profile.class.getName()).log(Level.SEVERE, null, e);
+            }
+        }
+        if (statement != null) {
+            try {
+                statement.close();
+            } catch (SQLException e) {
+                Logger.getLogger(Profile.class.getName()).log(Level.SEVERE, null, e);
+            }
+        }
+    }
     }//GEN-LAST:event_btn_CoverEditActionPerformed
 
     private void btn_EditProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_EditProfileActionPerformed
@@ -513,63 +502,54 @@ public class Profile extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_homeActionPerformed
 
     private void btn_ProfilePicEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ProfilePicEditActionPerformed
-        // TODO add your handling code here:
+        ResultSet generatedKeys = null;
+        PreparedStatement statement = null;
         imagenBytes = Manejador.leerImagen();
-        
         byte[] multimedia = imagenBytes;
         int imageID = 0;
+        
+        try {
         String image_query = "INSERT INTO Images(image_data) VALUES(?)";
         
-        PreparedStatement statement = null;
-        ResultSet generatedKeys = null;
-
-            try {
-                connection.setAutoCommit(false);
-                statement = connection.prepareStatement(image_query, Statement.RETURN_GENERATED_KEYS);
-
-                statement.setBytes(1, multimedia);
-                statement.executeUpdate();
-
-                generatedKeys = statement.getGeneratedKeys();
-                if (generatedKeys.next()) {
-                    imageID = generatedKeys.getInt(1);
-                }
-                connection.commit();
-                } catch (SQLException ex) {
-                if (connection != null) {
-                    try {
-                        connection.rollback(); // Rollback the transaction on error
-                    } catch (SQLException e) {
-                        Logger.getLogger(NewUser_View.class.getName()).log(Level.SEVERE, null, e);
-                    }
-                }
-                Logger.getLogger(NewUser_View.class.getName()).log(Level.SEVERE, null, ex);
-            } finally {
-                // Close resources
-                if (generatedKeys != null) {
-                    try {
-                        generatedKeys.close();
-                    } catch (SQLException e) {
-                        Logger.getLogger(NewUser_View.class.getName()).log(Level.SEVERE, null, e);
-                    }
-                }
-                if (statement != null) {
-                    try {
-                        statement.close();
-                    } catch (SQLException e) {
-                        Logger.getLogger(NewUser_View.class.getName()).log(Level.SEVERE, null, e);
-                    }
-                }
-                if (connection != null) {
-                    try {
-                        connection.close();
-                    } catch (SQLException e) {
-                        Logger.getLogger(NewUser_View.class.getName()).log(Level.SEVERE, null, e);
-                    }
-                }
+        connection.setAutoCommit(false);
+        statement = connection.prepareStatement(image_query, Statement.RETURN_GENERATED_KEYS);
+        
+        statement.setBytes(1, multimedia);
+        statement.executeUpdate();
+        
+        generatedKeys = statement.getGeneratedKeys();
+        if (generatedKeys.next()) {
+            imageID = generatedKeys.getInt(1);
+        }
+        connection.commit();
+        this.insertarProfileImage(imageID, id);
+        this.mostrarDatos();
+    } catch (SQLException ex) {
+        Logger.getLogger(Profile.class.getName()).log(Level.SEVERE, null, ex);
+        try {
+            if (connection != null) {
+                connection.rollback();
             }
-            this.insertarProfileImage(imageID, id);
-            this.mostrarDatos();
+        } catch (SQLException e) {
+            Logger.getLogger(Profile.class.getName()).log(Level.SEVERE, null, e);
+        }
+    } finally {
+        // Close resources
+        if (generatedKeys != null) {
+            try {
+                generatedKeys.close();
+            } catch (SQLException e) {
+                Logger.getLogger(Profile.class.getName()).log(Level.SEVERE, null, e);
+            }
+        }
+        if (statement != null) {
+            try {
+                statement.close();
+            } catch (SQLException e) {
+                Logger.getLogger(Profile.class.getName()).log(Level.SEVERE, null, e);
+            }
+        }
+    }
     }//GEN-LAST:event_btn_ProfilePicEditActionPerformed
 
     /**
