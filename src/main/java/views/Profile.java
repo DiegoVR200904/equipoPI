@@ -367,7 +367,7 @@ public class Profile extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btn_FriendsActionPerformed
 
-    private void insertarProfileImage(int img_id, int user_id){
+    /*private void insertarProfileImage(int img_id, int user_id){
         String imagen_perfil_query = "UPDATE Users "
                     + "SET profile_image_id = ? "
                     + "WHERE user_id = ?";
@@ -385,9 +385,9 @@ public class Profile extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(Profile.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
+    }*/
     
-    private void insertarCoverImage(int img_id, int user_id){
+    /*private void insertarCoverImage(int img_id, int user_id){
         String imagen_perfil_query = "UPDATE Users "
                     + "SET cover_image_id = ? "
                     + "WHERE user_id = ?";
@@ -405,7 +405,7 @@ public class Profile extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(Profile.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
+    }*/
         
     private static ImageIcon bytesToImageIcon(byte[] multimedia) {
         try {
@@ -454,7 +454,7 @@ public class Profile extends javax.swing.JFrame {
         
         connection.commit();
         //this.insertarCoverImage(imageID, id);
-        this.mostrarDatos();
+        
     } catch (SQLException ex) {
         Logger.getLogger(Profile.class.getName()).log(Level.SEVERE, null, ex);
         try {
@@ -481,6 +481,8 @@ public class Profile extends javax.swing.JFrame {
             }
         }
     }
+        this.setVisible(false);
+        this.setVisible(true);
     }//GEN-LAST:event_btn_CoverEditActionPerformed
 
     private void btn_EditProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_EditProfileActionPerformed
@@ -514,16 +516,21 @@ public class Profile extends javax.swing.JFrame {
     private void btn_ProfilePicEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ProfilePicEditActionPerformed
         ResultSet generatedKeys = null;
         PreparedStatement statement = null;
+        PreparedStatement insert_img = null;
+        
         imagenBytes = Manejador.leerImagen();
         byte[] multimedia = imagenBytes;
         int imageID = 0;
         
         try {
         String image_query = "INSERT INTO Images(image_data) VALUES(?)";
+        String imagen_perfil_query = "UPDATE Users "
+                    + "SET profile_image_id = ? "
+                    + "WHERE user_id = ?";
         
         connection.setAutoCommit(false);
         statement = connection.prepareStatement(image_query, Statement.RETURN_GENERATED_KEYS);
-        
+        insert_img = connection.prepareStatement(imagen_perfil_query);
         statement.setBytes(1, multimedia);
         statement.executeUpdate();
         
@@ -531,9 +538,13 @@ public class Profile extends javax.swing.JFrame {
         if (generatedKeys.next()) {
             imageID = generatedKeys.getInt(1);
         }
+        
+        insert_img.setInt(1, imageID);
+        insert_img.setInt(2, id);
+        insert_img.executeUpdate();
+        
         connection.commit();
-        this.insertarProfileImage(imageID, id);
-        this.mostrarDatos();
+       
     } catch (SQLException ex) {
         Logger.getLogger(Profile.class.getName()).log(Level.SEVERE, null, ex);
         try {
@@ -560,6 +571,8 @@ public class Profile extends javax.swing.JFrame {
             }
         }
     }
+        this.setVisible(false);
+        this.setVisible(true);
     }//GEN-LAST:event_btn_ProfilePicEditActionPerformed
 
     /**
