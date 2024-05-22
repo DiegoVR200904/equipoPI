@@ -365,7 +365,7 @@ private static ImageIcon bytesToImageIcon(byte[] multimedia) {
         String add_friend_query = "INSERT INTO Comments(post_id, user_id, text)"
                 + "VALUES(?, ?, ?)";
         
-        try {
+       /* try {
             PreparedStatement statement = connection.prepareStatement(add_friend_query);
             // Supongamos que estos datos vienen de algún lugar en tu aplicación
             int usuarioID = id;
@@ -383,7 +383,7 @@ private static ImageIcon bytesToImageIcon(byte[] multimedia) {
             // Manejar cualquier excepción que pueda ocurrir al ejecutar la consulta SQL
             e.printStackTrace();
         }
-        this.btn_addfriend.enable(false);
+        this.btn_addfriend.enable(false);*/
     }//GEN-LAST:event_btn_addfriendActionPerformed
 
     /**
