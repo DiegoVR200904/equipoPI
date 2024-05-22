@@ -356,12 +356,12 @@ private static ImageIcon bytesToImageIcon(byte[] multimedia) {
 
     private void btn_previousActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_previousActionPerformed
         // TODO add your handling code here:
-        //this.mostrarRegistroAnterior();
+        this.mostrarRegistroAnterior();
     }//GEN-LAST:event_btn_previousActionPerformed
 
     private void btn_nextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_nextActionPerformed
         // TODO add your handling code here:
-        //this.mostrarRegistroSiguiente();
+        this.mostrarRegistroSiguiente();
     }//GEN-LAST:event_btn_nextActionPerformed
 
     private void btn_addfriendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addfriendActionPerformed

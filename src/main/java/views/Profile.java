@@ -379,7 +379,7 @@ public class Profile extends javax.swing.JFrame {
             
             statement.executeUpdate();
             statement.close();
-            connection.close();
+            //connection.close();
             System.out.println("Se actualizo la imagen de perfil correctamente en la base de datos.");
             
         } catch (SQLException ex) {
@@ -399,7 +399,7 @@ public class Profile extends javax.swing.JFrame {
             
             statement.executeUpdate();
             statement.close();
-            connection.close();
+            //connection.close();
             System.out.println("Se actualizo la imagen de perfil correctamente en la base de datos.");
             
         } catch (SQLException ex) {
