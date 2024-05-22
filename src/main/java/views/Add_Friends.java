@@ -45,10 +45,22 @@ public class Add_Friends extends javax.swing.JFrame {
     
 private void mostrarPrimerRegistro() {       
     try {
-        String query = "SELECT u.first_name, u.last_name, u.user_id, i.image_data\n" +
-        "FROM Users u\n" + "JOIN Images i ON u.profile_image_id = i.image_id\n" +
-        "WHERE u.user_id NOT IN (\n" + "    SELECT c.contact_user_id\n" + "    FROM Contacts c\n" +
-        "    WHERE c.user_id = ?\n" + ")\n" + "AND u.user_id != ?;";
+            String query = "SELECT \n" +
+            "    u.first_name, \n" +
+            "    u.last_name, \n" +
+            "    u.user_id, \n" +
+            "    i.image_data\n" +
+            "FROM \n" +
+            "    Users u\n" +
+            "LEFT JOIN \n" +
+            "    Images i ON u.profile_image_id = i.image_id\n" +
+            "WHERE \n" +
+            "    u.user_id NOT IN (\n" +
+            "        SELECT c.contact_user_id\n" +
+            "        FROM Contacts c\n" +
+            "        WHERE c.user_id = ?\n" +
+            "    )\n" +
+            "    AND u.user_id != ?;";
         
         PreparedStatement statement = this.connection.prepareStatement(query, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
         statement.setInt(1, id);
