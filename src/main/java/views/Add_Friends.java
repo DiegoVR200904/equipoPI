@@ -370,7 +370,7 @@ private static ImageIcon bytesToImageIcon(byte[] multimedia) {
             int usuarioID = id;
             int contact_id = this.resultSet.getInt("user_id");
             
-            statement.setInt(1, id);
+            statement.setInt(1, usuarioID);
             statement.setInt(2, contact_id);
             
             statement.executeUpdate();

@@ -54,20 +54,21 @@ public class Profile extends javax.swing.JFrame {
     
   private void profile_info(){
         try {
-        String query = "SELECT u.first_name, u.profile_image_id, u.cover_image_id, u.last_name, COUNT(c.contact_id) AS friends\n" +
+        String query = "SELECT \n" +
+        "    u.first_name, \n" +
+        "    u.last_name, \n" +
+        "    u.profile_image_id, \n" +
+        "    u.cover_image_id, \n" +
+        "    COUNT(c.contact_id) AS friends,\n" +
+        "    (SELECT i1.image_data FROM Images i1 WHERE i1.image_id = u.profile_image_id) AS profile_image_data,\n" +
+        "    (SELECT i2.image_data FROM Images i2 WHERE i2.image_id = u.cover_image_id) AS cover_image_data\n" +
         "FROM Users u\n" +
         "LEFT JOIN Contacts c ON u.user_id = c.user_id\n" +
-        "WHERE u.user_id = ? \n" +
-        "GROUP BY u.user_id, u.first_name, u.last_name;\n " + 
-        "SELECT i1.image_data AS profile_image_data, i2.image_data AS cover_image_data\n" +
-        "FROM Users u\n" +
-        "LEFT JOIN Images i1 ON u.profile_image_id = i1.image_id\n" +
-        "LEFT JOIN Images i2 ON u.cover_image_id = i2.image_id\n" +
-        "WHERE u.user_id = ?;";
+        "WHERE u.user_id = ?\n" +
+        "GROUP BY u.user_id, u.first_name, u.last_name, u.profile_image_id, u.cover_image_id;";
         
         PreparedStatement statement = this.connection.prepareStatement(query, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
         statement.setInt(1, id); // Asignar el ID de usuario al primer parámetro
-        statement.setInt(2, id);
         
         this.resultSet = statement.executeQuery();            
         } catch (SQLException ex) {
