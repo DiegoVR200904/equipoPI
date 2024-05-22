@@ -51,7 +51,8 @@ private void mostrarPrimerRegistro() {
         "    WHERE c.user_id = ?\n" + ")\n" + "AND u.user_id != ?;";
         
         PreparedStatement statement = this.connection.prepareStatement(query, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-        statement.setInt(1, id); // Asignar el ID de usuario al primer parámetro
+        statement.setInt(1, id);
+        statement.setInt(2, id);
 
         this.resultSet = statement.executeQuery();            
     } catch (SQLException ex) {
@@ -88,15 +89,19 @@ private void mostrarRegistroSiguiente() {
             this.lbl_name1.setText(nombre);
             this.lbl_last.setText(apellido);
             
-                    ImageIcon imageIcon = bytesToImageIcon(imagen);
+            if(imagen != null){
+                ImageIcon imageIcon = bytesToImageIcon(imagen);
                         if (imageIcon != null) {
                             Image scaledImage = imageIcon.getImage().getScaledInstance(lbl_picture.getWidth(), lbl_picture.getHeight(), Image.SCALE_SMOOTH);
                             ImageIcon scaledIcon = new ImageIcon(scaledImage);
                             this.lbl_picture.setIcon(scaledIcon);
                         } else {
                             System.out.println("no cargo imagen xd");
-                            //this.ta_text.setText("Failed to load image");
-                    }            
+                        }
+            }else{
+                this.lbl_picture.setIcon(null);
+            }
+                                
         } catch (SQLException ex) {
             Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -372,7 +372,7 @@ private static ImageIcon bytesToImageIcon(byte[] multimedia) {
     }//GEN-LAST:event_btn_createPostActionPerformed
 
     private void btn_ProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ProfileActionPerformed
-       Profile  Profile = new Profile(id);
+        Profile  Profile = new Profile(id);
         Profile.setVisible(true);
         this.setVisible(false);      
     }//GEN-LAST:event_btn_ProfileActionPerformed

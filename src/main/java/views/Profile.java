@@ -88,6 +88,7 @@ public class Profile extends javax.swing.JFrame {
         byte[] imagen_cover = this.resultSet.getBytes("profile_image_data");
         byte[] imagen_profile = this.resultSet.getBytes("cover_image_data");
         
+        if(imagen_cover != null){
             ImageIcon imageIcon = bytesToImageIcon(imagen_cover);
                         if (imageIcon != null) {
                             Image scaledImage = imageIcon.getImage().getScaledInstance(lbl_Cover.getWidth(), lbl_Cover.getHeight(), Image.SCALE_SMOOTH);
@@ -96,7 +97,11 @@ public class Profile extends javax.swing.JFrame {
                         } else {
                             System.out.println("no cargo imagen xd");
                         }
-                        
+        }else{
+            this.lbl_Cover.setIcon(null);
+        }
+        
+        if(imagen_profile != null){
             ImageIcon imageIcon_2 = bytesToImageIcon(imagen_profile);
                         if (imageIcon_2 != null) {
                             Image scaledImage = imageIcon_2.getImage().getScaledInstance(lbl_perfil_imagen.getWidth(), lbl_perfil_imagen.getHeight(), Image.SCALE_SMOOTH);
@@ -104,8 +109,11 @@ public class Profile extends javax.swing.JFrame {
                             this.lbl_perfil_imagen.setIcon(scaledIcon);
                         } else {
                             System.out.println("no cargo imagen xd");
-                        }            
-        
+                        }
+        }else{
+            this.lbl_perfil_imagen.setIcon(null);
+        }
+            
         this.tf_name.setText(UserName+" "+UserLast);
         this.tf_countfriends.setText(friendsCount );
           
